@@ -1,0 +1,80 @@
+function text_x_pos(t)
+  return 64 - (#t * 2)
+end
+
+function text_y_pos(target_y)
+  return target_y + TITLE.offset_y
+end
+
+function title_init()
+  TITLE = {
+    offset_y = 128
+    -- offset_y = 1
+  }
+end
+
+function title_update()
+  if TITLE.offset_y > 0 then
+    TITLE.offset_y = TITLE.offset_y - 0.5
+    if TITLE.offset_y <= 0 then
+      sfx(4)
+    end
+    return
+  end
+
+  -- after offset_y reaches 0, check for any key press
+  if TITLE.offset_y <= 0 and any_key_pressed() then
+    game_state_change(GAME_STATE_PLAY_INTRO)
+  end
+end
+
+function draw_press_key()
+  if (flr(time() * 2) % 2 == 0) then
+    local msg = LANG.PRESS_KEY
+    local x = 128 - (#msg * 4) - 2
+    local y = 128 - 10
+    print(msg, x, y, 7)
+  end
+end
+
+function title_draw()
+  cls(COL.GROUND_WIN)
+  print(LANG.AUTHOR, text_x_pos(LANG.AUTHOR),
+    text_y_pos(8 * 1), 9)
+  print(LANG.PRESENTS, text_x_pos(LANG.PRESENTS),
+    text_y_pos(8 * 2), 7)
+  print(LANG.TITLE, text_x_pos(LANG.TITLE),
+    text_y_pos(8 * 4), 8)
+
+  if TITLE.offset_y <= 0 then
+    -- hero
+    spr(96, 32, 64, 1, 1)
+    spr(115, 33, 66, 1, 1)
+
+    -- sprinkle flowers (sprites 16-19) around hero and enemy
+    local flower_sprites = {16, 17, 18, 19}
+    -- positions near hero
+    spr(flower_sprites[1], 24, 72, 1, 1)
+    spr(flower_sprites[2], 40, 80, 1, 1)
+    spr(flower_sprites[3], 28, 88, 1, 1)
+    spr(flower_sprites[4], 44, 70, 1, 1)
+    -- above hero
+    spr(flower_sprites[2], 32, 54, 1, 1)
+    spr(flower_sprites[3], 40, 58, 1, 1)
+
+    -- positions near enemy
+    spr(flower_sprites[2], 80, 80, 1, 1)
+    spr(flower_sprites[3], 104, 72, 1, 1)
+    spr(flower_sprites[1], 96, 88, 1, 1)
+    spr(flower_sprites[4], 112, 70, 1, 1)
+    -- above enemy
+    spr(flower_sprites[1], 88, 54, 1, 1)
+    spr(flower_sprites[4], 96, 58, 1, 1)
+
+    -- enemy (animated)
+    local enemy_frame = 69 + (flr(time() / 0.1) % 2)
+    spr(enemy_frame, 88, 64, 1, 1)
+
+    draw_press_key()
+  end
+end

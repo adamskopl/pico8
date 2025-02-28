@@ -1,0 +1,143 @@
+ANIM = {
+  singles = {},
+}
+
+function ANIM.draw(o)
+  if o.visible == false then
+    return
+  end
+  if o.dir and o.dir.x ~= 0 then
+    o.anim.flip = o.dir.x == -1
+  end
+  EFFECTS.before_spr(o)
+  spr(o.anim.frame, o.pos.x, o.pos.y, 1, 1, o.anim.flip)
+  EFFECTS.after_spr()
+end
+
+function ANIM.apply_loop(o, frame_idle, frame_s, frame_e, speed)
+  o.anim = {
+    stop = true,
+    frame_idle = frame_idle,
+    frame_s = frame_s,
+    frame_e = frame_e,
+    frame = frame_idle,
+    speed = speed,
+    time = time(),
+    flip = false,
+    type = "LOOP",
+  }
+end
+
+function ANIM.apply_single(o, frame_idle, frame_s, frame_e, speed)
+  o.anim = {
+    stop = true,
+    frame_idle = frame_idle,
+    frame_s = frame_s,
+    frame_e = frame_e,
+    frame = frame_idle,
+    speed = speed,
+    time = time(),
+    flip = false,
+    type = "SINGLE",
+  }
+end
+
+-- continuous, no stopping
+function ANIM.apply_cont_reverse(o, frame_s, frame_e, speed, interval)
+  o.anim = {
+    frame_s = frame_s,
+    frame_e = frame_e,
+    frame = frame_s,
+    speed = speed,
+    interval = interval,
+    time = time(),
+    forward = true, -- false = backward,
+    pause = true,
+    flip = false,
+    type = "CONT_REVERSE",
+  }
+end
+
+function ANIM.stop(o)
+  o.anim.stop = true
+  o.anim.frame = o.anim.frame_idle
+end
+
+function ANIM.start(o)
+  o.anim.stop = false
+  o.anim.time = time()
+  o.anim.frame = o.anim.frame_s
+end
+
+function ANIM.update(o)
+  local anim = o.anim
+  if anim.type == "SINGLE" then
+    if anim.stop == true then
+      return
+    end
+    if (time() - anim.time) >= anim.speed then
+      anim.time = time()
+      anim.frame = anim.frame + 1
+      if anim.frame > anim.frame_e then
+        ANIM.stop(o)
+      end
+    end
+  elseif anim.type == "CONT_REVERSE" then
+    if anim.pause then
+      if (time() - anim.time) >= anim.interval then
+        anim.time = time()
+        anim.pause = false
+      else
+        return
+      end
+    end
+    if (time() - anim.time) >= anim.speed then
+      anim.time = time()
+      anim.frame = anim.frame + (anim.forward and 1 or -1)
+
+      if anim.frame > anim.frame_e then
+        anim.forward = false
+        anim.frame = anim.frame_e - 1 -- start going back
+      elseif anim.frame < anim.frame_s then
+        anim.forward = true
+        anim.frame = anim.frame_s
+        -- full cycle finished
+        anim.pause = true
+      end
+    end
+  elseif anim.type == "LOOP" then
+    if anim.stop == true then
+      return
+    end
+    if (time() - anim.time) >= anim.speed then
+      anim.time = time()
+      anim.frame = anim.frame + 1
+      if anim.frame > anim.frame_e then
+        anim.frame = anim.frame_s
+      end
+    end
+  end
+end
+
+function ANIM.create_single(pos, frame_s, frame_e, speed)
+  local single = ENTITY.new(pos)
+  ANIM.apply_single(single, frame_s, frame_s, frame_e, speed)
+  ANIM.start(single)
+  add(ANIM.singles, single)
+end
+
+function ANIM.update_singles()
+  for i = #ANIM.singles, 1, -1 do -- backward because of removals
+    local single = ANIM.singles[i]
+    ANIM.update(single)
+    if single.anim.stop then
+      deli(ANIM.singles, i)
+    end
+  end
+end
+
+function ANIM.draw_singles()
+  for single in all(ANIM.singles) do
+    ANIM.draw(single)
+  end
+end
