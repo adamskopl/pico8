@@ -1,29 +1,31 @@
 pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
-cfg={
-  mar=2
+cfg = {
+	mar = 2
 }
--->8
+temp = 0
+
 function _update()
-	
+
 end
 
 function _draw()
 	cls(1)
 
-	spr(0,cfg.mar,cfg.mar,2,2)
-	rect(2*cfg.mar + 16, cfg.mar,
-		127-cfg.mar,64 - cfg.mar,3)
-	
---	rect(cfg.mar,63,125,64,10)
-	
-	spr(0,128-cfg.mar-16,63+cfg.mar,
-		2,2)
-	rect(
-		cfg.mar,63+cfg.mar,
-		127-cfg.mar*2-16, 128-cfg.mar, 3)
+    spr(0, cfg.mar, cfg.mar, 2, 2)
+    rect(2 * cfg.mar + 16, cfg.mar,
+            127 - cfg.mar, 64 - cfg.mar, 3)
+
+    --	rect(cfg.mar,63,125,64,10)
+
+    spr(0, 128 - cfg.mar - 16, 63 + cfg.mar,
+            2, 2)
+    rect(
+            cfg.mar, 63 + cfg.mar,
+            127 - cfg.mar * 2 - 16, 128 - cfg.mar, 3)
 end
+
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 02200000000002200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
