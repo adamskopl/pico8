@@ -1,9 +1,66 @@
 pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
-#include main.lua
+cfg = {
+	mar = 2
+}
+mess=[[
+let's start with something
+simple.
+]]
+
+delta=0
+last_t=0
+
+text={
+	t="",
+	t_pos=0,
+	delta=0,
+	delta1=0,
+	update = function()
+		text.delta += delta
+		text.delta1 += delta
+		if (text.delta > 0.05) then
+			text.delta = 0
+			text.t_pos += 3
+			text.t = sub(mess,0,text.t_pos)
+--			sfx(0)
+		end
+		if (text.delta1 > 2) then
+			sfx(-2`)
+		end
+		
+
+	end,
+	print = function()
+		print(text.t, 2 * cfg.mar + 16, cfg.mar, 10)
+	end
+}
+
+function _update()
+	delta=time()-last_t
+	last_t=time()
+	text.update()
+end
+
+function _draw()
+	cls(1)
+	spr(0, cfg.mar, cfg.mar, 2, 2)
+	rect(2 * cfg.mar + 16, cfg.mar, 127 - cfg.mar, 64 - cfg.mar, 3)
+	spr(0, 128 - cfg.mar - 16, 63 + cfg.mar, 2, 2)
+	rect(cfg.mar, 63 + cfg.mar, 127 - cfg.mar * 2 - 16, 128 - cfg.mar, 3)
+	text.print()
+end
+sfx(0)
+-->8
+--[[notes
+displaying text char by char
 
 
+
+
+
+]]
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -22,3 +79,8 @@ __gfx__
 27720027720027720000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 22720002200027220000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 02200000000002200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+__sfx__
+000500050e3530c35306353073532730317303153031b3031b3031a3030f3032a3032a3032a303293032930300303003030030300303003030030300303003030030300303003030030300303003030030300300
+__music__
+00 00024344
+
