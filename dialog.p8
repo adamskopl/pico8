@@ -7,40 +7,48 @@ cfg = {
 mess=[[
 let's start with something
 simple.
+shall we? why not.. because
+there is a lot of stuff to
+discuss.
 ]]
 
 delta=0
 last_t=0
 
 text={
-	t="",
 	t_pos=0,
 	delta=0,
-	delta1=0,
-	update = function()
-		text.delta += delta
-		text.delta1 += delta
-		if (text.delta > 0.05) then
-			text.delta = 0
-			text.t_pos += 3
-			text.t = sub(mess,0,text.t_pos)
---			sfx(0)
-		end
-		if (text.delta1 > 2) then
-			sfx(-2`)
-		end
-		
-
+	fin=false,
+	start = function(self)
+		sfx(0)
 	end,
-	print = function()
-		print(text.t, 2 * cfg.mar + 16, cfg.mar, 10)
+	update = function(self)
+		if (self.fin) then return end
+		self.delta += delta
+		if (self.delta > 0.04) then
+			self.delta = 0
+			self.t_pos += 2
+			self.t = sub(mess,0,self.t_pos)
+			if (self.t_pos > #mess) then
+				self.fin = true
+				sfx(0, -2)
+				return
+			end 
+		end
+	end,
+	print = function(self)
+		print(self.t, 2 * cfg.mar + 16, cfg.mar, 10)
 	end
 }
+
+function _init()
+
+end
 
 function _update()
 	delta=time()-last_t
 	last_t=time()
-	text.update()
+	text:update()
 end
 
 function _draw()
@@ -49,9 +57,9 @@ function _draw()
 	rect(2 * cfg.mar + 16, cfg.mar, 127 - cfg.mar, 64 - cfg.mar, 3)
 	spr(0, 128 - cfg.mar - 16, 63 + cfg.mar, 2, 2)
 	rect(cfg.mar, 63 + cfg.mar, 127 - cfg.mar * 2 - 16, 128 - cfg.mar, 3)
-	text.print()
+	text:print()
 end
-sfx(0)
+text:start()
 -->8
 --[[notes
 displaying text char by char
