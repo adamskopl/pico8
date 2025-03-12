@@ -3,9 +3,9 @@ version 42
 __lua__
 cfg = {
 	mar = 2,
-	txt_on_c = 3,
-	txt_off_c = 8,
-	bg = 6
+	txt_on_c = 7,
+	txt_off_c = 5,
+	bg = 0
 }
 
 delta=0
@@ -56,9 +56,13 @@ text={
 			fin = true,
 		}
 	end,
-	start = function(self)
-		sfx(0)
-		self.fin = false
+	start = function(self, anim)
+		if (anim) then
+			sfx(0)
+			self.fin = false
+		else
+			self.t = self.t_fin
+		end
 	end,
 	update = function(self)
 		if (self.fin) then return end
@@ -82,7 +86,7 @@ text={
 -->8
 -- dialog
 
-mess_print = 1 -- 1 or 2.
+mess_print = 2 -- 1 or 2.
 
 mess_1=[[
 let's start with something
@@ -90,8 +94,7 @@ simple.
 ]]
 
 mess_2=[[
-let's start with something
-simple.
+yes, let's do it so.
 ]]
 
 -->8
@@ -112,7 +115,12 @@ anim2 = anim.create(32, 128 - cfg.mar - 16, 63 + cfg.mar, true)
 function _init()
 	if (mess_print == 1) then
 		anim.start(anim1)
-		text.start(text1)
+		text.start(text1, true)
+		text.start(text2, false)
+	else
+		text.start(text1, false)
+		anim.start(anim2)
+		text.start(text2, true)
 	end
 end
 
@@ -121,16 +129,18 @@ function _update()
 	last_t=time()
 	
 	text.update(text1)
+	anim1.fin = text1.fin
 	anim.update(anim1)
 	
 	text.update(text2)
+	anim2.fin = text2.fin
 	anim.update(anim2)
 end
 
 function _draw()
 	cls(cfg.bg)
-	rect(2 * cfg.mar + 16, cfg.mar, 127 - cfg.mar, 64 - cfg.mar, 2)
-	rect(cfg.mar, 63 + cfg.mar, 127 - cfg.mar * 2 - 16, 128 - cfg.mar, 2)
+--	rect(2 * cfg.mar + 16, cfg.mar, 127 - cfg.mar, 64 - cfg.mar, 2)
+--	rect(cfg.mar, 63 + cfg.mar, 127 - cfg.mar * 2 - 16, 128 - cfg.mar, 2)
 	
 	text.draw(text1)
 	anim.draw(anim1)
