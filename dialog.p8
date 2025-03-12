@@ -3,9 +3,9 @@ version 42
 __lua__
 cfg = {
 	mar = 2,
-	txt_on_c = 7,
+	txt_on_c = 17,
 	txt_off_c = 5,
-	bg = 0
+	bg = 6
 }
 
 delta=0
