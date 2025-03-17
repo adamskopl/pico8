@@ -1,16 +1,28 @@
+messages = {[[
+welcome to our show :(
+welcome to our show.
+welcome to our show.
+welcome to our show.
+]], [[
+yes, hello.
+]], [[
+i don't know.
+]]}
+
 cfg = {
   mar = 2,
   txt_on_c = 17,
   txt_off_c = 5,
-  bg = 6
+  bg = 6,
+  char_speed = 0.05,
+  pause_dialog = 2
 }
 
-delta = 0
+dt = 0
 last_t = 0
 
 anim = {
   create = function(n, x, y, f_x)
-    printh(x)
     return {
       start_n = n,
       n = n,
@@ -26,9 +38,10 @@ anim = {
   end,
   update = function(self)
     if (self.fin) then
+      self.n = self.start_n
       return
     end
-    self.dt = self.dt + delta
+    self.dt = self.dt + dt
     if (self.dt > 0.08) then
       self.dt = 0;
       self.n = self.n + 2; -- sprite 16px
@@ -43,33 +56,34 @@ anim = {
 }
 
 text = {
-  create = function(t, x, y, c)
+  create = function(x, y)
     return {
       t = "",
-      t_fin = t,
+      t_fin = "",
       x = x,
       y = y,
-      c = c,
+      c = cfg.txt_on_c,
       t_pos = 0,
-      delta = 0,
+      dt = 0,
       fin = true
     }
   end,
-  start = function(self, anim)
-    if (anim) then
-      sfx(0)
-      self.fin = false
-    else
-      self.t = self.t_fin
-    end
+  start = function(self, t)
+    sfx(0)
+    self.t = ""
+    self.t_fin = t
+    self.c = cfg.txt_on_c
+    self.t_pos = 0
+    self.dt = 0
+    self.fin = false
   end,
   update = function(self)
     if (self.fin) then
       return
     end
-    self.delta = self.delta + delta
-    if (self.delta > 0.05) then
-      self.delta = 0
+    self.dt = self.dt + dt
+    if (self.dt > cfg.char_speed) then
+      self.dt = 0
       self.t_pos = self.t_pos + 2
       self.t = sub(self.t_fin, 0, self.t_pos)
       if (self.t_pos > #self.t_fin) then
@@ -84,65 +98,47 @@ text = {
   end
 }
 
--- >8
--- dialog
-
-mess_print = 2
-
-mess_1 = [[
-let's start with something1
-simple.
-let's start with something1
-simple.
-let's start with something1
-simple.
-let's start with something1
-simple.
-let's start with something1
-simple.
-]]
-
-mess_2 = [[
-yes, let's do it solllll123
-yes, let's do it solllll123
-yes, let's do it solllll123
-]]
-
--- >8
--- declarations
-
-local c1, c2 = cfg.txt_off_c, cfg.txt_on_c
-if mess_print == 1 then
-  c1, c2 = c2, c1
-end
-text1 = text.create(mess_1, 2 * cfg.mar + 16, cfg.mar, c1)
+text1 = text.create(2 * cfg.mar + 16, cfg.mar)
 anim1 = anim.create(0, cfg.mar, cfg.mar, false)
-
-text2 = text.create(mess_2, cfg.mar, 63 + cfg.mar, c2)
+text2 = text.create(cfg.mar, 63 + cfg.mar, c2)
 anim2 = anim.create(32, 128 - cfg.mar - 16, 63 + cfg.mar, true)
 
--- >8
--- main
-function _init()
-  if (mess_print == 1) then
-    anim.start(anim1)
-    text.start(text1, true)
-    text.start(text2, false)
-  else
-    text.start(text1, false)
-    anim.start(anim2)
-    text.start(text2, true)
+manager = {
+  mess_i = 1,
+  anim = anim1,
+  text = text2, -- switch to text1 at start
+  dt = 0,
+  pause = true,
+  update = function(self)
+    if self.text.fin and self.mess_i ~= #messages + 1 then
+      if self.pause == true then
+        self.dt = self.dt + dt
+        if self.dt > cfg.pause_dialog then
+          self.dt = 0
+          self.pause = false
+        end
+      else
+        self.text.c = cfg.txt_off_c
+        self.text = self.text == text1 and text2 or text1
+        text.start(self.text, messages[self.mess_i])
+        self.mess_i = self.mess_i + 1
+        self.pause = true
+      end
+    end
   end
+}
+
+function _init()
+  printh("----init----")
 end
 
 function _update()
-  delta = time() - last_t
+  dt = time() - last_t
   last_t = time()
-
+  manager:update()
   text.update(text1)
   anim1.fin = text1.fin
   anim.update(anim1)
-
   text.update(text2)
   anim2.fin = text2.fin
   anim.update(anim2)
@@ -155,7 +151,6 @@ function _draw()
 
   text.draw(text1)
   anim.draw(anim1)
-
   text.draw(text2)
   anim.draw(anim2)
 end
