@@ -1,21 +1,10 @@
-messages = {[[
-welcome to our show :(
-welcome to our show.
-welcome to our show.
-welcome to our show.
-]], [[
-yes, hello.
-]], [[
-i don't know.
-]]}
-
 cfg = {
   mar = 2,
-  txt_on_c = 17,
+  txt_on_c = 1,
   txt_off_c = 5,
   bg = 6,
-  char_speed = 0.05,
-  pause_dialog = 2
+  char_speed = 0.066,
+  pause_dialog = 1
 }
 
 dt = 0
@@ -69,7 +58,7 @@ text = {
     }
   end,
   start = function(self, t)
-    sfx(0)
+    -- sfx(0)
     self.t = ""
     self.t_fin = t
     self.c = cfg.txt_on_c
@@ -118,13 +107,18 @@ manager = {
           self.pause = false
         end
       else
-        self.text.c = cfg.txt_off_c
-        self.text = self.text == text1 and text2 or text1
-        text.start(self.text, messages[self.mess_i])
+        self:switchActor()
+        if messages[self.mess_i] ~= "" then
+          text.start(self.text, messages[self.mess_i])
+          self.pause = true
+        end
         self.mess_i = self.mess_i + 1
-        self.pause = true
       end
     end
+  end,
+  switchActor = function(self)
+    self.text.c = cfg.txt_off_c
+    self.text = self.text == text1 and text2 or text1
   end
 }
 
