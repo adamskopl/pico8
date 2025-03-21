@@ -3,12 +3,28 @@ function _init()
     x = 128 / 2 - 8,
     y = 128 - 16
   }
+  anvils = {}
 end
 
 function _update()
+  -- spawn anvils
+  if (#anvils < 5) then
+    add(anvils, {
+      x = rnd(120),
+      y = 0
+    })
+  end
+
+  -- move anvils
+  for anvil in all(anvils) do
+    anvil.y = anvil.y + 1
+  end
 end
 
 function _draw()
-  cls()
+  cls(12)
   spr(1, player.x, player.y, 2, 2)
+  for anvil in all(anvils) do
+    spr(0, anvil.x, anvil.y, 1, 1)
+  end
 end
