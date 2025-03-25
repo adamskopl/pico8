@@ -1,12 +1,20 @@
 function _init()
   player = {
     x = 128 / 2 - 8,
-    y = 128 - 16
+    y = 128 - 16,
+    speed = 2
   }
   anvils = {}
 end
 
 function _update()
+  -- player movement
+  if btn(0) then
+    player.x = max(0, player.x - player.speed)
+  elseif btn(1) then
+    player.x = min(128 - 16, player.x + player.speed)
+  end
+
   -- spawn anvils
   if (#anvils < 5 and rnd(100) < 2) then
     add(anvils, {
