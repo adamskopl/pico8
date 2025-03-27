@@ -7,7 +7,8 @@ function _init()
 		y = 128 - 16,
 		speed = 2,
 		frame = 1,
-		anim_dt = 0
+		anim_dt = 0,
+		flip_x = false
 	}
 	anvils = {}
 end
@@ -16,9 +17,11 @@ function _update()
 	-- move player
 	if btn(0) then
 		player.x = max(0, player.x - player.speed)
+		player.flip_x = true
 		anim_player()
 	elseif btn(1) then
 		player.x = min(128-16, player.x + player.speed)
+		player.flip_x = false
 		anim_player()
 	else
 		player.frame = 1
@@ -43,7 +46,8 @@ end
 
 function _draw()
 	cls(12)
-	spr(player.frame, player.x, player.y, 2, 2)
+	spr(player.frame, player.x, 
+	player.y, 2, 2, player.flip_x)
 	for anvil in all(anvils) do
 		spr(0, anvil.x, anvil.y,1,1)
 	end
