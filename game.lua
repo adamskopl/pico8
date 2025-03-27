@@ -1,78 +1,70 @@
-player = {
-  x = 128 / 2 - 8,
-  y = 128 - 16,
-  w = 13,
-  h = 14,
-  speed = 2,
-  frame = 1,
-  anim_timer = 0
-}
-
--- falling objects (anvils)
-objects = {}
-fin = false
-
 function _init()
-  -- preload spritesheet (if needed)
+  player = {
+    x = 128 / 2 - 8,
+    y = 128 - 16,
+    w = 16,
+    h = 16,
+    speed = 2,
+    frame = 1,
+    anim_dt = 0,
+    flip = false
+  }
+  anvils = {}
 end
 
 function _update()
-  -- player movement + animation
-  if (btn(0)) then
+  -- player movement
+  if btn(0) then
     player.x = max(0, player.x - player.speed)
+    player.flip = true
     animate_player()
-  elseif (btn(1)) then
-    player.x = min(112, player.x + player.speed)
+  elseif btn(1) then
+    player.x = min(128 - 16, player.x + player.speed)
+    player.flip = false
     animate_player()
   else
-    player.anim_timer = 0 -- reset animation when idle
+    player.frame = 1
   end
 
-  -- spawn anvils randomly
-  if (#objects < 5 and rnd(100) < 10) then
-    add(objects, {
+  -- spawn anvils
+  if (#anvils < 5 and rnd(100) < 2) then
+    add(anvils, {
       x = rnd(120),
       y = 0,
       w = 8,
-      h = 8,
-      speed = 1 + rnd(2)
+      h = 8
     })
   end
 
   -- move anvils
-  for obj in all(objects) do
-    obj.y = obj.y + obj.speed
-    if (obj.y > 128) then
-      del(objects, obj)
+  for anvil in all(anvils) do
+    anvil.y = anvil.y + 2
+    if (anvil.y > 128) then
+      del(anvils, anvil)
     end
 
-    -- collision detection
-    if (check_collision(player, obj)) then
-      sfx(0) -- play collision sound
-      _init() -- restart the game
-      fin = true
+    -- collision
+    if (check_collision(player, anvil)) then
+      _init()
     end
   end
 end
 
 function _draw()
   cls(12)
-
-  -- draw player with animation
-  spr(player.frame, player.x, player.y, 2, 2) -- 16x16 sprite
-  -- rect(player.x, player.y, player.x + player.w - 1, player.y + player.h - 1, 8)
-
-  -- draw anvils
-  for obj in all(objects) do
-    spr(0, obj.x, obj.y, 1, 1) -- 8x8 anvil sprite
+  spr(player.frame, player.x, player.y, 2, 2, player.flip)
+  for anvil in all(anvils) do
+    spr(0, anvil.x, anvil.y, 1, 1)
   end
 end
 
--- animate blacksmith by cycling through frames 1, 3, 5
 function animate_player()
-  player.anim_timer = player.anim_timer + 1
-  if (player.anim_timer % 2 == 0) then
-    player.frame = (player.frame == 1) and 3 or (player.frame == 3) and 5 or 1
+  player.anim_dt = player.anim_dt + 1
+  if (player.anim_dt % 2 == 0) then
+    player.frame = player.frame + 2
+    if (player.frame == 7) then
+      player.frame = 1
+    end
   end
 end
 
