@@ -10,9 +10,14 @@ function _init()
     flip = false
   }
   anvils = {}
+  score = 0
+  game_over = false
 end
 
 function _update()
+  if game_over then
+    return
+  end
   -- player movement
   if btn(0) then
     player.x = max(0, player.x - player.speed)
@@ -34,6 +39,7 @@ function _update()
       w = 8,
       h = 8
     })
+    score = score + 1
   end
 
   -- move anvils
@@ -45,16 +51,23 @@ function _update()
 
     -- collision
     if (check_collision(player, anvil)) then
-      _init()
+      game_over = true
     end
   end
 end
 
 function _draw()
-  cls(12)
-  spr(player.frame, player.x, player.y, 2, 2, player.flip)
-  for anvil in all(anvils) do
-    spr(0, anvil.x, anvil.y, 1, 1)
+  if not game_over then
+    cls(12)
+    spr(player.frame, player.x, player.y, 2, 2, player.flip)
+    for anvil in all(anvils) do
+      spr(0, anvil.x, anvil.y, 1, 1)
+    end
+    print("score: " .. score, 5, 5, 8)
+  else
+    cls()
+    print("GAME OVER", 128 / 2 - 15, 128 / 2, 8)
+    print("SCORE: " .. score, 128 / 2 - 15, 128 / 2 + 10, 8)
   end
 end
 
