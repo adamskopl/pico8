@@ -8,6 +8,7 @@ function _init()
     flip = false
   }
   anvils = {}
+  score = 0
 end
 
 function _update()
@@ -30,6 +31,7 @@ function _update()
       x = rnd(120),
       y = 0
     })
+    score = score + 1
   end
 
   -- move anvils
@@ -47,6 +49,7 @@ function _draw()
   for anvil in all(anvils) do
     spr(0, anvil.x, anvil.y, 1, 1)
   end
+  print("score: " .. score, 5, 5, 8)
 end
 
 function animate_player()
