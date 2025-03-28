@@ -5,6 +5,8 @@ function _init()
 	player = {
 		x = 128/2 -8,
 		y = 128 - 16,
+		w = 16,
+		h = 16,
 		speed = 2,
 		frame = 1,
 		anim_dt = 0,
@@ -12,6 +14,7 @@ function _init()
 	}
 	anvils = {}
 	score = 0
+	game_over = false
 end
 
 function _update()
@@ -32,7 +35,9 @@ function _update()
 	if (#anvils < 5 and rnd(100) < 5) then
 		add(anvils, {
 			x = rnd(120),
-			y = 0
+			y = 0,
+			w = 8,
+			h = 8
 		})
 		score += 1
 	end
@@ -42,6 +47,12 @@ function _update()
 		anvil.y = anvil.y + 2
 		if (anvil.y > 128) then
 			del(anvils, anvil)
+		end
+		
+		-- collision
+		if check_collision(player,
+			anvil) then
+				game_over = true
 		end
 	end
 end
@@ -53,8 +64,11 @@ function _draw()
 	for anvil in all(anvils) do
 		spr(0, anvil.x, anvil.y,1,1)
 	end
-	print("score :" .. score, 
-	5, 5, 8)
+	print("score: " .. score
+	.. " game over: " .. 
+	tostr(game_over)
+	, 
+		5, 5, 8)
 end
 
 function anim_player()
@@ -65,6 +79,14 @@ function anim_player()
 			player.frame = 1
 		end
 	end
+end
+
+function check_collision(a, b)
+	return
+		a.x < b.x + b.w and
+		a.x + a.w > b.x and
+		a.y < b.y + b.h and
+		a.y + a.h > b.y
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
