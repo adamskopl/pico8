@@ -2,19 +2,24 @@ function _init()
   player = {
     x = 128 / 2 - 8,
     y = 128 - 16,
-    w = 16,
-    h = 16,
+    w = 14,
+    h = 13,
     speed = 2,
     frame = 1,
     anim_dt = 0,
     flip = false
   }
   anvils = {}
+  anvils_dt = 0
+  anvils_speed = 1
+  anvils_num = 5
+  anvils_chance = 5
   score = 0
   game_over = false
 end
 
 function _update()
+  -- game over
   if game_over then
     return
   end
@@ -32,19 +37,25 @@ function _update()
   end
 
   -- spawn anvils
-  if (#anvils < 5 and rnd(100) < 2) then
+  anvils_dt = anvils_dt + 1
+  if (anvils_dt % (30 * 5) == 0) then
+    anvils_speed = anvils_speed + 0.3
+    anvils_num = anvils_num + 1
+    anvils_chance = anvils_chance + 1
+  end
+  if (#anvils < anvils_num and rnd(100) < anvils_chance) then
     add(anvils, {
       x = rnd(120),
       y = 0,
       w = 8,
-      h = 8
+      h = 5
     })
     score = score + 1
   end
 
   -- move anvils
   for anvil in all(anvils) do
-    anvil.y = anvil.y + 2
+    anvil.y = anvil.y + anvils_speed
     if (anvil.y > 128) then
       del(anvils, anvil)
     end
@@ -64,6 +75,7 @@ function _draw()
       spr(0, anvil.x, anvil.y, 1, 1)
     end
     print("score: " .. score, 5, 5, 8)
+    print("speed: " .. anvils_speed, 10, 100, 8)
   else
     cls()
     print("GAME OVER", 128 / 2 - 15, 128 / 2, 8)
