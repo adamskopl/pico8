@@ -10,6 +10,9 @@ function _init()
     flip = false
   }
   anvils = {}
+  anvils_speed = 1
+  anvils_num = 5
+  anvils_chance = 5
   score = 0
   game_over = false
 end
@@ -29,7 +32,12 @@ function _update()
   end
 
   -- spawn anvils
-  if (#anvils < 5 and rnd(100) < 2) then
+  if t() % 5 == 0 then
+    anvils_speed = anvils_speed + 0.3
+    anvils_num = anvils_num + 1
+    anvils_chance = anvils_chance + 1
+  end
+  if (#anvils < anvils_num and rnd(100) < anvils_chance) then
     add(anvils, {
       x = rnd(120),
       y = 0,
@@ -41,7 +49,7 @@ function _update()
 
   -- move anvils
   for anvil in all(anvils) do
-    anvil.y = anvil.y + 2
+    anvil.y = anvil.y + anvils_speed
     if (anvil.y > 128) then
       del(anvils, anvil)
     end
