@@ -1,8 +1,8 @@
 function _init()
   printh("--init--")
   p = {
-    x = 0,
-    y = 56,
+    x = 1 * 8,
+    y = 1 * 8,
     speed = 1
   }
   init_map()
@@ -23,7 +23,10 @@ end
 function _draw()
   cls()
   map(0, 0)
-  draw_lines_to_objs()
+  if target then
+    rect(target.x, target.y, target.x + 8, target.y + 8, 12)
+  end
+  -- draw_lines_to_objs()
   draw_p()
 end
 
@@ -72,7 +75,6 @@ function cycle_target(dir)
     if obj ~= target then
       local angle_to = angle_between(p, obj)
       local diff = angle_diff_cw(angle_from, angle_to, dir)
-      printh(diff)
       if diff < min_diff then
         min_diff = diff
         next_obj = obj
@@ -80,9 +82,5 @@ function cycle_target(dir)
     end
   end
 
-  if target then
-    target.active = false
-  end
   target = next_obj
-  target.active = true
 end

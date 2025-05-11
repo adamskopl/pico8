@@ -1,10 +1,11 @@
 function init_map()
   objs = {}
-  for i = 0, 7 do
-    for j = 0, 7 do
+  for i = 0, 15 do
+    for j = 0, 15 do
       printh('DUPA')
       printh(mget(i, j))
-      if mget(i, j) == 2 then
+      local tile = mget(i, j)
+      if tile == 2 or tile == 5 then
         printh('add')
         add(objs, {
           x = i * 8,
