@@ -1,43 +1,11 @@
 function _init()
   printh("--init--")
   p = {
-    x = 50,
-    y = 50,
+    x = 0,
+    y = 56,
     speed = 1
   }
-  objs = {{
-    x = 0,
-    y = 0,
-    active = false
-  }, {
-    x = 50,
-    y = 25,
-    active = false
-  }, {
-    x = 100,
-    y = 0,
-    active = false
-  }, {
-    x = 100,
-    y = 50,
-    active = false
-  }, {
-    x = 100,
-    y = 100,
-    active = false
-  }, {
-    x = 50,
-    y = 100,
-    active = false
-  }, {
-    x = 0,
-    y = 100,
-    active = false
-  }, {
-    x = 0,
-    y = 50,
-    active = false
-  }}
+  init_map()
   target = nil
 end
 
@@ -54,16 +22,12 @@ end
 
 function _draw()
   cls()
+  map(0, 0)
   draw_lines_to_objs()
-
-  for o in all(objs) do
-    pset(o.x, o.y, o.active and 11 or 8)
-  end
   draw_p()
 end
 
 function draw_p()
-
   spr(1, p.x, p.y)
 end
 
