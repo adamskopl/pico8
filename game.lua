@@ -1,98 +1,124 @@
 function _init()
-  player = {
-    x = 128 / 2 - 8,
-    y = 128 - 16,
-    w = 14,
-    h = 13,
-    speed = 2,
-    frame = 1,
-    anim_dt = 0,
-    flip = false
+  printh("--init--")
+  p = {
+    x = 50,
+    y = 50,
+    speed = 1
   }
-  anvils = {}
-  anvils_dt = 0
-  anvils_speed = 1
-  anvils_num = 5
-  anvils_chance = 5
-  score = 0
-  game_over = false
+  objs = {{
+    x = 0,
+    y = 0,
+    active = false
+  }, {
+    x = 50,
+    y = 25,
+    active = false
+  }, {
+    x = 100,
+    y = 0,
+    active = false
+  }, {
+    x = 100,
+    y = 50,
+    active = false
+  }, {
+    x = 100,
+    y = 100,
+    active = false
+  }, {
+    x = 50,
+    y = 100,
+    active = false
+  }, {
+    x = 0,
+    y = 100,
+    active = false
+  }, {
+    x = 0,
+    y = 50,
+    active = false
+  }}
+  target = nil
 end
 
-function _update()
-  -- game over
-  if game_over then
-    return
-  end
-  -- player movement
-  if btn(0) then
-    player.x = max(0, player.x - player.speed)
-    player.flip = true
-    animate_player()
-  elseif btn(1) then
-    player.x = min(128 - 16, player.x + player.speed)
-    player.flip = false
-    animate_player()
-  else
-    player.frame = 1
-  end
-
-  -- spawn anvils
-  anvils_dt = anvils_dt + 1
-  if (anvils_dt % (30 * 5) == 0) then
-    anvils_speed = anvils_speed + 0.3
-    anvils_num = anvils_num + 1
-    anvils_chance = anvils_chance + 1
-  end
-  if (#anvils < anvils_num and rnd(100) < anvils_chance) then
-    add(anvils, {
-      x = rnd(120),
-      y = 0,
-      w = 8,
-      h = 5
-    })
-    score = score + 1
-  end
-
-  -- move anvils
-  for anvil in all(anvils) do
-    anvil.y = anvil.y + anvils_speed
-    if (anvil.y > 128) then
-      del(anvils, anvil)
-    end
-
-    -- collision
-    if (check_collision(player, anvil)) then
-      game_over = true
-    end
+function _update60()
+  if btnp(0) then
+    cycle_target(1)
+  elseif btnp(1) then
+    cycle_target(-1)
+  elseif btn(2) then
+    move_towards(p, target)
+  elseif btn(3) then
   end
 end
 
 function _draw()
-  if not game_over then
-    cls(12)
-    spr(player.frame, player.x, player.y, 2, 2, player.flip)
-    for anvil in all(anvils) do
-      spr(0, anvil.x, anvil.y, 1, 1)
-    end
-    print("score: " .. score, 5, 5, 8)
-    print("speed: " .. anvils_speed, 10, 100, 8)
+  cls()
+  draw_lines_to_objs()
+
+  for o in all(objs) do
+    pset(o.x, o.y, o.active and 11 or 8)
+  end
+  draw_p()
+end
+
+function draw_p()
+
+  spr(1, p.x, p.y)
+end
+
+function move_towards(o, target)
+  local dx = target.x - o.x
+  local dy = target.y - o.y
+  local distance = sqrt(dx ^ 2 + dy ^ 2)
+  local dir_x = dx / distance
+  local dir_y = dy / distance
+  if distance < o.speed then
+    o.x = target.x
+    o.y = target.y
   else
-    cls()
-    print("GAME OVER", 128 / 2 - 15, 128 / 2, 8)
-    print("SCORE: " .. score, 128 / 2 - 15, 128 / 2 + 10, 8)
+    o.x = o.x + dir_x * o.speed
+    o.y = o.y + dir_y * o.speed
   end
 end
 
-function animate_player()
-  player.anim_dt = player.anim_dt + 1
-  if (player.anim_dt % 2 == 0) then
-    player.frame = player.frame + 2
-    if (player.frame == 7) then
-      player.frame = 1
+function draw_lines_to_objs()
+  for o in all(objs) do
+    line(p.x, p.y, o.x, o.y, o.active and 13 or 9)
+  end
+end
+
+function angle_between(from, to)
+  local dx = to.x - from.x
+  local dy = to.y - from.y
+  return atan2(dx, dy)
+end
+
+function angle_diff_cw(from, to, dir)
+  local diff = ((to - from) * dir) % 1
+  return diff == 0 and 1 or diff -- skip exact same angle
+end
+
+function cycle_target(dir)
+  local angle_from = target and angle_between(p, target) or 0
+  local next_obj = nil
+  local min_diff = 1 -- full circle
+
+  for obj in all(objs) do
+    if obj ~= target then
+      local angle_to = angle_between(p, obj)
+      local diff = angle_diff_cw(angle_from, angle_to, dir)
+      printh(diff)
+      if diff < min_diff then
+        min_diff = diff
+        next_obj = obj
+      end
     end
   end
-end
 
-function check_collision(a, b)
-  return a.x < b.x + b.w and a.x + a.w > b.x and a.y < b.y + b.h and a.y + a.h > b.y
+  if target then
+    target.active = false
+  end
+  target = next_obj
+  target.active = true
 end
