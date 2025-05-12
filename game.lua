@@ -55,6 +55,9 @@ function _update60()
       del(bullets, b)
       del(enemies, b.target)
       target = nil
+      if (#enemies == 0) then
+        _init()
+      end
     end
   end
 end
