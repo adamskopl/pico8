@@ -1,42 +1,33 @@
 function _init()
   printh("--init--")
-  cfg = {
-    mode = 1 -- 0=angles, 1=arrows
-  }
+  cfg = {}
   p = {
-    x = 1 * 8,
-    y = 1 * 8,
-    speed = 1
+    x = 8 * 8,
+    y = 8 * 8,
+    speed = 1,
+    aim = 0.0
   }
   init_map()
   target = nil
 end
 
 function _update60()
-  if cfg.mode == 0 then
-    if btnp(0) then
-      cycle_target(1)
-    elseif btnp(1) then
-      cycle_target(-1)
-    elseif btn(2) then
-      move_towards(p, target)
-    elseif btn(3) then
-    end
-  elseif cfg.mode == 1 then
-    if btn(0) then
-      p.x = p.x - p.speed
-      aim(-1, 0)
-    elseif btn(1) then
-      p.x = p.x + p.speed
-      aim(1, 0)
-    elseif btn(2) then
-      p.y = p.y - p.speed
-      aim(0, -1)
-    elseif btn(3) then
-      p.y = p.y + p.speed
-      aim(0, 1)
-    end
+  if btn(0) then
+    p.x = p.x - p.speed
+    aim(-1, 0)
+  elseif btn(1) then
+    p.x = p.x + p.speed
+    aim(1, 0)
+  elseif btn(2) then
+    p.y = p.y - p.speed
+    aim(0, -1)
+  elseif btn(3) then
+    p.y = p.y + p.speed
+    aim(0, 1)
   end
+
+  update_p()
+
   if btnp(4) then
     shoot()
   end
@@ -78,10 +69,6 @@ function _draw()
     pset(b.x, b.y, 8)
   end
 
-end
-
-function draw_p()
-  spr(1, p.x, p.y)
 end
 
 function normalize(x, y)
