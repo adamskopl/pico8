@@ -1,6 +1,7 @@
 -- map
-function init_map()
-  walls = {}
+function init_level()
+  level = {}
+  doors = {}
   p = {
     pos = {
       x = -1,
@@ -15,7 +16,7 @@ function init_map()
   for i = 0, 15 do
     for j = 0, 15 do
       local m = mget(i, j)
-      if m == 1 then
+      if m == 1 then -- player
         p.pos = {
           x = i * 8,
           y = j * 8
@@ -24,11 +25,12 @@ function init_map()
           pos = vec_cp(p.pos)
         }
       end
-      if m == 2 then
-        walls[pos_key({
+      if m == 2 or m == 4 then
+        level[pos_key({
           x = i * 8,
           y = j * 8
         })] = {
+          type = m == 2 and 'W' or 'D',
           pos = {
             x = i * 8,
             y = j * 8
@@ -40,9 +42,9 @@ function init_map()
   end
 end
 
-function update_map()
+function update_level()
   light_corridor()
-  discover_map_known()
+  discover_level_known()
   discover_walls()
 end
 
@@ -75,7 +77,7 @@ function light_corridor()
   end
 end
 
-function discover_map_known()
+function discover_level_known()
   for m_h in all(m_highl) do
     if not m_known[pos_key(m_h.pos)] then
       m_known[pos_key(m_h.pos)] = {
@@ -101,70 +103,57 @@ function discover_walls()
   }}
 
   if p.dir then
-    local w = walls[pos_key(vec_add(p.pos,
+    local m = level[pos_key(vec_add(p.pos,
       vec_multi(p.dir, 8)))]
-    if w then
-      w.known = true
+    if m and m.type == 'W' then
+      m.known = true
     end
   end
 
   for m_h in all(m_highl) do
     for dir in all(dirs) do
-      local w = walls[pos_key(vec_add(m_h.pos, dir))]
-      if w then
-        w.known = true
+      local m = level[pos_key(vec_add(m_h.pos, dir))]
+      if m and m.type == 'W' then
+        m.known = true
       end
     end
   end
 end
 
-function draw_map()
-  draw_walls()
-  draw_map_known()
-  draw_light()
+function draw_level()
+  draw_level_fog()
+  draw_visible()
 
-  for i = 0, 15 do
-    for j = 0, 15 do
-      local m = mget(i, j)
-      if m == 0 then
-
-      end
-      if m == 2 then
-      end
-
-      if draw then
-        spr(m, i * 8, j * 8)
-      end
+  for pos, t in pairs(level) do
+    if t.type == 'W' and t.known then
+      spr(2, t.pos.x, t.pos.y)
     end
   end
+
 end
 
-function draw_walls()
-  for pos, w in pairs(walls) do
-    if w.known then
-      spr(2, w.pos.x, w.pos.y)
-    end
-  end
-end
-
-function draw_map_known()
+function draw_level_fog()
   for pos, m in pairs(m_known) do
     if not vec_eq(m.pos, p.pos) then
       spr(3, m.pos.x, m.pos.y)
-      -- rectfill(m.pos.x, m.pos.y, m.pos.x + 7, m.pos.y + 7, 0)
     end
   end
 end
 
-function draw_light()
+function draw_visible()
   local function draw(pos)
-    rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 6)
+    rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 4)
   end
   if not p.m then
     draw(p.pos)
   end
   for m_h in all(m_highl) do
     draw(m_h.pos)
+    local m = level[pos_key(m_h.pos)]
+    if m then
+      if m.type == 'D' then
+        spr(4, m_h.pos.x, m_h.pos.y)
+      end
+    end
   end
-
 end

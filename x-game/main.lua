@@ -1,6 +1,6 @@
 function _init()
   printh("--init")
-  init_map()
+  init_level()
 end
 
 function _update60()
@@ -27,12 +27,12 @@ function _update60()
   end
 
   move(p)
-  update_map()
+  update_level()
 end
 
 function _draw()
   cls(0)
-  draw_map()
+  draw_level()
   draw_enemies()
   draw_p()
 end
