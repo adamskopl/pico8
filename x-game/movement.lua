@@ -23,23 +23,24 @@ function start_move(o, dir)
     local m = {}
     o.m = m
     m.start = {
-      x = o.x,
-      y = o.y
+      x = o.pos.x,
+      y = o.pos.y
     }
     m.dir = dir
   end
 end
 
 function move(o)
-  if not o.m.dir then
+  if not o.m then
     return
   end
   local dir = o.m.dir
   if dir then
-    o.pos.x = o.pos.x + dir.x * 0.5
-    o.pos.y = o.pos.y + dir.y * 0.5
+    o.pos.x = o.pos.x + dir.x * 1
+    o.pos.y = o.pos.y + dir.y * 1
   end
-  if abs(o.m.start.x - o.pos.x) == 8 or abs(o.m.start.y - o.pos.y) == 8 then
-    o.m = {}
+  if abs(o.m.start.x - o.pos.x) == 8 or
+    abs(o.m.start.y - o.pos.y) == 8 then
+    o.m = nil
   end
 end
