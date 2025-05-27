@@ -15,11 +15,11 @@ function start_move(o, dir)
   if dir.y == 1 then
     m_y = min(15, m_y + 1)
   end
-  local m = mget(m_x, m_y)
-  local coll_f = fget(m, 0)
 
-  if coll_f then
-  else
+  local t = lvl[pos_key(vec(m_x * 8, m_y * 8))]
+  local coll = t and (t.type == 'W')
+
+  if not coll then
     local m = {}
     o.m = m
     m.start = {
@@ -36,8 +36,8 @@ function move(o)
   end
   local dir = o.m.dir
   if dir then
-    o.pos.x = o.pos.x + dir.x * 1
-    o.pos.y = o.pos.y + dir.y * 1
+    o.pos.x = o.pos.x + dir.x * o.speed
+    o.pos.y = o.pos.y + dir.y * o.speed
   end
   if abs(o.m.start.x - o.pos.x) == 8 or
     abs(o.m.start.y - o.pos.y) == 8 then

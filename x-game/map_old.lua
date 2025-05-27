@@ -1,7 +1,6 @@
 -- map
-function init_level()
-  level = {}
-  doors = {}
+function init_lvl_old()
+  lvl = {}
   p = {
     pos = {
       x = -1,
@@ -11,8 +10,8 @@ function init_level()
     dir = nil
   }
   enemies = {}
-  m_highl = {}
-  m_known = {}
+  lvl_highl = {}
+  lvl_known = {}
   for i = 0, 15 do
     for j = 0, 15 do
       local m = mget(i, j)
@@ -21,16 +20,17 @@ function init_level()
           x = i * 8,
           y = j * 8
         }
-        m_known[pos_key(p.pos)] = {
+        lvl_known[pos_key(p.pos)] = {
           pos = vec_cp(p.pos)
         }
       end
       if m == 2 or m == 4 then
-        level[pos_key({
+        lvl[pos_key({
           x = i * 8,
           y = j * 8
         })] = {
-          type = m == 2 and 'W' or 'D',
+          type = m == 2 and 'W' -- wall
+          or m == 4 and 'D', -- doors
           pos = {
             x = i * 8,
             y = j * 8
@@ -42,14 +42,14 @@ function init_level()
   end
 end
 
-function update_level()
-  light_corridor()
-  discover_level_known()
-  discover_walls()
+function update_lvl_old()
+  light_corridor_old()
+  discover_lvl_known_old()
+  discover_walls_old()
 end
 
-function light_corridor()
-  m_highl = {}
+function light_corridor_old()
+  lvl_highl = {}
   if not p.dir then
     return
   end
@@ -66,7 +66,7 @@ function light_corridor()
   local m = mget(m_pos.x, m_pos.y)
 
   while m ~= 2 do
-    add(m_highl, {
+    add(lvl_highl, {
       pos = {
         x = m_pos.x * 8,
         y = m_pos.y * 8
@@ -77,17 +77,17 @@ function light_corridor()
   end
 end
 
-function discover_level_known()
-  for m_h in all(m_highl) do
-    if not m_known[pos_key(m_h.pos)] then
-      m_known[pos_key(m_h.pos)] = {
+function discover_lvl_known_old()
+  for m_h in all(lvl_highl) do
+    if not lvl_known[pos_key(m_h.pos)] then
+      lvl_known[pos_key(m_h.pos)] = {
         pos = vec_cp(m_h.pos)
       }
     end
   end
 end
 
-function discover_walls()
+function discover_walls_old()
   local dirs = {{
     x = -8,
     y = 0
@@ -103,16 +103,16 @@ function discover_walls()
   }}
 
   if p.dir then
-    local m = level[pos_key(vec_add(p.pos,
-      vec_multi(p.dir, 8)))]
+    local m = lvl[pos_key(
+      vec_add(p.pos, vec_multi(p.dir, 8)))]
     if m and m.type == 'W' then
       m.known = true
     end
   end
 
-  for m_h in all(m_highl) do
+  for m_h in all(lvl_highl) do
     for dir in all(dirs) do
-      local m = level[pos_key(vec_add(m_h.pos, dir))]
+      local m = lvl[pos_key(vec_add(m_h.pos, dir))]
       if m and m.type == 'W' then
         m.known = true
       end
@@ -120,11 +120,11 @@ function discover_walls()
   end
 end
 
-function draw_level()
-  draw_level_fog()
+function draw_lvl_old()
+  draw_lvl_fog()
   draw_visible()
 
-  for pos, t in pairs(level) do
+  for pos, t in pairs(lvl) do
     if t.type == 'W' and t.known then
       spr(2, t.pos.x, t.pos.y)
     end
@@ -132,24 +132,24 @@ function draw_level()
 
 end
 
-function draw_level_fog()
-  for pos, m in pairs(m_known) do
+function draw_lvl_fog_old()
+  for pos, m in pairs(lvl_known) do
     if not vec_eq(m.pos, p.pos) then
       spr(3, m.pos.x, m.pos.y)
     end
   end
 end
 
-function draw_visible()
+function draw_visible_old()
   local function draw(pos)
-    rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 4)
+    rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 13)
   end
   if not p.m then
     draw(p.pos)
   end
-  for m_h in all(m_highl) do
+  for m_h in all(lvl_highl) do
     draw(m_h.pos)
-    local m = level[pos_key(m_h.pos)]
+    local m = lvl[pos_key(m_h.pos)]
     if m then
       if m.type == 'D' then
         spr(4, m_h.pos.x, m_h.pos.y)

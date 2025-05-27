@@ -36,3 +36,18 @@ end
 function pos_key(pos)
   return pos.x .. "_" .. pos.y
 end
+
+DIRS = {{
+  x = -8,
+  y = 0
+}, {
+  x = 8,
+  y = 0
+}, {
+  x = 0,
+  y = -8
+}, {
+  x = 0,
+  y = 8
+}}
+
