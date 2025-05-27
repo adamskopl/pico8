@@ -112,14 +112,19 @@ function draw_lvl()
         local t = lvl[pos_key(pos)]
         if (t) then
           if t.type == 'W' then
+            pal(6, 5)
+            pal(5, 0)
             spr(2, t.pos.x, t.pos.y)
+            pal()
           elseif t.type == 'D' then
+            pal(6, 0)
             spr(4, t.pos.x, t.pos.y)
+            pal()
           end
         else
-          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 4)
+          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0)
         end
-        spr(3, pos.x, pos.y)
+        -- spr(3, pos.x, pos.y)
       end
     end
   end
