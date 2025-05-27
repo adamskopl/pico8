@@ -1,9 +1,4 @@
--- player
 function draw_p()
-  -- if (p.m) then
-  --   spr(3, p.pos.x, p.pos.y)
-  -- end
-
   spr(1, p.pos.x, p.pos.y)
   if p.dir then
     local len = 5

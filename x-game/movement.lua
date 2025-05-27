@@ -1,4 +1,3 @@
--- movement
 function start_move(o, dir)
   local m_x = flr(o.pos.x / 8)
   local m_y = flr(o.pos.y / 8)

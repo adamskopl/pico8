@@ -43,6 +43,8 @@ end
 function update_lvl()
   mark_lvl_visible()
   mrk_lvl_discovered()
+  update_enemies()
+  move(p)
 end
 
 function mark_lvl_visible()
@@ -128,5 +130,7 @@ function draw_lvl()
       end
     end
   end
+
+  draw_p()
 
 end

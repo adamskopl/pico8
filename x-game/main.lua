@@ -13,16 +13,14 @@ function _update60()
     if (not p.dir) or (not vec_eq(dir, p.dir)) then
       p.dir = dir
     else
+      sfx(0)
       start_move(p, dir)
     end
   end
 
-  move(p)
   update_lvl()
-  update_enemies()
 end
 
 function _draw()
   draw_lvl()
-  draw_p()
 end
