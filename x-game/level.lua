@@ -107,7 +107,18 @@ function draw_lvl()
       if not lvl_discovered[pos_key(pos)] then
         rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0)
       elseif not lvl_visible[pos_key(pos)] then
-        -- rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 1)
+
+        -- repeat render with a cover
+        local t = lvl[pos_key(pos)]
+        if (t) then
+          if t.type == 'W' then
+            spr(2, t.pos.x, t.pos.y)
+          elseif t.type == 'D' then
+            spr(4, t.pos.x, t.pos.y)
+          end
+        else
+          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 4)
+        end
         spr(3, pos.x, pos.y)
       end
     end
