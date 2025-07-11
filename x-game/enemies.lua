@@ -7,7 +7,7 @@ function update_enemies()
       if (next_m and next_m.type == 'W') then
         e.dir = vec_multi(e.dir, -1) -- reverse direction if wall
       end
-      start_move(e, e.dir)
+      start_move(e)
     end
     move(e)
   end

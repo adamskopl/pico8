@@ -1,17 +1,17 @@
-function start_move(o, dir)
+function start_move(o)
   local m_x = flr(o.pos.x / 8)
   local m_y = flr(o.pos.y / 8)
 
-  if dir.x == -1 then
+  if o.dir.x == -1 then
     m_x = max(0, m_x - 1)
   end
-  if dir.x == 1 then
+  if o.dir.x == 1 then
     m_x = min(15, m_x + 1)
   end
-  if dir.y == -1 then
+  if o.dir.y == -1 then
     m_y = max(0, m_y - 1)
   end
-  if dir.y == 1 then
+  if o.dir.y == 1 then
     m_y = min(15, m_y + 1)
   end
 
@@ -25,7 +25,7 @@ function start_move(o, dir)
       x = o.pos.x,
       y = o.pos.y
     }
-    m.dir = dir
+    m.dir = o.dir
   end
 end
 

@@ -14,7 +14,7 @@ function init_lvl()
           pos = vec(i * 8, j * 8),
           m = nil,
           dir = nil,
-          speed = 1
+          movespeed = 1
         }
       elseif m == 2 then
         o = {
@@ -40,14 +40,22 @@ function init_lvl()
   end
 end
 
-function update_lvl()
-  mark_lvl_visible()
-  mrk_lvl_discovered()
-  update_enemies()
-  move(p)
+local function mrk_lvl_discovered()
+  if not p.m and p.dir then
+    local pos_dir = vec_add(p.pos, vec_multi(p.dir, 8))
+    lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
+  end
+
+  for key, pos in pairs(lvl_visible) do
+    -- for dir in all(DIRS) do
+    --   local pos_dir = vec_add(pos, dir)
+    --   lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
+    -- end
+    lvl_discovered[pos_key(pos)] = vec_cp(pos)
+  end
 end
 
-function mark_lvl_visible()
+local function mark_lvl_visible()
   lvl_visible = {}
   if not p.dir then
     return
@@ -73,23 +81,15 @@ function mark_lvl_visible()
   end
 end
 
-function mrk_lvl_discovered()
-  if not p.m and p.dir then
-    local pos_dir = vec_add(p.pos, vec_multi(p.dir, 8))
-    lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
-  end
-
-  for key, pos in pairs(lvl_visible) do
-    -- for dir in all(DIRS) do
-    --   local pos_dir = vec_add(pos, dir)
-    --   lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
-    -- end
-    lvl_discovered[pos_key(pos)] = vec_cp(pos)
-  end
+function update_lvl()
+  mark_lvl_visible()
+  mrk_lvl_discovered()
+  update_enemies()
+  move(p)
 end
 
 function draw_lvl()
-  cls(4)
+  cls(5)
 
   -- draw lvl all
   for pos, t in pairs(lvl) do
