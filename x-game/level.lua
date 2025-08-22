@@ -4,6 +4,7 @@ function init_lvl()
   lvl_discovered = {}
   p = nil
   enemies = {}
+  bullets = {}
 
   for i = 0, 15 do
     for j = 0, 15 do
@@ -13,11 +14,12 @@ function init_lvl()
         p = {
           pos = vec(i * 8, j * 8),
           m = nil,
-          dir = nil,
-          movespeed = 1
+          dir = vec(1, 0),
+          speed = 1
         }
       elseif m == 2 then
         o = {
+          -- TODO dictionary
           type = 'W'
         }
       elseif m == 4 then
@@ -28,7 +30,7 @@ function init_lvl()
         add(enemies, {
           pos = vec(i * 8, j * 8),
           m = nil,
-          dir = vec(0, -1),
+          dir = vec(-1, 0),
           speed = 0.5
         })
       end
@@ -47,10 +49,6 @@ local function mrk_lvl_discovered()
   end
 
   for key, pos in pairs(lvl_visible) do
-    -- for dir in all(DIRS) do
-    --   local pos_dir = vec_add(pos, dir)
-    --   lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
-    -- end
     lvl_discovered[pos_key(pos)] = vec_cp(pos)
   end
 end
@@ -89,7 +87,7 @@ function update_lvl()
 end
 
 function draw_lvl()
-  cls(5)
+  cls(4)
 
   -- draw lvl all
   for pos, t in pairs(lvl) do
@@ -101,6 +99,7 @@ function draw_lvl()
   end
 
   draw_enemies()
+  draw_bullets()
 
   -- cover lvl not discovered
   for i = 0, 15 do
@@ -114,8 +113,8 @@ function draw_lvl()
         local t = lvl[pos_key(pos)]
         if (t) then
           if t.type == 'W' then
-            pal(6, 5)
-            pal(5, 0)
+            pal(11, 5)
+            pal(4, 0)
             spr(2, t.pos.x, t.pos.y)
             pal()
           elseif t.type == 'D' then
@@ -124,7 +123,7 @@ function draw_lvl()
             pal()
           end
         else
-          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0)
+          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 5)
         end
         -- spr(3, pos.x, pos.y)
       end
