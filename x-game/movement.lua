@@ -25,7 +25,7 @@ function start_move(o)
       x = o.pos.x,
       y = o.pos.y
     }
-    m.dir = o.dir
+    -- m.dir = o.dir
   end
 end
 
@@ -33,13 +33,16 @@ function move(o)
   if not o.m then
     return
   end
-  local dir = o.m.dir
-  if dir then
-    o.pos.x = o.pos.x + dir.x * o.speed
-    o.pos.y = o.pos.y + dir.y * o.speed
+  if o.dir then
+    update_pos(o)
   end
   if abs(o.m.start.x - o.pos.x) == 8 or
     abs(o.m.start.y - o.pos.y) == 8 then
     o.m = nil
   end
+end
+
+function update_pos(o)
+  o.pos.x = o.pos.x + o.dir.x * o.speed
+  o.pos.y = o.pos.y + o.dir.y * o.speed
 end

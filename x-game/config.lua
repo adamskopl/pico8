@@ -1,0 +1,4 @@
+CFG = {
+  COL_GROUND = 3,
+  COL_BULLET = 9
+}

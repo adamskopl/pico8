@@ -18,15 +18,35 @@ end
 
 function shoot()
   sfx(1)
+
+  -- calc pos
+  local pos = vec_cp(p.pos)
+  pos.y = pos.y + 5
+  if p.dir.x == -1 then
+    pos.x = pos.x - 2
+  elseif p.dir.x == 1 then
+    pos.x = pos.x + 10
+  else
+    pos.x = pos.x + 3
+  end
+  -- calc pos
+
   add(bullets, {
-    pos = vec_cp(p.pos),
+    pos = pos,
     dir = vec_cp(p.dir),
-    speed = 0.5
+    speed = 1
   })
+
+end
+
+function update_bullets()
+  for b in all(bullets) do
+    update_pos(b)
+  end
 end
 
 function draw_bullets()
   for b in all(bullets) do
-    pset(b.pos.x, b.pos.y, 10)
+    pset(b.pos.x, b.pos.y, CFG.COL_BULLET)
   end
 end

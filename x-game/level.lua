@@ -66,7 +66,7 @@ local function mark_lvl_visible()
       (p.dir.y == 1 and flr(m_y)) or m_y)
   local m_pos_next = vec_add(m_pos, p.dir)
   local m_next = mget(m_pos_next.x, m_pos_next.y)
-  while m_next ~= 2 do
+  while m_next ~= 2 do -- TODO magic number
     local pos = vec(m_pos_next.x * 8, m_pos_next.y * 8)
     -- mark next tile as visible and all around it
     lvl_visible[pos_key(pos)] = pos
@@ -83,11 +83,12 @@ function update_lvl()
   mark_lvl_visible()
   mrk_lvl_discovered()
   update_enemies()
+  update_bullets()
   move(p)
 end
 
 function draw_lvl()
-  cls(4)
+  cls(CFG.COL_GROUND)
 
   -- draw lvl all
   for pos, t in pairs(lvl) do
@@ -106,14 +107,13 @@ function draw_lvl()
     for j = 0, 15 do
       local pos = vec(i * 8, j * 8)
       if not lvl_discovered[pos_key(pos)] then
-        rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0)
+        rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0) -- TODO magic number
       elseif not lvl_visible[pos_key(pos)] then
-
-        -- repeat render with a cover
+        -- repeat render with a fog of war cover
         local t = lvl[pos_key(pos)]
         if (t) then
           if t.type == 'W' then
-            pal(11, 5)
+            pal(11, 5) -- TODO magic numbers
             pal(4, 0)
             spr(2, t.pos.x, t.pos.y)
             pal()
