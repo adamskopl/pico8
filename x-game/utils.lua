@@ -32,7 +32,12 @@ function touching(a, b)
            (a.y == b.y and abs(a.x - b.x) == 8)
 end
 
-function pos_key(pos)
+function vec_inside(v, v_area)
+  return v.x >= v_area.x and v.x < v_area.x + 8 and v.y >=
+           v_area.y and v.y < v_area.y + 8
+end
+
+function v_key(pos)
   return pos.x .. "_" .. pos.y
 end
 

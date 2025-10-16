@@ -9,10 +9,10 @@ function draw_p()
   spr(1, p.pos.x, p.pos.y, 1, 1, flip)
   draw_gun()
   if p.dir then
-    local len = 8
+    local len = 6
     --  crosshair
-    -- circ(p.pos.x + 4 + p.dir.x * len,
-    -- p.pos.y + 4 + p.dir.y * len, 1, 8)
+    circ(p.pos.x + 4 + p.dir.x * len,
+      p.pos.y + 4 + p.dir.y * len, 1, 8)
   end
 end
 
@@ -34,7 +34,7 @@ function shoot()
   add(bullets, {
     pos = pos,
     dir = vec_cp(p.dir),
-    speed = 1
+    speed = 2
   })
 
 end
@@ -42,6 +42,16 @@ end
 function update_bullets()
   for b in all(bullets) do
     update_pos(b)
+  end
+  for pos, t in pairs(lvl) do
+    if t.type == 'W' then
+      for b in all(bullets) do
+        if vec_inside(b.pos, t.pos) then
+          sfx(2)
+          del(bullets, b)
+        end
+      end
+    end
   end
 end
 

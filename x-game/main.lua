@@ -11,7 +11,7 @@ function _update60()
                 (btnp(3) and vec(0, 1)) or nil
 
   if dir and not p.m then
-    if (not p.dir) or (not vec_eq(dir, p.dir)) then
+    if not vec_eq(dir, p.dir) then
       p.dir = dir
     else
       sfx(0)

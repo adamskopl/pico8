@@ -15,7 +15,7 @@ function start_move(o)
     m_y = min(15, m_y + 1)
   end
 
-  local t = lvl[pos_key(vec(m_x * 8, m_y * 8))]
+  local t = lvl[v_key(vec(m_x * 8, m_y * 8))]
   local coll = t and (t.type == 'W')
 
   if not coll then

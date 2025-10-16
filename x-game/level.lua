@@ -17,10 +17,9 @@ function init_lvl()
           dir = vec(1, 0),
           speed = 1
         }
-      elseif m == 2 then
+      elseif m == 2 then -- TODO magic number
         o = {
-          -- TODO dictionary
-          type = 'W'
+          type = 'W' -- TODO magic number
         }
       elseif m == 4 then
         o = {
@@ -36,7 +35,7 @@ function init_lvl()
       end
       if o then
         o.pos = vec(i * 8, j * 8)
-        lvl[pos_key(o.pos)] = o
+        lvl[v_key(o.pos)] = o
       end
     end
   end
@@ -45,11 +44,11 @@ end
 local function mrk_lvl_discovered()
   if not p.m and p.dir then
     local pos_dir = vec_add(p.pos, vec_multi(p.dir, 8))
-    lvl_discovered[pos_key(pos_dir)] = vec_cp(pos_dir)
+    lvl_discovered[v_key(pos_dir)] = vec_cp(pos_dir)
   end
 
   for key, pos in pairs(lvl_visible) do
-    lvl_discovered[pos_key(pos)] = vec_cp(pos)
+    lvl_discovered[v_key(pos)] = vec_cp(pos)
   end
 end
 
@@ -69,10 +68,10 @@ local function mark_lvl_visible()
   while m_next ~= 2 do -- TODO magic number
     local pos = vec(m_pos_next.x * 8, m_pos_next.y * 8)
     -- mark next tile as visible and all around it
-    lvl_visible[pos_key(pos)] = pos
+    lvl_visible[v_key(pos)] = pos
     for dir in all(DIRS) do
       local pos_dir = vec_add(pos, dir)
-      lvl_visible[pos_key(pos_dir)] = pos_dir
+      lvl_visible[v_key(pos_dir)] = pos_dir
     end
     m_pos_next = vec_add(m_pos_next, p.dir)
     m_next = mget(m_pos_next.x, m_pos_next.y)
@@ -87,6 +86,11 @@ function update_lvl()
   move(p)
 end
 
+--[[ 
+	TODO draw level algorithm:
+	OR make functions to make this procedure easier tto read
+
+]]
 function draw_lvl()
   cls(CFG.COL_GROUND)
 
@@ -106,11 +110,11 @@ function draw_lvl()
   for i = 0, 15 do
     for j = 0, 15 do
       local pos = vec(i * 8, j * 8)
-      if not lvl_discovered[pos_key(pos)] then
+      if not lvl_discovered[v_key(pos)] then
         rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0) -- TODO magic number
-      elseif not lvl_visible[pos_key(pos)] then
+      elseif not lvl_visible[v_key(pos)] then
         -- repeat render with a fog of war cover
-        local t = lvl[pos_key(pos)]
+        local t = lvl[v_key(pos)]
         if (t) then
           if t.type == 'W' then
             pal(11, 5) -- TODO magic numbers

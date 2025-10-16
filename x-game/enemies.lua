@@ -2,8 +2,8 @@ function update_enemies()
   for e in all(enemies) do
     if not e.m then
       -- TODO some util functions needed...
-      local next_m = lvl[pos_key(
-        vec_add(e.pos, vec_multi(e.dir, 8)))]
+      local next_m = lvl[v_key(vec_add(e.pos,
+        vec_multi(e.dir, 8)))]
       if (next_m and next_m.type == 'W') then
         e.dir = vec_multi(e.dir, -1) -- reverse direction if wall
       end
