@@ -37,6 +37,7 @@ function init_lvl()
         o.pos = vec(i * 8, j * 8)
         lvl[v_key(o.pos)] = o
       end
+
     end
   end
 end
@@ -65,7 +66,7 @@ local function mark_lvl_visible()
       (p.dir.y == 1 and flr(m_y)) or m_y)
   local m_pos_next = vec_add(m_pos, p.dir)
   local m_next = mget(m_pos_next.x, m_pos_next.y)
-  while m_next ~= 2 do -- TODO magic number
+  while m_next ~= MAP.WALL do
     local pos = vec(m_pos_next.x * 8, m_pos_next.y * 8)
     -- mark next tile as visible and all around it
     lvl_visible[v_key(pos)] = pos
@@ -83,7 +84,7 @@ function update_lvl()
   mrk_lvl_discovered()
   update_enemies()
   update_bullets()
-  move(p)
+  update_movement(p)
 end
 
 --[[ 

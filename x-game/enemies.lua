@@ -1,4 +1,8 @@
 function update_enemies()
+
+end
+
+function update_enemies_old_for_ref()
   for e in all(enemies) do
     if not e.m then
       -- TODO some util functions needed...
@@ -7,9 +11,9 @@ function update_enemies()
       if (next_m and next_m.type == 'W') then
         e.dir = vec_multi(e.dir, -1) -- reverse direction if wall
       end
-      start_move(e)
+      start_movement(e)
     end
-    move(e)
+    update_movement(e)
   end
 end
 

@@ -15,7 +15,7 @@ function _update60()
       p.dir = dir
     else
       sfx(0)
-      start_move(p)
+      start_movement(p)
     end
   end
 

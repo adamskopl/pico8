@@ -1,4 +1,4 @@
-function start_move(o)
+function start_movement(o)
   local m_x = flr(o.pos.x / 8)
   local m_y = flr(o.pos.y / 8)
 
@@ -25,11 +25,10 @@ function start_move(o)
       x = o.pos.x,
       y = o.pos.y
     }
-    -- m.dir = o.dir
   end
 end
 
-function move(o)
+function update_movement(o)
   if not o.m then
     return
   end
