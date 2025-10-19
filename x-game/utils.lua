@@ -32,9 +32,9 @@ function touching(a, b)
            (a.y == b.y and abs(a.x - b.x) == 8)
 end
 
-function vec_inside(v, v_area)
-  return v.x >= v_area.x and v.x < v_area.x + 8 and v.y >=
-           v_area.y and v.y < v_area.y + 8
+function vec_inside(v, v_tile)
+  return v.x >= v_tile.x and v.x < v_tile.x + 8 and v.y >=
+           v_tile.y and v.y < v_tile.y + 8
 end
 
 function v_key(pos)
@@ -42,6 +42,20 @@ function v_key(pos)
 end
 
 DIRS = {{
+  x = -1,
+  y = 0
+}, {
+  x = 1,
+  y = 0
+}, {
+  x = 0,
+  y = -1
+}, {
+  x = 0,
+  y = 1
+}}
+
+DIRS_8 = {{
   x = -8,
   y = 0
 }, {

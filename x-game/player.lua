@@ -44,7 +44,7 @@ function update_bullets()
     update_pos(b)
   end
   for pos, t in pairs(lvl) do
-    if t.type == 'W' then
+    if t.type == MAP.WALL then
       for b in all(bullets) do
         if vec_inside(b.pos, t.pos) then
           sfx(2)

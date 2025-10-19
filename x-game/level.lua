@@ -1,5 +1,5 @@
 function init_lvl()
-  lvl = {}
+  lvl = {} -- [pos]:object
   lvl_visible = {}
   lvl_discovered = {}
   p = nil
@@ -9,35 +9,24 @@ function init_lvl()
   for i = 0, 15 do
     for j = 0, 15 do
       local m = mget(i, j)
-      local o
-      if m == 1 then
-        p = {
-          pos = vec(i * 8, j * 8),
-          m = nil,
-          dir = vec(1, 0),
-          speed = 1
-        }
-      elseif m == 2 then -- TODO magic number
-        o = {
-          type = 'W' -- TODO magic number
-        }
-      elseif m == 4 then
-        o = {
-          type = 'D'
-        }
-      elseif m == 17 then
-        add(enemies, {
-          pos = vec(i * 8, j * 8),
-          m = nil,
-          dir = vec(-1, 0),
-          speed = 0.5
-        })
-      end
-      if o then
-        o.pos = vec(i * 8, j * 8)
+      local o = {
+        type = m,
+        pos = vec(i * 8, j * 8)
+      }
+      if m == MAP.PLAYER then
+        o.m = nil
+        o.dir = vec(1, 0)
+        o.speed = 1
+        p = o
+      elseif m == MAP.MONSTER then
+        o.m = nil
+        o.dir = vec(-1, 0)
+        o.speed = 0.5
+        o.sleep = true
+        add(enemies, o)
+      else
         lvl[v_key(o.pos)] = o
       end
-
     end
   end
 end
@@ -55,9 +44,11 @@ end
 
 local function mark_lvl_visible()
   lvl_visible = {}
-  if not p.dir then
-    return
-  end
+
+  -- TODO needed?
+  -- if not p.dir then
+  --   return
+  -- end
 
   local m_x, m_y = p.pos.x / 8, p.pos.y / 8
   local m_pos = vec((p.dir.x == -1 and ceil(m_x)) or
@@ -70,7 +61,7 @@ local function mark_lvl_visible()
     local pos = vec(m_pos_next.x * 8, m_pos_next.y * 8)
     -- mark next tile as visible and all around it
     lvl_visible[v_key(pos)] = pos
-    for dir in all(DIRS) do
+    for dir in all(DIRS_8) do
       local pos_dir = vec_add(pos, dir)
       lvl_visible[v_key(pos_dir)] = pos_dir
     end
@@ -97,9 +88,9 @@ function draw_lvl()
 
   -- draw lvl all
   for pos, t in pairs(lvl) do
-    if t.type == 'W' then
+    if t.type == MAP.WALL then
       spr(2, t.pos.x, t.pos.y)
-    elseif t.type == 'D' then
+    elseif t.type == MAP.DOOR then
       spr(4, t.pos.x, t.pos.y)
     end
   end
@@ -112,23 +103,27 @@ function draw_lvl()
     for j = 0, 15 do
       local pos = vec(i * 8, j * 8)
       if not lvl_discovered[v_key(pos)] then
-        rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0) -- TODO magic number
+        if not CFG.DEBUG then
+          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0) -- TODO magic number
+        end
       elseif not lvl_visible[v_key(pos)] then
         -- repeat render with a fog of war cover
         local t = lvl[v_key(pos)]
         if (t) then
-          if t.type == 'W' then
+          if t.type == MAP.WALL then
             pal(11, 5) -- TODO magic numbers
             pal(4, 0)
             spr(2, t.pos.x, t.pos.y)
             pal()
-          elseif t.type == 'D' then
+          elseif t.type == MAP.DOOR then
             pal(6, 0)
             spr(4, t.pos.x, t.pos.y)
             pal()
           end
         else
-          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 5)
+          if not CFG.DEBUG then
+            rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 5)
+          end
         end
         -- spr(3, pos.x, pos.y)
       end
@@ -136,5 +131,7 @@ function draw_lvl()
   end
 
   draw_p()
-
+  if CFG.DEBUG then
+    draw_debug()
+  end
 end

@@ -1,5 +1,9 @@
-function _init()
+--[[ 
+pos - pixel position
+m_pos - map position
+]] function _init()
   printh("--init")
+  init_debug()
   init_lvl()
   poke(0X5F5C, 100) -- never repeat btnp
 end
