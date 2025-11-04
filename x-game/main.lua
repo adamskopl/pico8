@@ -19,7 +19,7 @@ function _update60()
     if not vec_eq(dir, p.dir) then
       p.dir = dir
     else
-      sfx(0)
+      sfx(SFX.WALK)
       start_movement(p)
     end
   end

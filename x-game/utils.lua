@@ -27,12 +27,18 @@ function vec_add(v1, v2)
   }
 end
 
-function touching(a, b)
+function tiles_touch(a, b)
   return (a.x == b.x and abs(a.y - b.y) == 8) or
            (a.y == b.y and abs(a.x - b.x) == 8)
 end
 
-function vec_inside(v, v_tile)
+function tiles_collide(a, b)
+  return
+    a.x < b.x + 8 and a.x + 8 > b.x and a.y < b.y + 8 and
+      a.y + 8 > b.y
+end
+
+function vec_in_tile(v, v_tile)
   return v.x >= v_tile.x and v.x < v_tile.x + 8 and v.y >=
            v_tile.y and v.y < v_tile.y + 8
 end

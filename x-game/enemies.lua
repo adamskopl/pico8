@@ -55,19 +55,11 @@ function player_enemies_scan()
     while m_next ~= MAP.WALL do
       for e in all(enemies) do
         if e.sleep and
-          vec_inside(e.pos, vec_multi(m_pos_next, 8)) then
+          vec_in_tile(e.pos, vec_multi(m_pos_next, 8)) then
           e.sleep = false
-          sfx(3)
-          add(lvl_debug, {
-            pos = vec_multi(m_pos_next, 8),
-            col = 8
-          })
+          sfx(SFX.MONSTER_WAKE)
         end
       end
-      -- add(lvl_debug, {
-      --   pos = vec_multi(m_pos_next, 8),
-      --   col = 8
-      -- })
       m_pos_next = vec_add(m_pos_next, dir)
       m_next = mget(m_pos_next.x, m_pos_next.y)
     end

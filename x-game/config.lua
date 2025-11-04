@@ -1,5 +1,5 @@
 CFG = {
-  DEBUG = true
+  DEBUG = false
 }
 
 COL = {
@@ -13,4 +13,14 @@ MAP = {
   WALL = 2,
   FOG = 3,
   MONSTER = 17
+}
+
+SFX = {
+  WALK = 0,
+  SHOOT = 1,
+  BULL_CRASH = 2,
+  MONSTER_WAKE = 3,
+  DEATH = 4,
+  MONSTER_DEATH = 5
+
 }

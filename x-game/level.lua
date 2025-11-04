@@ -60,7 +60,7 @@ end
 function update_lvl()
   mark_lvl_visible()
   update_enemies()
-  update_bullets()
+  update_p()
   update_movement(p)
 end
 

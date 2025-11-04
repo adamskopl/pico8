@@ -48,7 +48,6 @@ function update_pos(o)
 end
 
 function on_mov_end(o)
-  init_debug()
   if (o == p) then
     player_enemies_scan()
   end
