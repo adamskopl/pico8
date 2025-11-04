@@ -43,6 +43,8 @@ function mark_lvl_visible()
       (p.dir.y == 1 and flr(m_y)) or m_y)
   local m_pos_next = vec_add(m_pos, p.dir)
   local m_next = mget(m_pos_next.x, m_pos_next.y)
+
+  add_to_visible(vec_multi(m_pos_next, 8)) -- always add first (could be a wall)
   while m_next ~= MAP.WALL do
     local pos = vec_multi(m_pos_next, 8)
     -- mark next tile as visible and all around it (will also include player)
