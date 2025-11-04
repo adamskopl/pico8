@@ -37,22 +37,22 @@ function vec_inside(v, v_tile)
            v_tile.y and v.y < v_tile.y + 8
 end
 
-function v_key(pos)
+function vec_key(pos)
   return pos.x .. "_" .. pos.y
 end
 
 DIRS = {{
-  x = -1,
-  y = 0
+  x = 0,
+  y = -1
 }, {
   x = 1,
   y = 0
 }, {
   x = 0,
-  y = -1
-}, {
-  x = 0,
   y = 1
+}, {
+  x = -1,
+  y = 0
 }}
 
 DIRS_8 = {{

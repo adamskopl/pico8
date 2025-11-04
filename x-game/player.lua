@@ -9,7 +9,7 @@ function draw_p()
   spr(1, p.pos.x, p.pos.y, 1, 1, flip)
   draw_gun()
   if p.dir then
-    local len = 6
+    local len = 8
     --  crosshair
     circ(p.pos.x + 4 + p.dir.x * len,
       p.pos.y + 4 + p.dir.y * len, 1, 8)
@@ -57,6 +57,6 @@ end
 
 function draw_bullets()
   for b in all(bullets) do
-    pset(b.pos.x, b.pos.y, CFG.COL_BULLET)
+    pset(b.pos.x, b.pos.y, COL.BULLET)
   end
 end

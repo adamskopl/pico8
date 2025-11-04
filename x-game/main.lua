@@ -1,6 +1,7 @@
---[[ 
+--[[ DICTIONARY
 pos - pixel position
 m_pos - map position
+m - result of mget()
 ]] function _init()
   printh("--init")
   init_debug()

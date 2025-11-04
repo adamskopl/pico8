@@ -1,12 +1,16 @@
 CFG = {
-  DEBUG = true,
-  COL_GROUND = 3,
-  COL_BULLET = 9
+  DEBUG = true
+}
+
+COL = {
+  GROUND = 3,
+  BULLET = 9
 }
 
 MAP = {
+  CLEAR = 0,
   PLAYER = 1,
   WALL = 2,
-  DOOR = 4,
+  FOG = 3,
   MONSTER = 17
 }
