@@ -5,6 +5,7 @@ function init_lvl()
   p = nil
   enemies = {}
   bullets = {}
+  swirls = {}
 
   for i = 0, 15 do
     for j = 0, 15 do
@@ -21,8 +22,11 @@ function init_lvl()
       elseif m == MAP.MONSTER then
         create_enemy(o)
         add(enemies, o)
-      elseif m == MAP.WALL then
+      elseif m == MAP.WALL or m == MAP.SWIRL then
         lvl[vec_key(o.pos)] = o
+        if m == MAP.SWIRL then
+          add(swirls, o)
+        end
       end
     end
   end
@@ -79,6 +83,10 @@ function draw_lvl()
               pal(11, 5) -- TODO magic numbers
               spr(MAP.WALL, t.pos.x, t.pos.y)
               pal()
+            elseif t.type == MAP.SWIRL then
+              pal(7, 0)
+              spr(MAP.SWIRL, t.pos.x, t.pos.y)
+              pal()
             end
           else
             rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
@@ -93,9 +101,7 @@ function draw_lvl()
   cls(COL.GROUND)
   -- draw lvl static elements all
   for pos, t in pairs(lvl) do
-    if t.type == MAP.WALL then
-      spr(2, t.pos.x, t.pos.y)
-    end
+    spr(t.type, t.pos.x, t.pos.y)
   end
   draw_enemies()
   draw_bullets()

@@ -12,6 +12,8 @@ MAP = {
   PLAYER = 1,
   WALL = 2,
   FOG = 3,
+  SWIRL = 4,
+  GUN = 5,
   MONSTER = 17
 }
 

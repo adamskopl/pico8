@@ -38,6 +38,12 @@ function tiles_collide(a, b)
       a.y + 8 > b.y
 end
 
+function tiles_small_collide(a, b)
+  return
+    a.x < b.x + 4 and a.x + 4 > b.x and a.y < b.y + 4 and
+      a.y + 4 > b.y
+end
+
 function vec_in_tile(v, v_tile)
   return v.x >= v_tile.x and v.x < v_tile.x + 8 and v.y >=
            v_tile.y and v.y < v_tile.y + 8
