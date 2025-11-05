@@ -1,4 +1,16 @@
 function init_lvl()
+  local function pair_mages()
+    local m_index = 1
+    for m in all(mages) do
+      local swirl = swirls[m_index]
+      local col = COL.MAGES[m_index]
+      m.swirl = swirl
+      m.col = col
+      swirl.col = col
+      m_index = m_index + 1
+    end
+  end
+
   lvl = {} -- [pos]:object
   lvl_visible = {}
   lvl_discovered = {}
@@ -6,6 +18,7 @@ function init_lvl()
   enemies = {}
   bullets = {}
   swirls = {}
+  mages = {}
 
   for i = 0, 15 do
     for j = 0, 15 do
@@ -22,6 +35,8 @@ function init_lvl()
       elseif m == MAP.MONSTER then
         create_enemy(o)
         add(enemies, o)
+      elseif m == MAP.MAGE then
+        add(mages, o)
       elseif m == MAP.WALL or m == MAP.SWIRL then
         lvl[vec_key(o.pos)] = o
         if m == MAP.SWIRL then
@@ -30,6 +45,8 @@ function init_lvl()
       end
     end
   end
+
+  pair_mages()
 end
 
 function mark_lvl_visible()
@@ -101,9 +118,14 @@ function draw_lvl()
   cls(COL.GROUND)
   -- draw lvl static elements all
   for pos, t in pairs(lvl) do
+    if t.type == MAP.SWIRL then
+      pal(7, t.col)
+    end
     spr(t.type, t.pos.x, t.pos.y)
+    pal()
   end
   draw_enemies()
+  draw_mages()
   draw_bullets()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
@@ -112,5 +134,13 @@ function draw_lvl()
 
   if CFG.DEBUG then
     draw_debug()
+  end
+end
+
+function draw_mages()
+  for m in all(mages) do
+    pal(7, m.col)
+    spr(MAP.MAGE, m.pos.x, m.pos.y)
+    pal()
   end
 end
