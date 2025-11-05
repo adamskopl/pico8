@@ -31,7 +31,7 @@ function update_p()
         if vec_in_tile(b.pos, m.pos) then
           sfx(SFX.MONSTER_DEATH)
           del(bullets, b)
-          del(swirls, m.swirl)
+          remove_from_level(m.swirl)
           del(mages, m)
         end
       end
@@ -59,7 +59,7 @@ end
 function draw_p()
   local function draw_gun()
     local flip = p.dir.x == -1
-    local dx = (flip and -7) or 7
+    local dx = (flip and -3) or 3
     spr(MAP.GUN, p.pos.x + dx, p.pos.y + 5, 1, 1, flip)
   end
 
@@ -80,9 +80,9 @@ function shoot()
   local pos = vec_cp(p.pos)
   pos.y = pos.y + 5
   if p.dir.x == -1 then
-    pos.x = pos.x - 1
+    pos.x = pos.x + 2
   elseif p.dir.x == 1 then
-    pos.x = pos.x + 8
+    pos.x = pos.x + 5
   else
     pos.x = pos.x + 3
   end

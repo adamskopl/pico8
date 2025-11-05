@@ -49,6 +49,13 @@ function init_lvl()
   pair_mages()
 end
 
+function remove_from_level(o)
+  lvl[vec_key(o.pos)] = nil
+  if o.type == MAP.SWIRL then
+    del(swirls, o)
+  end
+end
+
 function mark_lvl_visible()
   local function add_to_visible(pos)
     lvl_visible[vec_key(pos)] = pos
@@ -125,7 +132,7 @@ function draw_lvl()
     pal()
   end
   draw_enemies()
-  draw_mages()
+  draw_mages_and_swirls()
   draw_bullets()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
@@ -137,10 +144,12 @@ function draw_lvl()
   end
 end
 
-function draw_mages()
+function draw_mages_and_swirls()
   for m in all(mages) do
+    local swirl = m.swirl
     pal(7, m.col)
     spr(MAP.MAGE, m.pos.x, m.pos.y)
+    spr(MAP.SWIRL, swirl.pos.x, swirl.pos.y)
     pal()
   end
 end

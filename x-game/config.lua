@@ -3,7 +3,7 @@ CFG = {
 }
 
 COL = {
-  GROUND = 4,
+  GROUND = 3,
   BULLET = 9,
   MAGES = {7, 12, 9, 1}
 }
