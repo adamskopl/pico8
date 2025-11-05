@@ -2,33 +2,40 @@ function update_p()
   local function update_bullets()
     for b in all(bullets) do
       update_pos(b)
-    end
-    for pos, t in pairs(lvl) do
-      if t.type == MAP.WALL then
-        for b in all(bullets) do
+
+      for pos, t in pairs(lvl) do
+        if t.type == MAP.WALL then
           if vec_in_tile(b.pos, t.pos) then
             sfx(SFX.BULL_CRASH)
             del(bullets, b)
           end
         end
       end
-    end
-    for e in all(enemies) do
-      for b in all(bullets) do
+
+      for e in all(enemies) do
         if vec_in_tile(b.pos, e.pos) then
           sfx(SFX.MONSTER_DEATH)
           del(bullets, b)
           del(enemies, e)
         end
       end
-    end
-    for s in all(swirls) do
-      for b in all(bullets) do
+
+      for s in all(swirls) do
         if vec_in_tile(b.pos, s.pos) then
           sfx(SFX.BULL_CRASH)
           del(bullets, b)
         end
       end
+
+      for m in all(mages) do
+        if vec_in_tile(b.pos, m.pos) then
+          sfx(SFX.MONSTER_DEATH)
+          del(bullets, b)
+          del(swirls, m.swirl)
+          del(mages, m)
+        end
+      end
+
     end
   end
 
@@ -41,6 +48,8 @@ function update_p()
     end
     foreach(enemies, forColl)
     foreach(swirls, forColl)
+    foreach(mages, forColl)
+
   end
 
   update_bullets()
