@@ -1,4 +1,19 @@
-function update_p()
+function create_player(o)
+  o.m = nil
+  o.dir = vec(1, 0)
+  o.speed = 1
+
+  o.ammo = {
+    ammo = 0,
+    show = false,
+    t_show = create_timer(0.7, function()
+      printh('cb')
+      p.ammo.show = false
+    end)
+  }
+end
+
+function update_player()
   local function update_bullets()
     for b in all(bullets) do
       update_pos(b)
@@ -52,6 +67,7 @@ function update_p()
 
   end
 
+  update_timer(p.ammo.t_show)
   update_bullets()
   check_collisions()
 end
@@ -63,9 +79,24 @@ function draw_p()
     spr(MAP.GUN, p.pos.x + dx, p.pos.y + 5, 1, 1, flip)
   end
 
+  local function draw_ammo()
+    if (not p.ammo.show) then
+      return
+    end
+    local pos = vec(p.pos.x + 1, p.pos.y - 2, 6)
+    local shift = 0
+    for i = 1, 3 do
+      pset(pos.x + shift, pos.y, 6)
+      shift = shift + 2
+    end
+  end
+
   local flip = p.dir.x == -1
   spr(1, p.pos.x, p.pos.y, 1, 1, flip)
+
+  draw_ammo()
   draw_gun()
+
   if p.dir then
     local len = 8
     --  crosshair
@@ -75,6 +106,16 @@ function draw_p()
 end
 
 function shoot()
+  local function show_ammo()
+    p.ammo.show = true
+    start_timer(p.ammo.t_show)
+  end
+
+  if p.ammo.ammo == 0 then
+    show_ammo()
+    sfx(SFX.NO_AMMO)
+    return
+  end
   sfx(SFX.SHOOT)
 
   local pos = vec_cp(p.pos)

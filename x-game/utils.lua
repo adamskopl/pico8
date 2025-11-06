@@ -81,3 +81,25 @@ DIRS_8 = {{
   y = 8
 }}
 
+-- timer
+function create_timer(dt, cb)
+  return {
+    set_time = nil,
+    dt = dt,
+    cb = cb
+  }
+end
+
+function start_timer(timer)
+  timer.set_time = time()
+end
+
+function update_timer(timer)
+  if timer.set_time == nil then
+    return
+  end
+  if (time() - timer.set_time) >= timer.dt then
+    timer.set_time = nil
+    timer.cb()
+  end
+end

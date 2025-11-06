@@ -19,6 +19,7 @@ function init_lvl()
   bullets = {}
   swirls = {}
   mages = {}
+  carrots = {}
 
   for i = 0, 15 do
     for j = 0, 15 do
@@ -28,15 +29,15 @@ function init_lvl()
         pos = vec(i * 8, j * 8)
       }
       if m == MAP.PLAYER then
-        o.m = nil
-        o.dir = vec(1, 0)
-        o.speed = 1
+        create_player(o)
         p = o
       elseif m == MAP.MONSTER then
         create_enemy(o)
         add(enemies, o)
       elseif m == MAP.MAGE then
         add(mages, o)
+      elseif m == MAP.CARROT then
+        add(carrots, o)
       elseif m == MAP.WALL or m == MAP.SWIRL then
         lvl[vec_key(o.pos)] = o
         if m == MAP.SWIRL then
@@ -88,7 +89,7 @@ end
 function update_lvl()
   mark_lvl_visible()
   update_enemies()
-  update_p()
+  update_player()
   update_movement(p)
 end
 
@@ -122,6 +123,22 @@ function draw_lvl()
     end
   end
 
+  local function draw_mages_and_swirls()
+    for m in all(mages) do
+      local swirl = m.swirl
+      pal(7, m.col)
+      spr(MAP.MAGE, m.pos.x, m.pos.y)
+      spr(MAP.SWIRL, swirl.pos.x, swirl.pos.y)
+      pal()
+    end
+  end
+
+  local function draw_carrots()
+    for c in all(carrots) do
+      spr(MAP.CARROT, c.pos.x, c.pos.y)
+    end
+  end
+
   cls(COL.GROUND)
   -- draw lvl static elements all
   for pos, t in pairs(lvl) do
@@ -133,6 +150,7 @@ function draw_lvl()
   end
   draw_enemies()
   draw_mages_and_swirls()
+  draw_carrots()
   draw_bullets()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
@@ -141,15 +159,5 @@ function draw_lvl()
 
   if CFG.DEBUG then
     draw_debug()
-  end
-end
-
-function draw_mages_and_swirls()
-  for m in all(mages) do
-    local swirl = m.swirl
-    pal(7, m.col)
-    spr(MAP.MAGE, m.pos.x, m.pos.y)
-    spr(MAP.SWIRL, swirl.pos.x, swirl.pos.y)
-    pal()
   end
 end
