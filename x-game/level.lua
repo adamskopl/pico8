@@ -10,7 +10,7 @@ function init_lvl()
       m_index = m_index + 1
     end
   end
-
+  ---------------------------------------------------
   lvl = {} -- [pos]:object
   lvl_visible = {}
   lvl_discovered = {}
@@ -62,7 +62,7 @@ function mark_lvl_visible()
     lvl_visible[vec_key(pos)] = pos
     lvl_discovered[vec_key(pos)] = pos
   end
-
+  ------------------------------
   lvl_visible = {}
 
   local m_x, m_y = p.pos.x / 8, p.pos.y / 8
@@ -138,7 +138,7 @@ function draw_lvl()
       spr(MAP.CARROT, c.pos.x, c.pos.y)
     end
   end
-
+  -----------------------------------------------------------------
   cls(COL.GROUND)
   -- draw lvl static elements all
   for pos, t in pairs(lvl) do

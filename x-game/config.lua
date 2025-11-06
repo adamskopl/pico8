@@ -4,8 +4,9 @@ CFG = {
 
 COL = {
   GROUND = 2,
-  BULLET = 9,
-  MAGES = {7, 12, 9, 1}
+  MAGES = {7, 12, 9, 1},
+  AMMO_EMPTY = 6,
+  AMMO = 9
 }
 
 MAP = {
@@ -27,5 +28,6 @@ SFX = {
   MONSTER_WAKE = 3,
   DEATH = 4,
   MONSTER_DEATH = 5,
-  NO_AMMO = 6
+  NO_AMMO = 6,
+  AMMO_LOAD = 7
 }

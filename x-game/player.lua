@@ -7,10 +7,16 @@ function create_player(o)
     ammo = 0,
     show = false,
     t_show = create_timer(0.7, function()
-      printh('cb')
+      p.ammo.show = true
+    end, function()
       p.ammo.show = false
     end)
   }
+end
+
+-- TODO convention. all functions related to something with same prefix
+function player_show_ammo()
+  start_timer(p.ammo.t_show)
 end
 
 function update_player()
@@ -54,6 +60,13 @@ function update_player()
     end
   end
 
+  local function on_carrot(c)
+    sfx(SFX.AMMO_LOAD)
+    p.ammo.ammo = 3
+    del(carrots, c)
+    player_show_ammo()
+  end
+
   local function check_collisions()
     local function forColl(o)
       if tiles_small_collide(p.pos, o.pos) then
@@ -64,8 +77,13 @@ function update_player()
     foreach(enemies, forColl)
     foreach(swirls, forColl)
     foreach(mages, forColl)
-
+    foreach(carrots, function(c)
+      if tiles_small_collide(p.pos, c.pos) then
+        on_carrot(c)
+      end
+    end)
   end
+  --------------------------------------------------------------------
 
   update_timer(p.ammo.t_show)
   update_bullets()
@@ -86,7 +104,8 @@ function draw_p()
     local pos = vec(p.pos.x + 1, p.pos.y - 2, 6)
     local shift = 0
     for i = 1, 3 do
-      pset(pos.x + shift, pos.y, 6)
+      pset(pos.x + shift, pos.y,
+        i <= p.ammo.ammo and COL.AMMO or COL.AMMO_EMPTY)
       shift = shift + 2
     end
   end
@@ -106,17 +125,14 @@ function draw_p()
 end
 
 function shoot()
-  local function show_ammo()
-    p.ammo.show = true
-    start_timer(p.ammo.t_show)
-  end
-
   if p.ammo.ammo == 0 then
-    show_ammo()
+    start_timer(p.ammo.t_show)
     sfx(SFX.NO_AMMO)
     return
   end
   sfx(SFX.SHOOT)
+  p.ammo.ammo = p.ammo.ammo - 1
+  start_timer(p.ammo.t_show)
 
   local pos = vec_cp(p.pos)
   pos.y = pos.y + 5
@@ -137,6 +153,6 @@ end
 
 function draw_bullets()
   for b in all(bullets) do
-    pset(b.pos.x, b.pos.y, COL.BULLET)
+    pset(b.pos.x, b.pos.y, COL.AMMO)
   end
 end
