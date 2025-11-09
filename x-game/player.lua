@@ -41,7 +41,7 @@ function update_player()
         end
       end
 
-      for s in all(swirls) do
+      for s in all(eyes) do
         if vec_in_tile(b.pos, s.pos) then
           sfx(SFX.BULL_CRASH)
           del(bullets, b)
@@ -52,7 +52,7 @@ function update_player()
         if vec_in_tile(b.pos, m.pos) then
           sfx(SFX.MONSTER_DEATH)
           del(bullets, b)
-          remove_from_level(m.swirl)
+          remove_from_level(m.eye)
           del(mages, m)
         end
       end
@@ -75,7 +75,7 @@ function update_player()
       end
     end
     foreach(enemies, forColl)
-    foreach(swirls, forColl)
+    foreach(eyes, forColl)
     foreach(mages, forColl)
     foreach(carrots, function(c)
       if tiles_small_collide(p.pos, c.pos) then

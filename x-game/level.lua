@@ -2,11 +2,11 @@ function init_lvl()
   local function pair_mages()
     local m_index = 1
     for m in all(mages) do
-      local swirl = swirls[m_index]
+      local eye = eyes[m_index]
       local col = COL.MAGES[m_index]
-      m.swirl = swirl
+      m.eye = eye
       m.col = col
-      swirl.col = col
+      eye.col = col
       m_index = m_index + 1
     end
   end
@@ -17,7 +17,7 @@ function init_lvl()
   p = nil
   enemies = {}
   bullets = {}
-  swirls = {}
+  eyes = {}
   mages = {}
   carrots = {}
 
@@ -38,10 +38,10 @@ function init_lvl()
         add(mages, o)
       elseif m == MAP.CARROT then
         add(carrots, o)
-      elseif m == MAP.WALL or m == MAP.SWIRL then
+      elseif m == MAP.WALL or m == MAP.EYE then
         lvl[vec_key(o.pos)] = o
-        if m == MAP.SWIRL then
-          add(swirls, o)
+        if m == MAP.EYE then
+          add(eyes, o)
         end
       end
     end
@@ -52,8 +52,8 @@ end
 
 function remove_from_level(o)
   lvl[vec_key(o.pos)] = nil
-  if o.type == MAP.SWIRL then
-    del(swirls, o)
+  if o.type == MAP.EYE then
+    del(eyes, o)
   end
 end
 
@@ -108,9 +108,9 @@ function draw_lvl()
               pal(11, 5) -- TODO magic numbers
               spr(MAP.WALL, t.pos.x, t.pos.y)
               pal()
-            elseif t.type == MAP.SWIRL then
+            elseif t.type == MAP.EYE then
               pal(7, 0)
-              spr(MAP.SWIRL, t.pos.x, t.pos.y)
+              spr(MAP.EYE, t.pos.x, t.pos.y)
               pal()
             end
           else
@@ -123,12 +123,12 @@ function draw_lvl()
     end
   end
 
-  local function draw_mages_and_swirls()
+  local function draw_mages_and_eyes()
     for m in all(mages) do
-      local swirl = m.swirl
+      local eye = m.eye
       pal(7, m.col)
       spr(MAP.MAGE, m.pos.x, m.pos.y)
-      spr(MAP.SWIRL, swirl.pos.x, swirl.pos.y)
+      spr(MAP.EYE, eye.pos.x, eye.pos.y)
       pal()
     end
   end
@@ -142,14 +142,14 @@ function draw_lvl()
   cls(COL.GROUND)
   -- draw lvl static elements all
   for pos, t in pairs(lvl) do
-    if t.type == MAP.SWIRL then
+    if t.type == MAP.EYE then
       pal(7, t.col)
     end
     spr(t.type, t.pos.x, t.pos.y)
     pal()
   end
   draw_enemies()
-  draw_mages_and_swirls()
+  draw_mages_and_eyes()
   draw_carrots()
   draw_bullets()
   if not CFG.DEBUG then
