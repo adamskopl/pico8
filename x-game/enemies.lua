@@ -26,21 +26,29 @@ function chase_dir(from, to)
 end
 
 function update_enemies()
-  for e in all(enemies) do
-    if not e.sleep and not e.m then
-      local chase_dir = chase_dir(e, p)
+  for m in all(monsters) do
+    if not m.sleep and not m.m then
+      local chase_dir = chase_dir(m, p)
       if chase_dir then
-        e.dir = chase_dir
-        start_movement(e)
+        m.dir = chase_dir
+        start_movement(m)
       end
     else
-      update_movement(e)
+      update_movement(m)
     end
   end
+
+  for e in all(eyes) do
+    anim_update(e)
+  end
+  for m in all(mages) do
+    anim_update(m)
+  end
+
 end
 
 function draw_enemies()
-  for e in all(enemies) do
+  for e in all(monsters) do
     spr(MAP.MONSTER, e.pos.x, e.pos.y)
   end
 end
@@ -53,7 +61,7 @@ function player_enemies_scan()
     local m_pos_next = vec_add(m_pos, dir)
     local m_next = mget(m_pos_next.x, m_pos_next.y)
     while m_next ~= MAP.WALL do
-      for e in all(enemies) do
+      for e in all(monsters) do
         if e.sleep and
           vec_in_tile(e.pos, vec_multi(m_pos_next, 8)) then
           e.sleep = false

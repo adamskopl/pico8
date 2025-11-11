@@ -15,7 +15,7 @@ function init_lvl()
   lvl_visible = {}
   lvl_discovered = {}
   p = nil
-  enemies = {}
+  monsters = {}
   bullets = {}
   eyes = {}
   mages = {}
@@ -33,14 +33,18 @@ function init_lvl()
         p = o
       elseif m == MAP.MONSTER then
         create_enemy(o)
-        add(enemies, o)
+        add(monsters, o)
       elseif m == MAP.MAGE then
+        local interval = 1 + rnd(1)
+        anim_create_cont_reverse(o, 80, 82, 0.1, interval)
         add(mages, o)
       elseif m == MAP.CARROT then
         add(carrots, o)
       elseif m == MAP.WALL or m == MAP.EYE then
         lvl[vec_key(o.pos)] = o
         if m == MAP.EYE then
+          local interval = 3 + rnd(3)
+          anim_create_cont_reverse(o, 64, 67, 0.05, interval)
           add(eyes, o)
         end
       end
@@ -99,7 +103,8 @@ function draw_lvl()
       for j = 0, 15 do
         local pos = vec(i * 8, j * 8)
         if not lvl_discovered[vec_key(pos)] then
-          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7, 0)
+          rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
+            COL.UNDISCOVERED)
         elseif not lvl_visible[vec_key(pos)] then
           -- rerender with a fog of war cover
           local t = lvl[vec_key(pos)]
@@ -110,7 +115,7 @@ function draw_lvl()
               pal()
             elseif t.type == MAP.EYE then
               pal(7, 0)
-              spr(MAP.EYE, t.pos.x, t.pos.y)
+              spr(t.anim.frame, t.pos.x, t.pos.y)
               pal()
             end
           else
@@ -123,12 +128,10 @@ function draw_lvl()
     end
   end
 
-  local function draw_mages_and_eyes()
+  local function draw_mages()
     for m in all(mages) do
-      local eye = m.eye
       pal(7, m.col)
-      spr(MAP.MAGE, m.pos.x, m.pos.y)
-      spr(MAP.EYE, eye.pos.x, eye.pos.y)
+      spr(m.anim.frame, m.pos.x, m.pos.y)
       pal()
     end
   end
@@ -144,12 +147,14 @@ function draw_lvl()
   for pos, t in pairs(lvl) do
     if t.type == MAP.EYE then
       pal(7, t.col)
+      spr(t.anim.frame, t.pos.x, t.pos.y)
+      pal()
+    else
+      spr(t.type, t.pos.x, t.pos.y)
     end
-    spr(t.type, t.pos.x, t.pos.y)
-    pal()
   end
   draw_enemies()
-  draw_mages_and_eyes()
+  draw_mages()
   draw_carrots()
   draw_bullets()
   if not CFG.DEBUG then

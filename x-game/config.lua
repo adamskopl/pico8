@@ -3,6 +3,7 @@ CFG = {
 }
 
 COL = {
+  UNDISCOVERED = 0,
   GROUND = 2,
   MAGES = {7, 12, 9, 1},
   AMMO_EMPTY = 6,
@@ -16,7 +17,7 @@ MAP = {
   FOG = 3,
   EYE = 64,
   GUN = 5,
-  MAGE = 6,
+  MAGE = 80,
   MONSTER = 17,
   CARROT = 21
 }

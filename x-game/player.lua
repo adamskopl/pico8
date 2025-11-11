@@ -33,11 +33,11 @@ function update_player()
         end
       end
 
-      for e in all(enemies) do
+      for e in all(monsters) do
         if vec_in_tile(b.pos, e.pos) then
           sfx(SFX.MONSTER_DEATH)
           del(bullets, b)
-          del(enemies, e)
+          del(monsters, e)
         end
       end
 
@@ -74,7 +74,7 @@ function update_player()
         _init()
       end
     end
-    foreach(enemies, forColl)
+    foreach(monsters, forColl)
     foreach(eyes, forColl)
     foreach(mages, forColl)
     foreach(carrots, function(c)
