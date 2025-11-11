@@ -3,6 +3,7 @@ function create_player(o)
   o.dir = vec(1, 0)
   o.speed = 1
 
+  o.gun = {} -- for animation
   o.ammo = {
     ammo = 0,
     show = false,
@@ -12,9 +13,9 @@ function create_player(o)
       p.ammo.show = false
     end)
   }
+  anim_create_loop(o, 96, 97, 100, 0.05)
 end
 
--- TODO convention. all functions related to something with same prefix
 function player_show_ammo()
   start_timer(p.ammo.t_show)
 end
@@ -88,13 +89,14 @@ function update_player()
   update_timer(p.ammo.t_show)
   update_bullets()
   check_collisions()
+  anim_update(p)
 end
 
-function draw_p()
+function draw_player()
   local function draw_gun()
     local flip = p.dir.x == -1
-    local dx = (flip and -3) or 3
-    spr(MAP.GUN, p.pos.x + dx, p.pos.y + 5, 1, 1, flip)
+    local dx = (flip and -1) or 1
+    spr(MAP.GUN, p.pos.x + dx, p.pos.y + 2, 1, 1, flip)
   end
 
   local function draw_ammo()
@@ -109,9 +111,10 @@ function draw_p()
       shift = shift + 2
     end
   end
+  ---------------------------------------------
 
   local flip = p.dir.x == -1
-  spr(1, p.pos.x, p.pos.y, 1, 1, flip)
+  spr(p.anim.frame, p.pos.x, p.pos.y, 1, 1, flip)
 
   draw_ammo()
   draw_gun()

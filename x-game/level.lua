@@ -160,7 +160,7 @@ function draw_lvl()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
   end
-  draw_p()
+  draw_player()
 
   if CFG.DEBUG then
     draw_debug()

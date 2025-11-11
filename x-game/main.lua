@@ -10,10 +10,10 @@ m - result of mget()
 end
 
 function _update60()
-  local dir = (btnp(0) and vec(-1, 0)) or
-                (btnp(1) and vec(1, 0)) or
-                (btnp(2) and vec(0, -1)) or
-                (btnp(3) and vec(0, 1)) or nil
+  local dir = (btn(0) and vec(-1, 0)) or
+                (btn(1) and vec(1, 0)) or
+                (btn(2) and vec(0, -1)) or
+                (btn(3) and vec(0, 1)) or nil
 
   if dir and not p.m then
     if not vec_eq(dir, p.dir) then
@@ -21,6 +21,7 @@ function _update60()
     else
       sfx(SFX.WALK)
       start_movement(p)
+      anim_start(p)
     end
   end
 

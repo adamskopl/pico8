@@ -50,5 +50,6 @@ end
 function on_mov_end(o)
   if (o == p) then
     player_enemies_scan()
+    anim_stop(p)
   end
 end

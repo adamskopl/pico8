@@ -12,11 +12,11 @@ COL = {
 
 MAP = {
   CLEAR = 0,
-  PLAYER = 1,
+  PLAYER = 96,
   WALL = 2,
   FOG = 3,
   EYE = 64,
-  GUN = 5,
+  GUN = 112,
   MAGE = 80,
   MONSTER = 17,
   CARROT = 21
