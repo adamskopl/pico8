@@ -80,7 +80,3 @@ DIRS_8 = {{
   x = 0,
   y = 8
 }}
-
--- timer
-
--- timer

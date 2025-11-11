@@ -15,14 +15,11 @@ function _update60()
                 (btn(2) and vec(0, -1)) or
                 (btn(3) and vec(0, 1)) or nil
 
-  if dir and not p.m then
-    if not vec_eq(dir, p.dir) then
-      p.dir = dir
-    else
-      sfx(SFX.WALK)
-      start_movement(p)
-      anim_start(p)
-    end
+  if dir and not p.m and (not check_wall_in_dir(p, dir)) then
+    p.dir = dir
+    sfx(SFX.WALK)
+    start_movement(p)
+    anim_start(p)
   end
 
   if (btnp(4)) then
