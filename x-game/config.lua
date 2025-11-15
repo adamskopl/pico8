@@ -3,7 +3,7 @@ CFG = {
 }
 
 COL = {
-  UNDISCOVERED = 5,
+  UNDISCOVERED = 0,
   GROUND = 4,
   MAGES = {7, 12, 9, 1},
   AMMO_EMPTY = 6,

@@ -16,15 +16,15 @@ function _update60()
                 (btn(1) and vec(1, 0)) or
                 (btn(2) and vec(0, -1)) or
                 (btn(3) and vec(0, 1)) or nil
-  if dir and not p.m and (not check_wall_in_dir(p, dir)) then
-    if not vec_eq(dir, p.dir) then
+  if dir and not p.m then
+    if not vec_eq(dir, p.dir) then -- dir change, measure press time
       p.dir = dir
       t_key_press = time()
     elseif t_key_press then -- same dir, but measuring press time
       if time() - t_key_press >= dt_key_press then
         t_key_press = nil
       end
-    else -- same dir, no press time measure
+    elseif not check_wall_in_dir(p, dir) then -- same dir, no press time measure
       sfx(SFX.WALK)
       start_movement(p)
       anim_start(p)
