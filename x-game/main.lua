@@ -9,20 +9,31 @@ m - result of mget()
   poke(0X5F5C, 100) -- never repeat btnp
 end
 
+t_key_press = nil
+dt_key_press = 0.15
 function _update60()
   local dir = (btn(0) and vec(-1, 0)) or
                 (btn(1) and vec(1, 0)) or
                 (btn(2) and vec(0, -1)) or
                 (btn(3) and vec(0, 1)) or nil
-
   if dir and not p.m and (not check_wall_in_dir(p, dir)) then
-    p.dir = dir
-    sfx(SFX.WALK)
-    start_movement(p)
-    anim_start(p)
+    if not vec_eq(dir, p.dir) then
+      p.dir = dir
+      t_key_press = time()
+    elseif t_key_press then -- same dir, but measuring press time
+      if time() - t_key_press >= dt_key_press then
+        t_key_press = nil
+      end
+    else -- same dir, no press time measure
+      sfx(SFX.WALK)
+      start_movement(p)
+      anim_start(p)
+    end
+  else
+    t_key_press = nil
   end
 
-  if (btnp(4)) then
+  if (btn(4)) then
     shoot()
   end
 
