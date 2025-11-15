@@ -6,11 +6,11 @@ m - result of mget()
   printh("--init")
   init_debug()
   init_lvl()
-  poke(0X5F5C, 100) -- never repeat btnp
+
+  t_key_press = nil
+  dt_key_press = 0.15
 end
 
-t_key_press = nil
-dt_key_press = 0.15
 function _update60()
   local dir = (btn(0) and vec(-1, 0)) or
                 (btn(1) and vec(1, 0)) or
@@ -38,8 +38,10 @@ function _update60()
   end
 
   update_lvl()
+  update_splashes()
 end
 
 function _draw()
   draw_lvl()
+  draw_splashes()
 end

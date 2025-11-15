@@ -48,13 +48,15 @@ function update_player()
           sfx(SFX.MONSTER_DEATH)
           del(bullets, b)
           del(monsters, e)
+          splash_spawn(b.pos.x, b.pos.y, 100, 8, 40)
         end
       end
 
-      for s in all(eyes) do
-        if vec_in_tile(b.pos, s.pos) then
+      for eye in all(eyes) do
+        if vec_in_tile(b.pos, eye.pos) then
           sfx(SFX.BULL_CRASH)
           del(bullets, b)
+          splash_spawn(b.pos.x, b.pos.y, 10, 5, 5)
         end
       end
 
@@ -64,6 +66,10 @@ function update_player()
           del(bullets, b)
           remove_from_level(m.eye)
           del(mages, m)
+
+          splash_spawn(m.eye.pos.x, m.eye.pos.y, 100,
+            m.eye.col, 40)
+          splash_spawn(b.pos.x, b.pos.y, 100, m.col, 40)
         end
       end
 
@@ -143,6 +149,8 @@ function shoot()
   if p.gun.cooling or check_wall_in_dir(p, p.dir) then
     return
   end
+  timer_start(p.gun.t_cooldown)
+
   if p.ammo.ammo == 0 then
     timer_start(p.ammo.t_show)
     sfx(SFX.NO_AMMO)
@@ -152,7 +160,7 @@ function shoot()
 
   p.ammo.ammo = p.ammo.ammo - 1
   timer_start(p.ammo.t_show)
-  timer_start(p.gun.t_cooldown)
+
   anim_start(p.gun)
 
   --- bullets
