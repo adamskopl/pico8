@@ -87,7 +87,8 @@ function update_player()
     local function forColl(o)
       if tiles_small_collide(p.pos, o.pos) then
         sfx(SFX.DEATH)
-        _init()
+        splash_spawn(p.pos.x, p.pos.y, 100, COL.PLAYER, 50)
+        game.over = true
       end
     end
     foreach(monsters, forColl)

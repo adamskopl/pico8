@@ -6,6 +6,9 @@ m - result of mget()
   printh("--init")
   init_debug()
   init_lvl()
+  game = {
+    over = false
+  }
 
   t_key_press = nil
   dt_key_press = 0.15

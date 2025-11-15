@@ -4,8 +4,9 @@ CFG = {
 
 COL = {
   UNDISCOVERED = 0,
+  PLAYER = 14, -- e.g. for death splash
   GROUND = 4,
-  MAGES = {7, 12, 9, 1},
+  MAGES = {7, 12, 9, 1, 2},
   AMMO_EMPTY = 6,
   AMMO = 9
 }

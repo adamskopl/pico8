@@ -93,8 +93,11 @@ end
 function update_lvl()
   mark_lvl_visible()
   update_enemies()
-  update_player()
-  update_movement(p)
+
+  if not game.over then
+    update_player()
+    update_movement(p)
+  end
 end
 
 function draw_lvl()
@@ -160,7 +163,10 @@ function draw_lvl()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
   end
-  draw_player()
+
+  if not game.over then
+    draw_player()
+  end
 
   if CFG.DEBUG then
     draw_debug()
