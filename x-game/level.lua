@@ -43,7 +43,7 @@ function init_lvl()
       elseif m == MAP.WALL or m == MAP.EYE then
         lvl[vec_key(o.pos)] = o
         if m == MAP.EYE then
-          local interval = 3 + rnd(3)
+          local interval = 1 + rnd(3)
           anim_create_cont_reverse(o, 64, 67, 0.05, interval)
           add(eyes, o)
         end

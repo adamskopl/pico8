@@ -1,4 +1,4 @@
-function create_timer(dt, cb_start, cb_end)
+function timer_create(dt, cb_start, cb_end)
   return {
     set_time = nil,
     dt = dt,
@@ -7,12 +7,12 @@ function create_timer(dt, cb_start, cb_end)
   }
 end
 
-function start_timer(timer)
+function timer_start(timer)
   timer.set_time = time()
   timer.cb_start()
 end
 
-function update_timer(timer)
+function timer_update(timer)
   if timer.set_time == nil then
     return
   end
@@ -33,6 +33,20 @@ function anim_create_loop(o, frame_idle, frame_s, frame_e,
     speed = speed,
     time = time(),
     type = "LOOP"
+  }
+end
+
+function anim_create_single(o, frame_idle, frame_s, frame_e,
+  speed)
+  o.anim = {
+    stop = true,
+    frame_idle = frame_idle,
+    frame_s = frame_s,
+    frame_e = frame_e,
+    frame = frame_idle,
+    speed = speed,
+    time = time(),
+    type = "SINGLE"
   }
 end
 
@@ -58,12 +72,26 @@ end
 
 function anim_start(o)
   o.anim.stop = false
+  o.anim.time = time()
   o.anim.frame = o.anim.frame_s
+  printh(o.anim.frame)
 end
 
 function anim_update(o)
   local anim = o.anim
-  if (anim.type == "CONT_REVERSE") then
+  if anim.type == "SINGLE" then
+    if anim.stop == true then
+      return
+    end
+    if (time() - anim.time) >= anim.speed then
+      anim.time = time()
+      anim.frame = anim.frame + 1
+      printh(anim.frame)
+      if anim.frame > anim.frame_e then
+        anim_stop(o)
+      end
+    end
+  elseif (anim.type == "CONT_REVERSE") then
     if anim.pause then
       if (time() - anim.time) >= anim.interval then
         anim.time = time()

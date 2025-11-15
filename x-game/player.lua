@@ -3,21 +3,30 @@ function create_player(o)
   o.dir = vec(1, 0)
   o.speed = 1
 
-  o.gun = {} -- for animation
   o.ammo = {
     ammo = 0,
     show = false,
-    t_show = create_timer(0.7, function()
+    t_show = timer_create(0.7, function()
       p.ammo.show = true
     end, function()
       p.ammo.show = false
     end)
   }
   anim_create_loop(o, 96, 97, 100, 0.05)
+
+  o.gun = {
+    cooling = false,
+    t_cooldown = timer_create(0.6, function()
+      p.gun.cooling = true
+    end, function()
+      p.gun.cooling = false
+    end)
+  }
+  anim_create_single(o.gun, 112, 113, 114, 0.2)
 end
 
 function player_show_ammo()
-  start_timer(p.ammo.t_show)
+  timer_start(p.ammo.t_show)
 end
 
 function update_player()
@@ -86,17 +95,20 @@ function update_player()
   end
   --------------------------------------------------------------------
 
-  update_timer(p.ammo.t_show)
+  timer_update(p.ammo.t_show)
+  timer_update(p.gun.t_cooldown)
   update_bullets()
   check_collisions()
   anim_update(p)
+  anim_update(p.gun)
 end
 
 function draw_player()
   local function draw_gun()
     local flip = p.dir.x == -1
     local dx = (flip and -1) or 1
-    spr(MAP.GUN, p.pos.x + dx, p.pos.y + 2, 1, 1, flip)
+    spr(p.gun.anim.frame, p.pos.x + dx, p.pos.y + 2, 1, 1,
+      flip)
   end
 
   local function draw_ammo()
@@ -128,15 +140,22 @@ function draw_player()
 end
 
 function shoot()
+  if p.gun.cooling or check_wall_in_dir(p, p.dir) then
+    return
+  end
   if p.ammo.ammo == 0 then
-    start_timer(p.ammo.t_show)
+    timer_start(p.ammo.t_show)
     sfx(SFX.NO_AMMO)
     return
   end
   sfx(SFX.SHOOT)
-  p.ammo.ammo = p.ammo.ammo - 1
-  start_timer(p.ammo.t_show)
 
+  p.ammo.ammo = p.ammo.ammo - 1
+  timer_start(p.ammo.t_show)
+  timer_start(p.gun.t_cooldown)
+  anim_start(p.gun)
+
+  --- bullets
   local pos = vec_cp(p.pos)
   pos.y = pos.y + 5
   if p.dir.x == -1 then
@@ -146,12 +165,12 @@ function shoot()
   else
     pos.x = pos.x + 3
   end
-
   add(bullets, {
     pos = pos,
     dir = vec_cp(p.dir),
     speed = 4
   })
+  --- bullets
 end
 
 function draw_bullets()
