@@ -18,7 +18,7 @@ MAP = {
   EYE = 64,
   GUN = 112,
   MAGE = 80,
-  MONSTER = 17,
+  MONSTER = 69,
   CARROT = 21
 }
 

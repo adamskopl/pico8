@@ -74,7 +74,6 @@ function anim_start(o)
   o.anim.stop = false
   o.anim.time = time()
   o.anim.frame = o.anim.frame_s
-  printh(o.anim.frame)
 end
 
 function anim_update(o)

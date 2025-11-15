@@ -32,7 +32,7 @@ function init_lvl()
         create_player(o)
         p = o
       elseif m == MAP.MONSTER then
-        create_enemy(o)
+        create_monster(o)
         add(monsters, o)
       elseif m == MAP.MAGE then
         local interval = 1 + rnd(1)

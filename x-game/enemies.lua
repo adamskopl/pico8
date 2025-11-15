@@ -1,8 +1,10 @@
-function create_enemy(o)
+function create_monster(o)
   o.m = nil
   o.dir = vec(0, 0)
   o.speed = 0.5
   o.sleep = true
+  anim_create_loop(o, 69, 69, 70, 0.1)
+  anim_start(o)
 end
 
 function can_chase_dir(o, dir)
@@ -36,6 +38,7 @@ function update_enemies()
     else
       update_movement(m)
     end
+    anim_update(m)
   end
 
   for e in all(eyes) do
@@ -49,7 +52,7 @@ end
 
 function draw_enemies()
   for e in all(monsters) do
-    spr(MAP.MONSTER, e.pos.x, e.pos.y)
+    spr(e.anim.frame, e.pos.x, e.pos.y)
   end
 end
 
