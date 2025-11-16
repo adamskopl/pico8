@@ -27,7 +27,6 @@ function update_splashes()
       deli(splashes, i)
     end
   end
-  printh(#splashes)
 end
 
 function draw_splashes()

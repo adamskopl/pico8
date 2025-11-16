@@ -8,7 +8,7 @@ function create_monster(o)
 end
 
 function can_chase_dir(o, dir)
-  local m = mget(o.pos.x / 8 + dir.x, o.pos.y / 8 + dir.y)
+  local m = lget(o.pos.x / 8 + dir.x, o.pos.y / 8 + dir.y)
   return m ~= MAP.WALL
 end
 
@@ -62,7 +62,7 @@ function player_enemies_scan()
   for dir in all(DIRS) do
     -- scan in this direction
     local m_pos_next = vec_add(m_pos, dir)
-    local m_next = mget(m_pos_next.x, m_pos_next.y)
+    local m_next = lget(m_pos_next.x, m_pos_next.y)
     while m_next ~= MAP.WALL do
       for e in all(monsters) do
         if e.sleep and
@@ -72,7 +72,7 @@ function player_enemies_scan()
         end
       end
       m_pos_next = vec_add(m_pos_next, dir)
-      m_next = mget(m_pos_next.x, m_pos_next.y)
+      m_next = lget(m_pos_next.x, m_pos_next.y)
     end
   end
 end

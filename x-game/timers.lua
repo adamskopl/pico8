@@ -85,7 +85,6 @@ function anim_update(o)
     if (time() - anim.time) >= anim.speed then
       anim.time = time()
       anim.frame = anim.frame + 1
-      printh(anim.frame)
       if anim.frame > anim.frame_e then
         anim_stop(o)
       end

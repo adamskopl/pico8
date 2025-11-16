@@ -4,11 +4,12 @@ m_pos - map position
 m - result of mget()
 ]] function _init()
   printh("--init")
+  game = {
+    over = false,
+    level = LEVELS[2]
+  }
   init_debug()
   init_lvl()
-  game = {
-    over = false
-  }
 
   t_key_press = nil
   dt_key_press = 0.15
