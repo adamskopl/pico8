@@ -93,6 +93,7 @@ function update_player()
       if tiles_small_collide(p.pos, o.pos) then
         sfx(SFX.DEATH)
         splash_spawn(p.pos.x, p.pos.y, 100, COL.PLAYER, 50)
+        o.exposed = true
         game.over = true
       end
     end

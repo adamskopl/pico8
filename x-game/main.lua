@@ -12,7 +12,7 @@ m - result of mget()
   init_lvl()
 
   t_key_press = nil
-  dt_key_press = 0.15
+  dt_key_press = 0.1
 end
 
 function _update60()

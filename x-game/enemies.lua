@@ -3,6 +3,7 @@ function create_monster(o)
   o.dir = vec(0, 0)
   o.speed = 0.5
   o.sleep = true
+  o.exposed = false -- ignore fog of war
   anim_create_loop(o, 69, 69, 70, 0.1)
   anim_start(o)
 end

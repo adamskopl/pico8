@@ -108,7 +108,7 @@ function draw_lvl()
         if not lvl_discovered[vec_key(pos)] then
           rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
             COL.UNDISCOVERED)
-        elseif not lvl_visible[vec_key(pos)] then
+        elseif not lvl_visible[vec_key(pos)] or game.over then
           -- rerender with a fog of war cover
           local t = lvl[vec_key(pos)]
           if (t) then
@@ -144,6 +144,14 @@ function draw_lvl()
       spr(MAP.CARROT, c.pos.x, c.pos.y)
     end
   end
+
+  local function draw_exposed()
+    for e in all(monsters) do
+      if e.exposed then
+        spr(e.anim.frame, e.pos.x, e.pos.y)
+      end
+    end
+  end
   -----------------------------------------------------------------
   cls(COL.GROUND)
   -- draw lvl static elements all
@@ -163,6 +171,7 @@ function draw_lvl()
   if not CFG.DEBUG then
     cover_lvl_not_discovered()
   end
+  draw_exposed()
 
   if not game.over then
     draw_player()
