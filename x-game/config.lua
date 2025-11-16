@@ -1,5 +1,5 @@
 CFG = {
-  DEBUG = true
+  DEBUG = false
 }
 
 COL = {

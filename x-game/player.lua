@@ -31,14 +31,16 @@ end
 
 function update_player()
   local function update_bullets()
-    for b in all(bullets) do
+    for i = #bullets, 1, -1 do
+      local b = bullets[i]
       update_pos(b)
 
       for pos, t in pairs(lvl) do
         if t.type == MAP.WALL then
           if vec_in_tile(b.pos, t.pos) then
             sfx(SFX.BULL_CRASH)
-            del(bullets, b)
+            deli(bullets, i)
+            break
           end
         end
       end
@@ -46,30 +48,33 @@ function update_player()
       for e in all(monsters) do
         if vec_in_tile(b.pos, e.pos) then
           sfx(SFX.MONSTER_DEATH)
-          del(bullets, b)
+          deli(bullets, i)
           del(monsters, e)
           splash_spawn(b.pos.x, b.pos.y, 100, 8, 40)
+          break
         end
       end
 
       for eye in all(eyes) do
         if vec_in_tile(b.pos, eye.pos) then
           sfx(SFX.BULL_CRASH)
-          del(bullets, b)
+          deli(bullets, i)
           splash_spawn(b.pos.x, b.pos.y, 10, 5, 5)
+          break
         end
       end
 
       for m in all(mages) do
         if vec_in_tile(b.pos, m.pos) then
           sfx(SFX.MONSTER_DEATH)
-          del(bullets, b)
+          deli(bullets, i)
           remove_from_level(m.eye)
           del(mages, m)
 
           splash_spawn(m.eye.pos.x, m.eye.pos.y, 100,
             m.eye.col, 40)
           splash_spawn(b.pos.x, b.pos.y, 100, m.col, 40)
+          break
         end
       end
 
