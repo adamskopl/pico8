@@ -48,4 +48,5 @@ end
 function _draw()
   draw_lvl()
   draw_splashes()
+  text_animate(30, 1)
 end
