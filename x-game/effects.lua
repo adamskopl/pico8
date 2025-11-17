@@ -39,29 +39,17 @@ end
 ----------------- TEXT
 -- copied from "hello world" demo "by zep"
 
-TEXT = " CLEARED: 1/2"
-
+TEXT = "EYES CLEARED: 1/2"
 function text_animate(x0, y0)
   local amplitude = 1
   x0 = x0 or 0
   y0 = y0 or 0
-
-  -- rectfill(x0 - 4, y0 - 4, x0 + 60, y0 + 10, 0)
-
   for i = 1, #TEXT do
     local t1 = t() * 80 + i * 6
     local x = x0 + i * 4
     local y = y0 + sin(t1 / 30) * amplitude
     local ch = sub(TEXT, i, i)
     local col = 8 + flr((sin(t1 / 20) + 1) * 3) -- cycles color 8-14
-
-    if i == 1 then
-      pal(7, col)
-      -- spr(MAP.EYE, x - 6, y - 1)
-      pal()
-    else
-      print(ch, x, y, col)
-    end
-
+    print(ch, x, y, col)
   end
 end
