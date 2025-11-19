@@ -10,6 +10,7 @@ m - result of mget()
   }
   init_debug()
   init_lvl()
+  init_game_state()
 
   t_key_press = nil
   dt_key_press = 0.1
@@ -43,10 +44,12 @@ function _update60()
 
   update_lvl()
   update_splashes()
+  update_game_state()
+  text_update()
 end
 
 function _draw()
   draw_lvl()
   draw_splashes()
-  text_animate(23, 2)
+  text_draw()
 end

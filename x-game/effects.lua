@@ -1,4 +1,4 @@
------- SPLASHES
+---- SPLASHES
 splashes = {}
 
 function splash_spawn(x, y, n, col, life)
@@ -29,6 +29,7 @@ function update_splashes()
     end
   end
 end
+---- SPLASHES
 
 function draw_splashes()
   for p in all(splashes) do
@@ -36,20 +37,46 @@ function draw_splashes()
   end
 end
 
------------------ TEXT
--- copied from "hello world" demo "by zep"
+---- TEXT ANIMATION
+text = nil -- if set, text is displayed
+text_t = nil
+text_duration = 2
 
-TEXT = "EYES CLEARED: 1/2"
-function text_animate(x0, y0)
+function text_start(eyes_num, eyes_num_start)
+  local eyes_left = eyes_num_start - eyes_num
+  text = "EYES CLEARED: " .. tostr(eyes_left) .. "/" ..
+           tostr(eyes_num_start)
+  text_t = t()
+end
+
+function text_update()
+  if text_t and t() - text_t >= text_duration then
+    text = NIL
+  end
+end
+
+function text_draw()
+  if not text then
+    return
+  end
+  text_draw_animated(23, 2)
+end
+
+-- 23,2
+
+-- by copilot
+-- TODO add black background. whole width, height of one tile
+function text_draw_animated(x0, y0)
   local amplitude = 1
   x0 = x0 or 0
   y0 = y0 or 0
-  for i = 1, #TEXT do
+  for i = 1, #text do
     local t1 = t() * 80 + i * 6
     local x = x0 + i * 4
     local y = y0 + sin(t1 / 30) * amplitude
-    local ch = sub(TEXT, i, i)
+    local ch = sub(text, i, i)
     local col = 8 + flr((sin(t1 / 20) + 1) * 3) -- cycles color 8-14
     print(ch, x, y, col)
   end
 end
+------ TEXT ANIMATION
