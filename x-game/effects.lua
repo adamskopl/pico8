@@ -40,17 +40,19 @@ end
 ---- TEXT ANIMATION
 text = nil -- if set, text is displayed
 text_t = nil
-text_duration = 2
+text_duration = 2 -- nil = infinitive
+text_x = 0
 
-function text_start(eyes_num, eyes_num_start)
-  local eyes_left = eyes_num_start - eyes_num
-  text = "EYES CLEARED: " .. tostr(eyes_left) .. "/" ..
-           tostr(eyes_num_start)
+function text_start(text_to_start, x, duration)
+  text = text_to_start
   text_t = t()
+  text_x = x
+  text_duration = duration
 end
 
 function text_update()
-  if text_t and t() - text_t >= text_duration then
+  if text_duration and text_t and t() - text_t >=
+    text_duration then
     text = NIL
   end
 end
@@ -59,7 +61,7 @@ function text_draw()
   if not text then
     return
   end
-  text_draw_animated(23, 2)
+  text_draw_animated(text_x, 2)
 end
 
 -- 23,2

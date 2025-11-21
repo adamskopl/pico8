@@ -10,7 +10,14 @@ function update_game_state()
   -- if yes, display text
   if game_state.eyes_num ~= #eyes then
     game_state.eyes_num = #eyes
-    text_start(game_state.eyes_num,
-      game_state.eyes_num_start)
+    if #eyes == 0 then -- WIN
+      music(0)
+      text_start("LEVEL CLEARED!", 30, nil)
+    else
+      local eyes_left = game_state.eyes_num_start - #eyes
+      text = "EYES CLEARED: " .. tostr(eyes_left) .. "/" ..
+               tostr(game_state.eyes_num_start)
+      text_start(text, 23, 2)
+    end
   end
 end
