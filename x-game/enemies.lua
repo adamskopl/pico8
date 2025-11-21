@@ -1,11 +1,18 @@
-function create_monster(o)
+function monster_create(o)
   o.m = nil
   o.dir = vec(0, 0)
   o.speed = 0.5
   o.sleep = true
   o.exposed = false -- ignore fog of war
+  o.t_kill = 0.5 + rnd(2) -- kill time when win
   anim_create_loop(o, 69, 69, 70, 0.1)
   anim_start(o)
+end
+
+function monster_kill(m)
+  sfx(SFX.MONSTER_DEATH)
+  del(monsters, m)
+  splash_spawn(m.pos.x + 3, m.pos.y + 3, 100, 8, 40)
 end
 
 function can_chase_dir(o, dir)
@@ -37,9 +44,16 @@ function update_enemies()
         start_movement(m)
       end
     else
-      update_movement(m)
+      if not game_state.win then
+        update_movement(m)
+      end
     end
     anim_update(m)
+    if game_state.win_t then
+      if t() - game_state.win_t >= m.t_kill then
+        monster_kill(m)
+      end
+    end
   end
 
   for e in all(eyes) do

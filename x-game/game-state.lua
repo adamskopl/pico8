@@ -1,5 +1,8 @@
 function init_game_state()
   game_state = {
+    over = false,
+    win = false,
+    win_t = nil, -- time of win
     eyes_num_start = #eyes,
     eyes_num = #eyes
   }
@@ -11,6 +14,8 @@ function update_game_state()
   if game_state.eyes_num ~= #eyes then
     game_state.eyes_num = #eyes
     if #eyes == 0 then -- WIN
+      game_state.win = true
+      game_state.win_t = t()
       music(0)
       text_start("LEVEL CLEARED!", 30, nil)
     else

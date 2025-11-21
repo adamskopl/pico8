@@ -69,6 +69,7 @@ end
 -- by copilot
 -- TODO add black background. whole width, height of one tile
 function text_draw_animated(x0, y0)
+  rectfill(0, 0, 127, 7, 0)
   local amplitude = 1
   x0 = x0 or 0
   y0 = y0 or 0

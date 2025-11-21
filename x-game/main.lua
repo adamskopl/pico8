@@ -5,7 +5,6 @@ m - result of mget()
 ]] function _init()
   printh("--init")
   game = {
-    over = false,
     level = LEVELS[2]
   }
   init_debug()

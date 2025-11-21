@@ -32,7 +32,7 @@ function init_lvl()
         create_player(o)
         p = o
       elseif m == MAP.MONSTER then
-        create_monster(o)
+        monster_create(o)
         add(monsters, o)
       elseif m == MAP.MAGE then
         local interval = 1 + rnd(1)
@@ -94,7 +94,7 @@ function update_lvl()
   mark_lvl_visible()
   update_enemies()
 
-  if not game.over then
+  if not game_state.over then
     update_player()
     update_movement(p)
   end
@@ -108,7 +108,8 @@ function draw_lvl()
         if not lvl_discovered[vec_key(pos)] then
           rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
             COL.UNDISCOVERED)
-        elseif not lvl_visible[vec_key(pos)] or game.over then
+        elseif not lvl_visible[vec_key(pos)] or
+          game_state.over then
           -- rerender with a fog of war cover
           local t = lvl[vec_key(pos)]
           if (t) then
@@ -168,12 +169,12 @@ function draw_lvl()
   draw_mages()
   draw_carrots()
   draw_bullets()
-  if not CFG.DEBUG then
+  if not CFG.DEBUG and not game_state.win then
     cover_lvl_not_discovered()
   end
   draw_exposed()
 
-  if not game.over then
+  if not game_state.over then
     draw_player()
   end
 

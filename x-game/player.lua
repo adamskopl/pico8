@@ -45,12 +45,10 @@ function update_player()
         end
       end
 
-      for e in all(monsters) do
-        if vec_in_tile(b.pos, e.pos) then
-          sfx(SFX.MONSTER_DEATH)
+      for m in all(monsters) do
+        if vec_in_tile(b.pos, m.pos) then
           deli(bullets, i)
-          del(monsters, e)
-          splash_spawn(b.pos.x, b.pos.y, 100, 8, 40)
+          monster_kill(m)
           break
         end
       end
@@ -71,9 +69,10 @@ function update_player()
           remove_from_level(m.eye)
           del(mages, m)
 
-          splash_spawn(m.eye.pos.x, m.eye.pos.y, 100,
-            m.eye.col, 40)
-          splash_spawn(b.pos.x, b.pos.y, 100, m.col, 40)
+          splash_spawn(m.eye.pos.x + 3, m.eye.pos.y + 3,
+            100, m.eye.col, 40)
+          splash_spawn(m.pos.x + 3, m.pos.y + 3, 100, m.col,
+            40)
           break
         end
       end
@@ -94,7 +93,7 @@ function update_player()
         sfx(SFX.DEATH)
         splash_spawn(p.pos.x, p.pos.y, 100, COL.PLAYER, 50)
         o.exposed = true
-        game.over = true
+        game_state.over = true
       end
     end
     foreach(monsters, forColl)
@@ -147,8 +146,10 @@ function draw_player()
   if p.dir then
     local len = 8
     --  crosshair
-    circ(p.pos.x + 4 + p.dir.x * len,
-      p.pos.y + 4 + p.dir.y * len, 1, 8)
+    if not game_state.win then
+      circ(p.pos.x + 4 + p.dir.x * len,
+        p.pos.y + 4 + p.dir.y * len, 1, 8)
+    end
   end
 end
 
