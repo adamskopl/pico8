@@ -1,12 +1,13 @@
 function game_init()
-  STATE_INTRO = "STATE_INTRO"
+  STATE_TITLE = "STATE_TITLE"
+  STATE_PLAY_INTRO = "STATE_PLAY_INTRO"
   STATE_PLAY = "STATE_PLAY"
   STATE_OVER = "STATE_OVER"
   STATE_WIN = "STATE_WIN"
 
   game = {
     level = LEVELS[1],
-    state = STATE_INTRO,
+    state = STATE_TITLE,
     win_t = nil, -- time of win
     eyes_num_start = 0,
     eyes_num = 0

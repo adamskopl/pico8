@@ -7,6 +7,9 @@ LANGS = {
     LEVEL_CLEARED = "LEVEL CLEARED!",
     EYES_CLEARED = function(n, total)
       return "EYES CLEARED: " .. n .. "/" .. total
+    end,
+    LEVEL_NUM = function(n)
+      return "LEVEL " .. n
     end
     -- add more keys as needed
   },
@@ -18,6 +21,9 @@ LANGS = {
     LEVEL_CLEARED = "POZIOM UKONCZONY!",
     EYES_CLEARED = function(n, total)
       return "USUNIĘTE oczy: " .. n .. "/" .. total
+    end,
+    LEVEL_NUM = function(n)
+      return "POZIOM " .. n
     end
     -- add more keys as needed
   }

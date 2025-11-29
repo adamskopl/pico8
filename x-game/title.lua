@@ -1,4 +1,4 @@
-INTRO = {
+TITLE = {
   -- offset_y = 128
   offset_y = 128
 }
@@ -8,20 +8,20 @@ function text_x_pos(t)
 end
 
 function text_y_pos(target_y)
-  return target_y + INTRO.offset_y
+  return target_y + TITLE.offset_y
 end
 
-function intro_update()
-  if INTRO.offset_y > 0 then
-    INTRO.offset_y = INTRO.offset_y - 0.5
-    if INTRO.offset_y <= 0 then
+function title_update()
+  if TITLE.offset_y > 0 then
+    TITLE.offset_y = TITLE.offset_y - 0.5
+    if TITLE.offset_y <= 0 then
       sfx(4)
     end
     return
   end
 
   -- after offset_y reaches 0, check for any key press
-  if INTRO.offset_y <= 0 and any_key_pressed() then
+  if TITLE.offset_y <= 0 and any_key_pressed() then
     game.state = STATE_PLAY
   end
 end
@@ -35,7 +35,7 @@ function draw_press_key()
   end
 end
 
-function intro_draw()
+function title_draw()
   cls(COL.GROUND_WIN)
   print(LANG.AUTHOR, text_x_pos(LANG.AUTHOR),
     text_y_pos(8 * 1), 9)
@@ -44,7 +44,7 @@ function intro_draw()
   print(LANG.TITLE, text_x_pos(LANG.TITLE),
     text_y_pos(8 * 4), 8)
 
-  if INTRO.offset_y <= 0 then
+  if TITLE.offset_y <= 0 then
     -- hero
     spr(96, 32, 64, 1, 1)
     spr(115, 33, 66, 1, 1)

@@ -38,8 +38,8 @@ function game_keys_update()
 end
 
 function _update60()
-  if game.state == STATE_INTRO then
-    intro_update()
+  if game.state == STATE_TITLE then
+    title_update()
   else
     game_keys_update()
     update_lvl()
@@ -52,8 +52,8 @@ end
 
 function _draw()
 
-  if game.state == STATE_INTRO then
-    intro_draw()
+  if game.state == STATE_TITLE then
+    title_draw()
   else
     draw_lvl()
     draw_splashes()
