@@ -110,7 +110,9 @@ function update_player()
   timer_update(p.ammo.t_show)
   timer_update(p.gun.t_cooldown)
   update_bullets()
-  check_collisions()
+  if not game_state.win then
+    check_collisions()
+  end
   anim_update(p)
   anim_update(p.gun)
 end

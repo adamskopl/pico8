@@ -16,7 +16,9 @@ function update_game_state()
     if #eyes == 0 then -- WIN
       game_state.win = true
       game_state.win_t = t()
-      music(0)
+
+      -- TURN ON IN THE END
+      -- music(0)
       text_start("LEVEL CLEARED!", 30, nil)
       flowers_start()
       clean_level()
