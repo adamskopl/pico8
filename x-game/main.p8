@@ -6,6 +6,7 @@ __lua__
 #include main.lua
 #include game.lua
 #include title.lua
+#include play_intro.lua
 #include level.lua
 #include level-utils.lua
 #include movement.lua

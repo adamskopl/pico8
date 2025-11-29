@@ -80,3 +80,12 @@ DIRS_8 = {{
   x = 0,
   y = 8
 }}
+
+function any_key_pressed()
+  for i = 4, 5 do
+    if btnp(i) then
+      return true
+    end
+  end
+  return false
+end

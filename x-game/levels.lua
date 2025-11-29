@@ -2,22 +2,22 @@ LEVELS = {{
   x = 0,
   y = 0,
   title = {
-    en = "Here we begin",
-    pl = "Tu zaczynamy"
+    en = "here we begin",
+    pl = "tu zaczynamy"
   },
   text = {
-    en = "Some red bastards came and want to take over your lawn.",
-    pl = "Przyszły czerwone dranie i chcą przejąć twój trawnik."
+    en = "some red bastards came and want to take over your lawn. it's mowing time.",
+    pl = "przyszly jakies czerwone dranie i chca przejac twoj trawnik. pora na koszenie."
   }
 }, {
   x = 16,
   y = 0,
   title = {
-    en = "The fight continues",
-    pl = "Walka trwa"
+    en = "the fight continues",
+    pl = "walka trwa"
   },
   text = {
-    en = "They keep coming... I wonder who is behind all this.",
-    pl = "Nadchodzą kolejne... Ciekawe kto za tym stoi."
+    en = "they keep coming... i wonder who is behind all this.",
+    pl = "nadchodza kolejne... ciekawe kto za tym stoi."
   }
 }}

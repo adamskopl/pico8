@@ -1,6 +1,6 @@
 TITLE = {
-  -- offset_y = 128
   offset_y = 128
+  -- offset_y = 1
 }
 
 function text_x_pos(t)
@@ -22,7 +22,7 @@ function title_update()
 
   -- after offset_y reaches 0, check for any key press
   if TITLE.offset_y <= 0 and any_key_pressed() then
-    game.state = STATE_PLAY
+    game.state = STATE_PLAY_INTRO
   end
 end
 
@@ -75,13 +75,4 @@ function title_draw()
 
     draw_press_key()
   end
-end
-
-function any_key_pressed()
-  for i = 4, 5 do
-    if btnp(i) then
-      return true
-    end
-  end
-  return false
 end
