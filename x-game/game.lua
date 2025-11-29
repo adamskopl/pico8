@@ -5,10 +5,8 @@ function game_init()
   STATE_WIN = "STATE_WIN"
 
   game = {
-    level = LEVELS[2],
+    level = LEVELS[1],
     state = STATE_INTRO,
-    -- over = false,
-    -- win = false,
     win_t = nil, -- time of win
     eyes_num_start = 0,
     eyes_num = 0
@@ -28,17 +26,16 @@ function game_update()
     if #eyes == 0 then -- WIN
       game.state = STATE_WIN
       game.win_t = t()
-
+      text_start(LANG.LEVEL_CLEARED, 30, nil)
       -- TURN ON IN THE END
 
       -- music(0)
-      text_start("LEVEL CLEARED!", 30, nil)
       flowers_start()
       clean_level()
     else
       local eyes_left = game.eyes_num_start - #eyes
-      text = "EYES CLEARED: " .. tostr(eyes_left) .. "/" ..
-               tostr(game.eyes_num_start)
+      text = LANG.EYES_CLEARED(eyes_left,
+        game.eyes_num_start)
       text_start(text, 23, 2)
     end
   end

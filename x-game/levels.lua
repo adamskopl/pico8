@@ -6,6 +6,6 @@ LEVELS = {{
 }, {
   x = 16,
   y = 0,
-  title = 'LEVEL 1',
+  title = 'LEVEL 2',
   text = 'Some text ...'
 }}

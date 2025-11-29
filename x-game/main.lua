@@ -10,7 +10,7 @@ function _init()
   dt_key_press = 0.1
 end
 
-function _update60()
+function game_keys_update()
   local dir = (btn(0) and vec(-1, 0)) or
                 (btn(1) and vec(1, 0)) or
                 (btn(2) and vec(0, -1)) or
@@ -35,17 +35,28 @@ function _update60()
   if (btn(4)) then
     shoot()
   end
+end
 
-  update_lvl()
-  update_splashes()
-  game_update()
-  text_update()
-  flowers_update()
+function _update60()
+  if game.state == STATE_INTRO then
+    intro_update()
+  else
+    game_keys_update()
+    update_lvl()
+    update_splashes()
+    game_update()
+    text_update()
+    flowers_update()
+  end
 end
 
 function _draw()
-  draw_lvl()
-  draw_splashes()
-  text_draw()
 
+  if game.state == STATE_INTRO then
+    intro_draw()
+  else
+    draw_lvl()
+    draw_splashes()
+    text_draw()
+  end
 end
