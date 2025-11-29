@@ -1,15 +1,10 @@
---[[ DICTIONARY
-pos - pixel position
-m_pos - map position
-m - result of mget()
-]] function _init()
+function _init()
   printh("--init")
-  game = {
-    level = LEVELS[2]
-  }
   init_debug()
+
+  game_init()
   init_lvl()
-  init_game_state()
+  game_level_loaded()
 
   t_key_press = nil
   dt_key_press = 0.1
@@ -43,7 +38,7 @@ function _update60()
 
   update_lvl()
   update_splashes()
-  update_game_state()
+  game_update()
   text_update()
   flowers_update()
 end

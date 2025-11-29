@@ -44,13 +44,13 @@ function update_enemies()
         start_movement(m)
       end
     else
-      if not game_state.win then
+      if game.state ~= STATE_WIN then
         update_movement(m)
       end
     end
     anim_update(m)
-    if game_state.win_t then
-      if t() - game_state.win_t >= m.t_kill then
+    if game.win_t then
+      if t() - game.win_t >= m.t_kill then
         monster_kill(m)
       end
     end

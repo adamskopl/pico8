@@ -97,12 +97,12 @@ function mark_lvl_visible()
 end
 
 function update_lvl()
-  if not game_state.win then
+  if game.state ~= STATE_WIN then
     mark_lvl_visible()
   end
   update_enemies()
 
-  if not game_state.over then
+  if game.state ~= STATE_OVER then
     update_player()
     update_movement(p)
   end
@@ -116,8 +116,8 @@ function draw_lvl()
         if not lvl_discovered[vec_key(pos)] then
           rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
             COL.UNDISCOVERED)
-        elseif not lvl_visible[vec_key(pos)] or
-          game_state.over then
+        elseif not lvl_visible[vec_key(pos)] or game.state ==
+          STATE_OVER then
           -- rerender with a fog of war cover
           local t = lvl[vec_key(pos)]
           if (t) then
@@ -162,10 +162,11 @@ function draw_lvl()
     end
   end
   -----------------------------------------------------------------
-  cls(game_state.win and COL.GROUND_WIN or COL.GROUND)
+  cls(game.state == STATE_WIN and COL.GROUND_WIN or
+        COL.GROUND)
   flowers_draw()
   -- draw lvl static elements all
-  if not game_state.win then
+  if game.state ~= STATE_WIN then
     for pos, t in pairs(lvl) do
       if t.type == MAP.EYE then
         pal(7, t.col)
@@ -180,12 +181,12 @@ function draw_lvl()
   draw_mages()
   draw_carrots()
   draw_bullets()
-  if not CFG.DEBUG and not game_state.win then
+  if not CFG.DEBUG and game.state ~= STATE_WIN then
     cover_lvl_not_discovered()
   end
   draw_exposed()
 
-  if not game_state.over then
+  if game.state ~= STATE_OVER then
     draw_player()
   end
 

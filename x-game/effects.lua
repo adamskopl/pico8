@@ -105,7 +105,7 @@ function flowers_update()
   end
   for flower in all(flowers) do
     if flower.t_create and
-      (t() - game_state.win_t >= flower.t_create) then
+      (t() - game.win_t >= flower.t_create) then
       flower.t_create = nil
     end
   end
