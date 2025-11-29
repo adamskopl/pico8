@@ -18,6 +18,8 @@ function update_game_state()
       game_state.win_t = t()
       music(0)
       text_start("LEVEL CLEARED!", 30, nil)
+      flowers_start()
+      clean_level()
     else
       local eyes_left = game_state.eyes_num_start - #eyes
       text = "EYES CLEARED: " .. tostr(eyes_left) .. "/" ..

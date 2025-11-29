@@ -45,10 +45,12 @@ function _update60()
   update_splashes()
   update_game_state()
   text_update()
+  flowers_update()
 end
 
 function _draw()
   draw_lvl()
   draw_splashes()
   text_draw()
+
 end

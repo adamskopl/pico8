@@ -83,3 +83,38 @@ function text_draw_animated(x0, y0)
   end
 end
 ------ TEXT ANIMATION
+
+------ FLOWERS
+function flowers_start()
+  flowers = {}
+  for i = 0, 15 do
+    for j = 0, 15 do
+      local flower = {
+        pos = vec(i * 8, j * 8),
+        sprite = MAP.FLOWER + flr(rnd(4)), -- 4 sprites
+        t_create = rnd(3) -- nil = draw
+      }
+      add(flowers, flower)
+    end
+  end
+end
+------ FLOWERS
+function flowers_update()
+  if not flowers then
+    return
+  end
+  for flower in all(flowers) do
+    if flower.t_create and
+      (t() - game_state.win_t >= flower.t_create) then
+      flower.t_create = nil
+    end
+  end
+end
+
+function flowers_draw()
+  for flower in all(flowers) do
+    if not flower.t_create then
+      spr(flower.sprite, flower.pos.x, flower.pos.y)
+    end
+  end
+end

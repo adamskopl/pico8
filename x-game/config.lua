@@ -6,6 +6,7 @@ COL = {
   UNDISCOVERED = 0,
   PLAYER = 14, -- e.g. for death splash
   GROUND = 4,
+  GROUND_WIN = 3,
   MAGES = {7, 12, 9, 1, 2},
   AMMO_EMPTY = 6,
   AMMO = 9
@@ -20,7 +21,8 @@ MAP = {
   GUN = 112,
   MAGE = 80,
   MONSTER = 69,
-  CARROT = 21
+  CARROT = 21,
+  FLOWER = 16
 }
 
 SFX = {

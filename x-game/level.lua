@@ -54,6 +54,12 @@ function init_lvl()
   pair_mages()
 end
 
+function clean_level()
+  lvl = {}
+  bullets = {}
+  p.ammo.ammo = 0
+end
+
 function remove_from_level(o)
   lvl[vec_key(o.pos)] = nil
   if o.type == MAP.EYE then
@@ -91,7 +97,9 @@ function mark_lvl_visible()
 end
 
 function update_lvl()
-  mark_lvl_visible()
+  if not game_state.win then
+    mark_lvl_visible()
+  end
   update_enemies()
 
   if not game_state.over then
@@ -154,15 +162,18 @@ function draw_lvl()
     end
   end
   -----------------------------------------------------------------
-  cls(COL.GROUND)
+  cls(game_state.win and COL.GROUND_WIN or COL.GROUND)
+  flowers_draw()
   -- draw lvl static elements all
-  for pos, t in pairs(lvl) do
-    if t.type == MAP.EYE then
-      pal(7, t.col)
-      spr(t.anim.frame, t.pos.x, t.pos.y)
-      pal()
-    else
-      spr(t.type, t.pos.x, t.pos.y)
+  if not game_state.win then
+    for pos, t in pairs(lvl) do
+      if t.type == MAP.EYE then
+        pal(7, t.col)
+        spr(t.anim.frame, t.pos.x, t.pos.y)
+        pal()
+      else
+        spr(t.type, t.pos.x, t.pos.y)
+      end
     end
   end
   draw_enemies()

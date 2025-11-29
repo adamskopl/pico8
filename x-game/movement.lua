@@ -18,7 +18,7 @@ function start_movement(o)
   local t = lvl[vec_key(vec(m_x * 8, m_y * 8))]
   local coll = t and (t.type == MAP.WALL)
 
-  if not coll then
+  if game_state.win or not coll then
     local m = {}
     o.m = m
     m.start = {
@@ -49,7 +49,9 @@ end
 
 function on_mov_end(o)
   if (o == p) then
-    player_enemies_scan()
+    if not game_state.win then
+      player_enemies_scan()
+    end
     anim_stop(p)
   end
 end
