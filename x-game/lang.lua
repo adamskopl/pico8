@@ -17,7 +17,7 @@ LANGS = {
     AUTHOR = "kurnik software",
     LEVEL_CLEARED = "POZIOM UKONCZONY!",
     EYES_CLEARED = function(n, total)
-      return "OCZY USUNIĘTE: " .. n .. "/" .. total
+      return "USUNIĘTE oczy: " .. n .. "/" .. total
     end
     -- add more keys as needed
   }

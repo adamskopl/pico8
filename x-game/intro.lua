@@ -12,12 +12,17 @@ function text_y_pos(target_y)
 end
 
 function intro_update()
-  if INTRO.offset_y <= 0 then
+  if INTRO.offset_y > 0 then
+    INTRO.offset_y = INTRO.offset_y - 0.5
+    if INTRO.offset_y <= 0 then
+      sfx(4)
+    end
     return
   end
-  INTRO.offset_y = INTRO.offset_y - 0.5
-  if INTRO.offset_y <= 0 then
-    sfx(4)
+
+  -- after offset_y reaches 0, check for any key press
+  if INTRO.offset_y <= 0 and any_key_pressed() then
+    game.state = STATE_PLAY
   end
 end
 
@@ -70,4 +75,13 @@ function intro_draw()
 
     draw_press_key()
   end
+end
+
+function any_key_pressed()
+  for i = 4, 5 do
+    if btnp(i) then
+      return true
+    end
+  end
+  return false
 end
