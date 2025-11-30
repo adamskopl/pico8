@@ -6,7 +6,7 @@ function game_init()
   STATE_WIN = "STATE_WIN"
 
   game = {
-    level = LEVELS[1],
+    level_idx = 1,
     state = STATE_TITLE,
     win_t = nil, -- time of win
     eyes_num_start = 0,

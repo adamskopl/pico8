@@ -45,27 +45,19 @@ function play_intro_draw()
   local elapsed = t() - PLAY_INTRO.t_start
 
   if elapsed >= 1 then
-    -- Get current level index (assuming game.level is LEVELS[n])
-    local level_num = 1
-    for i, lvl in ipairs(LEVELS) do
-      if lvl == game.level then
-        level_num = i
-        break
-      end
-    end
-
     -- LEVEL X (white), centered above title
-    local level_str = LANG.LEVEL_NUM(level_num)
+    local level_str = LANG.LEVEL_NUM(game.level_idx)
     local level_x = 64 - (#level_str * 2)
     local level_y = 28
     print(level_str, level_x, level_y, 7)
 
     -- Centered level title (red), in quotes
-    local title =
-      game.level.title[LANG == LANGS.pl and "pl" or "en"]
+    local level = LEVELS[game.level_idx]
+    local title = level.title[LANG == LANGS.pl and "pl" or
+                    "en"]
     local quoted_title = '"' .. title .. '"'
-    local text =
-      game.level.text[LANG == LANGS.pl and "pl" or "en"]
+    local text = level.text[LANG == LANGS.pl and "pl" or
+                   "en"]
     local tx = 64 - (#quoted_title * 2)
     local ty = 40
     print(quoted_title, tx, ty, 8)

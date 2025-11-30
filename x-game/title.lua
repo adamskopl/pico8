@@ -1,6 +1,6 @@
 TITLE = {
-  offset_y = 128
-  -- offset_y = 1
+  -- offset_y = 128
+  offset_y = 1
 }
 
 function text_x_pos(t)

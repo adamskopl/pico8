@@ -23,7 +23,8 @@ function init_lvl()
 
   for i = 0, 15 do
     for j = 0, 15 do
-      local m = mget(i + game.level.x, j + game.level.y)
+      local m = mget(i + LEVELS[game.level_idx].x,
+        j + LEVELS[game.level_idx].y)
       local o = {
         type = m,
         pos = vec(i * 8, j * 8)
