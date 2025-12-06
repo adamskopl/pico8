@@ -12,8 +12,7 @@ function start_movement(o)
     m_y = max(0, m_y - 1)
   end
   if o.dir.y == 1 then
-    m_y = n
-    min(15, m_y + 1)
+    m_y = min(15, m_y + 1)
   end
 
   local t = lvl[vec_key(vec(m_x * 8, m_y * 8))]
