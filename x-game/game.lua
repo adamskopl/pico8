@@ -11,6 +11,7 @@ function game_init()
     level_idx = 1,
     state = nil,
     win_t = nil, -- time of win
+    lost_t = nil, -- time of lost
     eyes_num_start = 0,
     eyes_num = 0,
     player_state = null
@@ -37,6 +38,9 @@ end
 function player_state_change(state)
   printh("player state changed to: " .. state)
   game.player_state = state
+  if state == PLAYER_STATE_LOST then
+    game.lost_t = t()
+  end
 end
 
 function game_update()
@@ -72,6 +76,11 @@ function game_update()
       if game.level_idx > #LEVELS then
         game.level_idx = 1
       end
+    end
+  elseif game.player_state == PLAYER_STATE_LOST then
+    if t() - game.lost_t >= 3 then
+      game_state_change(GAME_STATE_PLAY_INTRO)
+      game.lost_t = nil
     end
   end
 end
