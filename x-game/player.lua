@@ -93,7 +93,7 @@ function update_player()
         sfx(SFX.DEATH)
         splash_spawn(p.pos.x, p.pos.y, 100, COL.PLAYER, 50)
         o.exposed = true
-        game.state = STATE_OVER
+        player_state_change(PLAYER_STATE_LOST)
       end
     end
     foreach(monsters, forColl)
@@ -110,7 +110,7 @@ function update_player()
   timer_update(p.ammo.t_show)
   timer_update(p.gun.t_cooldown)
   update_bullets()
-  if game.state ~= STATE_WIN then
+  if game.player_state ~= PLAYER_STATE_WIN then
     check_collisions()
   end
   anim_update(p)
@@ -148,7 +148,7 @@ function draw_player()
   if p.dir then
     local len = 8
     --  crosshair
-    if game.state ~= STATE_WIN then
+    if game.player_state ~= PLAYER_STATE_WIN then
       circ(p.pos.x + 4 + p.dir.x * len,
         p.pos.y + 4 + p.dir.y * len, 1, 8)
     end

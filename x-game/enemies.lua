@@ -44,7 +44,7 @@ function update_enemies()
         start_movement(m)
       end
     else
-      if game.state ~= STATE_WIN then
+      if game.player_state ~= PLAYER_STATE_LOST then
         update_movement(m)
       end
     end

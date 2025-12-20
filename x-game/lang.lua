@@ -9,7 +9,7 @@ LANGS = {
       return "eyes cleared: " .. n .. "/" .. total
     end,
     LEVEL_NUM = function(n)
-      return "level " .. n
+      return "lawn " .. n
     end
     -- add more keys as needed
   },
@@ -23,7 +23,7 @@ LANGS = {
       return "usuniete oczy: " .. n .. "/" .. total
     end,
     LEVEL_NUM = function(n)
-      return "poziom " .. n
+      return "trawnik " .. n
     end
     -- add more keys as needed
   }

@@ -1,6 +1,8 @@
-PLAY_INTRO = {
-  t_start = nil
-}
+function play_intro_init()
+  PLAY_INTRO = {
+    t_start = t()
+  }
+end
 
 -- Helper: splits text into lines that fit max_width (in chars)
 function split_text_lines(text, max_width)
@@ -25,23 +27,16 @@ function split_text_lines(text, max_width)
 end
 
 function play_intro_update()
-  if not PLAY_INTRO.t_start then
-    PLAY_INTRO.t_start = t()
-  end
   local elapsed = t() - PLAY_INTRO.t_start
 
   -- After 3s, allow key press to start level
   if elapsed >= 3 and any_key_pressed() then
-    game.state = STATE_PLAY
-    PLAY_INTRO.t_start = nil
+    game_state_change(GAME_STATE_PLAY)
   end
 end
 
 function play_intro_draw()
-  cls(0) -- black background
-  if not PLAY_INTRO.t_start then
-    return
-  end
+  cls(0)
   local elapsed = t() - PLAY_INTRO.t_start
 
   if elapsed >= 1 then

@@ -1,11 +1,7 @@
 function _init()
   printh("--init")
   init_debug()
-
   game_init()
-  init_lvl()
-  game_level_loaded()
-
   t_key_press = nil
   dt_key_press = 0.1
 end
@@ -38,12 +34,14 @@ function game_keys_update()
 end
 
 function _update60()
-  if game.state == STATE_TITLE then
+  if game.state == GAME_STATE_TITLE then
     title_update()
-  elseif game.state == STATE_PLAY_INTRO then
+  elseif game.state == GAME_STATE_PLAY_INTRO then
     play_intro_update()
-  else
-    game_keys_update()
+  elseif game.state == GAME_STATE_PLAY then
+    if game.player_state == PLAYER_STATE_PLAYING then
+      game_keys_update()
+    end
     update_lvl()
     update_splashes()
     game_update()
@@ -53,9 +51,9 @@ function _update60()
 end
 
 function _draw()
-  if game.state == STATE_TITLE then
+  if game.state == GAME_STATE_TITLE then
     title_draw()
-  elseif game.state == STATE_PLAY_INTRO then
+  elseif game.state == GAME_STATE_PLAY_INTRO then
     play_intro_draw()
   else
     draw_lvl()

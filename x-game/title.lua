@@ -1,14 +1,16 @@
-TITLE = {
-  -- offset_y = 128
-  offset_y = 1
-}
-
 function text_x_pos(t)
   return 64 - (#t * 2)
 end
 
 function text_y_pos(target_y)
   return target_y + TITLE.offset_y
+end
+
+function title_init()
+  TITLE = {
+    offset_y = 128
+    -- offset_y = 1
+  }
 end
 
 function title_update()
@@ -22,7 +24,7 @@ function title_update()
 
   -- after offset_y reaches 0, check for any key press
   if TITLE.offset_y <= 0 and any_key_pressed() then
-    game.state = STATE_PLAY_INTRO
+    game_state_change(GAME_STATE_PLAY_INTRO)
   end
 end
 
