@@ -39,7 +39,7 @@ function _update60()
   elseif game.state == GAME_STATE_PLAY_INTRO then
     play_intro_update()
   elseif game.state == GAME_STATE_PLAY then
-    if game.player_state == PLAYER_STATE_PLAYING then
+    if game.player_state ~= PLAYER_STATE_LOST then
       game_keys_update()
     end
     update_lvl()
@@ -55,7 +55,7 @@ function _draw()
     title_draw()
   elseif game.state == GAME_STATE_PLAY_INTRO then
     play_intro_draw()
-  else
+  elseif game.state == GAME_STATE_PLAY then
     draw_lvl()
     draw_splashes()
     text_draw()

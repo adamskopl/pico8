@@ -44,18 +44,15 @@ function player_state_change(state)
 end
 
 function game_update()
-  -- PLAY:
   if game.player_state == PLAYER_STATE_PLAYING then
     -- check if eye is killed (from the last time)
     -- if yes, display text
     if game.eyes_num ~= #eyes then
       game.eyes_num = #eyes
       if #eyes == 0 then -- WIN
-        game.player_state = PLAYER_STATE_WIN
+        player_state_change(PLAYER_STATE_WIN)
         game.win_t = t()
         text_start(LANG.LEVEL_CLEARED, 30, nil)
-        -- TURN ON IN THE END
-
         music(0)
         flowers_start()
         clean_level()

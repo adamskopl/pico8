@@ -165,7 +165,10 @@ function draw_lvl()
   -----------------------------------------------------------------
   cls(game.player_state == PLAYER_STATE_WIN and
         COL.GROUND_WIN or COL.GROUND)
-  flowers_draw()
+  if game.player_state == PLAYER_STATE_WIN then
+    flowers_draw()
+  end
+
   -- draw lvl static elements all
   if game.player_state ~= PLAYER_STATE_WIN then
     for pos, t in pairs(lvl) do
