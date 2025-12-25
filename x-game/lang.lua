@@ -8,6 +8,9 @@ LANGS = {
     EYES_CLEARED = function(n, total)
       return "eyes cleared: " .. n .. "/" .. total
     end,
+    MONSTERS_CLEARED = function(n, total)
+      return "bastards cleared: " .. n .. "/" .. total
+    end,
     LEVEL_NUM = function(n)
       return "lawn " .. n
     end
@@ -20,7 +23,10 @@ LANGS = {
     AUTHOR = "kurnik software",
     LEVEL_CLEARED = "trawnik ukonczony!",
     EYES_CLEARED = function(n, total)
-      return "usuniete oczy: " .. n .. "/" .. total
+      return "rozwalonych oczu: " .. n .. "/" .. total
+    end,
+    MONSTERS_CLEARED = function(n, total)
+      return "rozwalonych drani: " .. n .. "/" .. total
     end,
     LEVEL_NUM = function(n)
       return "trawnik " .. n

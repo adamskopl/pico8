@@ -1,5 +1,6 @@
 CFG = {
-  DEBUG = false
+  DEBUG = false,
+  SKIP_INTRO = true -- go straight to gameplay
 }
 
 COL = {
