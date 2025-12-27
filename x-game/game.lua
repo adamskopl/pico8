@@ -21,20 +21,25 @@ function game_init()
   game_state_change(GAME_STATE_PLAY_INTRO)
 end
 
+function level_increase()
+  game.level_idx = game.level_idx + 1
+  if game.level_idx > #LEVELS then
+    game.level_idx = 1
+  end
+end
+
 function game_state_change(state)
-  if game.state == GAME_STATE_PLAY then
+  local prev_state = game.state
+  game.state = state
+
+  if prev_state == GAME_STATE_PLAY then
     music(-1)
   end
-
-  game.state = state
 
   if state == GAME_STATE_TITLE then
     title_init()
   elseif state == GAME_STATE_PLAY_INTRO then
-    game.level_idx = game.level_idx + 1
-    if game.level_idx > #LEVELS then
-      game.level_idx = 1
-    end
+    level_increase()
     if not CFG.SKIP_INTRO then
       play_intro_init()
     else
@@ -94,14 +99,13 @@ function game_update()
       end
     end
   end
-
+  -----------------------------------------------------------------------------
   if game.player_state == PLAYER_STATE_PLAYING then
     if game.eyes_num_start > 0 then
       handle_eyes_change()
     else
       handle_monsters_change()
     end
-    -- WIN: check if player leaves screen, then go to next level
   elseif game.player_state == PLAYER_STATE_WIN then
     if p and
       (p.pos.x < 0 or p.pos.x > 127 or p.pos.y < 0 or
