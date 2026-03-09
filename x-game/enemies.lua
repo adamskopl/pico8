@@ -3,9 +3,9 @@ function monster_create(o)
   o.dir = vec(0, 0)
   o.speed = 0.5
   o.sleep = true
-  o.exposed = false -- ignore fog of war
+  o.exposed = false       -- ignore fog of war
   o.t_kill = 0.5 + rnd(2) -- kill time when win
-  anim_create_loop(o, 69, 69, 70, 0.1)
+  anim_create_loop(o, 71, 71, 72, 0.1)
   anim_start(o)
 end
 
@@ -62,7 +62,6 @@ function update_enemies()
   for m in all(mages) do
     anim_update(m)
   end
-
 end
 
 function draw_enemies()
@@ -81,7 +80,7 @@ function player_enemies_scan()
     while m_next ~= MAP.WALL do
       for e in all(monsters) do
         if e.sleep and
-          vec_in_tile(e.pos, vec_multi(m_pos_next, 8)) then
+            vec_in_tile(e.pos, vec_multi(m_pos_next, 8)) then
           e.sleep = false
           sfx(SFX.MONSTER_WAKE)
         end

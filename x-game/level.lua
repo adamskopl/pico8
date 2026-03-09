@@ -78,9 +78,9 @@ function mark_lvl_visible()
 
   local m_x, m_y = p.pos.x / 8, p.pos.y / 8
   local m_pos = vec((p.dir.x == -1 and ceil(m_x)) or
-                      (p.dir.x == 1 and flr(m_x)) or m_x,
+    (p.dir.x == 1 and flr(m_x)) or m_x,
     (p.dir.y == -1 and ceil(m_y)) or
-      (p.dir.y == 1 and flr(m_y)) or m_y)
+    (p.dir.y == 1 and flr(m_y)) or m_y)
   local m_pos_next = vec_add(m_pos, p.dir)
   local m_next = lget(m_pos_next.x, m_pos_next.y)
 
@@ -118,7 +118,7 @@ function draw_lvl()
           rectfill(pos.x, pos.y, pos.x + 7, pos.y + 7,
             COL.UNDISCOVERED)
         elseif not lvl_visible[vec_key(pos)] or
-          game.player_state == PLAYER_STATE_LOST then
+            game.player_state == PLAYER_STATE_LOST then
           -- rerender with a fog of war cover
           local t = lvl[vec_key(pos)]
           if (t) then
@@ -164,7 +164,7 @@ function draw_lvl()
   end
   -----------------------------------------------------------------
   cls(game.player_state == PLAYER_STATE_WIN and
-        COL.GROUND_WIN or COL.GROUND)
+    COL.GROUND_WIN or COL.GROUND)
   if game.player_state == PLAYER_STATE_WIN then
     flowers_draw()
   end

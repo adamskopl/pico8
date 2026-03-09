@@ -5,7 +5,7 @@
   },
   "diagnostics": {
     "globals": [
-      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls"
+      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset"
     ],
     "disable": [
       "lowercase-global"

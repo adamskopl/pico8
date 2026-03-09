@@ -29,6 +29,7 @@ function update_splashes()
     end
   end
 end
+
 ---- SPLASHES
 
 function draw_splashes()
@@ -38,7 +39,7 @@ function draw_splashes()
 end
 
 ---- TEXT ANIMATION
-text = nil -- if set, text is displayed
+text = nil        -- if set, text is displayed
 text_t = nil
 text_duration = 2 -- nil = infinitive
 text_x = 0
@@ -52,8 +53,8 @@ end
 
 function text_update()
   if text_duration and text_t and t() - text_t >=
-    text_duration then
-    text = NIL
+      text_duration then
+    text = nil
   end
 end
 
@@ -82,6 +83,7 @@ function text_draw_animated(x0, y0)
     print(ch, x, y, col)
   end
 end
+
 ------ TEXT ANIMATION
 
 ------ FLOWERS
@@ -92,12 +94,13 @@ function flowers_start()
       local flower = {
         pos = vec(i * 8, j * 8),
         sprite = MAP.FLOWER + flr(rnd(4)), -- 4 sprites
-        t_create = rnd(3) -- nil = draw
+        t_create = rnd(3)                  -- nil = draw
       }
       add(flowers, flower)
     end
   end
 end
+
 ------ FLOWERS
 function flowers_update()
   if not flowers then
@@ -105,7 +108,7 @@ function flowers_update()
   end
   for flower in all(flowers) do
     if flower.t_create and
-      (t() - game.win_t >= flower.t_create) then
+        (t() - game.win_t >= flower.t_create) then
       flower.t_create = nil
     end
   end
