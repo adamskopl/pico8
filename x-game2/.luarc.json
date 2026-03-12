@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/lua-language-server/master/meta/schema.json",
+  "runtime": {
+    "version": "Lua 5.2"
+  },
+  "diagnostics": {
+    "globals": [
+      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset", "foreach", "circ"
+    ],
+    "disable": [
+      "lowercase-global", "undefined-field"
+    ]
+  },
+  "workspace": {
+    "checkThirdParty": false
+  }
+}
