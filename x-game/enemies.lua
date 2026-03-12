@@ -12,7 +12,7 @@ end
 function monster_kill(m)
   sfx(SFX.MONSTER_DEATH)
   del(monsters, m)
-  splash_spawn(m.pos.x + 3, m.pos.y + 3, 100, 8, 40)
+  splash_spawn(m.pos.x + 3, m.pos.y + 3, 100, COL.ENEMY, 40)
 end
 
 function can_chase_dir(o, dir)
@@ -66,7 +66,8 @@ end
 
 function draw_enemies()
   for e in all(monsters) do
-    spr(e.anim.frame, e.pos.x, e.pos.y)
+    local flip = e.dir.x == 1
+    spr(e.anim.frame, e.pos.x, e.pos.y, 1, 1, flip)
   end
 end
 

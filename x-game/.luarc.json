@@ -5,10 +5,10 @@
   },
   "diagnostics": {
     "globals": [
-      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset"
+      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset", "foreach", "circ"
     ],
     "disable": [
-      "lowercase-global"
+      "lowercase-global", "undefined-field"
     ]
   },
   "workspace": {

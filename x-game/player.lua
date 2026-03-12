@@ -76,7 +76,6 @@ function update_player()
           break
         end
       end
-
     end
   end
 
@@ -129,7 +128,7 @@ function draw_player()
     if (not p.ammo.show) then
       return
     end
-    local pos = vec(p.pos.x + 1, p.pos.y - 2, 6)
+    local pos = vec(p.pos.x + 1, p.pos.y - 2)
     local shift = 0
     for i = 1, 3 do
       pset(pos.x + shift, pos.y,
