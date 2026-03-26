@@ -5,7 +5,7 @@
   },
   "diagnostics": {
     "globals": [
-      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset", "foreach", "circ"
+      "rnd", "sfx", "del", "abs", "all", "t", "spr", "mget", "add", "ceil", "flr","pal", "rectfill", "cls", "deli", "cos", "sin", "pset", "foreach", "circ", "printh", "btn", "time", "min", "max"
     ],
     "disable": [
       "lowercase-global", "undefined-field"
