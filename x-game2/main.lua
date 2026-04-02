@@ -46,7 +46,7 @@ function _draw()
   cls(CFG.COLORS.BLACK)
   rect(0, 0, 127, 127, CFG.COLORS.RED)
 
-  camera(G.player.pos.x - 64, G.player.pos.y - 64)
+  camera(G.player.vec.x - 64, G.player.vec.y - 64)
   MAP.draw()
   PLAYER.draw()
 end

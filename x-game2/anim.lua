@@ -2,7 +2,7 @@ ANIM = {}
 
 function ANIM.draw(o)
   local flip = o.dir.x == -1
-  spr(o.anim.frame, o.pos.x, o.pos.y, 1, 1, flip)
+  spr(o.anim.frame, o.vec.x, o.vec.y, 1, 1, flip)
 end
 
 function ANIM.create_loop(o, frame_idle, frame_s, frame_e, speed)
