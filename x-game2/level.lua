@@ -40,33 +40,50 @@ local function wall_update_sprite(_, vec)
   local down = neigh['0_8']
   local left = neigh['-8_0']
 
+  local sprites = nil
   if neigh_cnt == 1 then
     if up then
-      LVL.set(vec, MAP.WALL_UD[1])
+      sprites = MAP.WALL_UD
     elseif down then
-      LVL.set(vec, MAP.WALL_LR[1])
+      sprites = MAP.WALL_LR
     end
   elseif neigh_cnt == 2 then
     -- corners
     if down and left then      -- UR
-      LVL.set(vec, MAP.WALL_UR[1])
+      sprites = MAP.WALL_UR
     elseif up and left then    -- DR
-      LVL.set(vec, MAP.WALL_DR[1])
+      sprites = MAP.WALL_DR
     elseif right and up then   -- DL
-      LVL.set(vec, MAP.WALL_DL[1])
+      sprites = MAP.WALL_DL
     elseif right and down then -- UL
-      LVL.set(vec, MAP.WALL_UL[1])
+      sprites = MAP.WALL_UL
     elseif up and down and not left and not right then
-      LVL.set(vec, MAP.WALL_LR[1]) -- left/right
+      sprites = MAP.WALL_LR
     elseif left and right and not up and not down then
-      LVL.set(vec, MAP.WALL_UD[1]) -- up/down
+      sprites = MAP.WALL_UD
     end
   elseif neigh_cnt == 3 then
     if down then
-      LVL.set(vec, MAP.WALL_LR[1])
+      sprites = MAP.WALL_LR
     elseif up then
-      LVL.set(vec, MAP.WALL_UD[1])
+      sprites = MAP.WALL_UD
     end
+  end
+  if sprites then
+    LVL.set(vec, tbl_get_rnd(sprites))
+  else
+    printh('no wall sprite')
+  end
+end
+function floor_update_sprite(m, vec)
+  if m == MAP.FLOOR_BASE then
+    local sprites
+    if rnd() < 0.8 then
+      sprites = MAP.FLOOR_COMMON
+    else
+      sprites = MAP.FLOOR_UNCOMMON
+    end
+    LVL.set(vec, tbl_get_rnd(sprites))
   end
 end
 
@@ -91,6 +108,7 @@ local function init_walls()
 
   map_each(wall_init)
   map_each(wall_update_sprite)
+  map_each(floor_update_sprite)
 end
 
 --===== init =====--

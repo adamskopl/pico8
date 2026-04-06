@@ -1,15 +1,17 @@
 MAP = {
   HERO = 144,
   FLOOR_BASE = 66,
+  FLOOR_COMMON = { 49, 50, 51, 64, 65, 68, 70, 81, 82, },
+  FLOOR_UNCOMMON = { 48, 50, 67, 80, 83 },
   WALL_ALL = {}, -- set. filled later
   WALL_DBG = { 202, 234, 232, 200, 216, 201 },
   WALL_BASE = 241,
-  WALL_UL = { 2, 6, 10 }, -- up left
+  WALL_UL = { 2, 10 },    -- up left
   WALL_UR = { 4, 8, 12 }, -- up right...
   WALL_DR = { 36, 40, 44 },
   WALL_DL = { 34, 38, 42 },
-  WALL_LR = { 18, 20, 22, 24, 26, 28 }, -- left/right
-  WALL_UD = { 3, 35, 7, 39, 11, 43 }    -- up/down
+  WALL_LR = { 18, 20, 22, 26, 28 }, -- left/right
+  WALL_UD = { 3, 11 }               -- up/down
 }
 printh(MAP.WALL_UR[0])
 --===== init WALL_ALL =====--
