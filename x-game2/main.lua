@@ -7,7 +7,7 @@ function _init()
     level = nil,
     player = nil
   }
-  MAP.init()
+  LVL.init()
 end
 
 function game_keys_update()
@@ -43,10 +43,10 @@ end
 
 function _draw()
   camera()
-  cls(CFG.COLORS.BLACK)
-  rect(0, 0, 127, 127, CFG.COLORS.RED)
+  cls(COLORS.BLACK)
+  rect(0, 0, 127, 127, COLORS.RED)
 
   camera(G.player.vec.x - 64, G.player.vec.y - 64)
-  MAP.draw()
+  LVL.draw()
   PLAYER.draw()
 end

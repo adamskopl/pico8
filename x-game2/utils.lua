@@ -1,3 +1,4 @@
+--===== VEC =====--
 VEC = {}
 function VEC.from(x, y)
   return {
@@ -43,6 +44,7 @@ function VEC.to_str(v)
   return '[' .. v.x .. ',' .. v.y .. ']'
 end
 
+--===== DIRS =====--
 DIRS = { {
   x = 0,
   y = -1
@@ -56,7 +58,6 @@ DIRS = { {
   x = -1,
   y = 0
 } }
-
 DIRS_8 = { {
   x = -8,
   y = 0
@@ -70,8 +71,20 @@ DIRS_8 = { {
   x = 0,
   y = 8
 } }
-
 DIRS_8_ALL = {
   { x = 0, y = -8 }, { x = 8, y = -8 }, { x = 8, y = 0 },
   { x = 8, y = 8 }, { x = 0, y = 8 }, { x = -8, y = 8 }, { x = -8, y = 0 }, { x = -8, y = -8 }
 }
+
+--===== TABLES =====--
+function tbl_add_to_tbl(to, from)
+  for e in all(from) do
+    add(to, e)
+  end
+end
+
+function tbl_add_to_set(tbl, set)
+  for v in all(tbl) do
+    set[v] = true
+  end
+end
