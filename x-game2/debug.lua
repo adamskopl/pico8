@@ -5,12 +5,12 @@ DBG = {
 
 function DBG.drawWalls1()
   for w in all(DBG.WALLS1) do
-    rect(w.x, w.y, w.x + 8, w.y + 8, CFG.COLORS.RED)
+    rect(w.x, w.y, w.x + 8, w.y + 8, COLORS.RED)
   end
 end
 
 function DBG.drawWalls2()
   for w in all(DBG.WALLS2) do
-    rect(w.x, w.y, w.x + 8, w.y + 8, CFG.COLORS.GREEN)
+    rect(w.x, w.y, w.x + 8, w.y + 8, COLORS.GREEN)
   end
 end

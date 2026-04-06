@@ -83,7 +83,11 @@ function tbl_add_to_tbl(to, from)
   end
 end
 
-function tbl_add_to_set(tbl, set)
+function tbl_get_rnd(tbl)
+  return tbl[flr(rnd(#tbl)) + 1]
+end
+
+function set_add_tbl(set, tbl)
   for v in all(tbl) do
     set[v] = true
   end

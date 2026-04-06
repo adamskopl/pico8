@@ -1,4 +1,5 @@
 function _init()
+  printh('')
   printh('--init')
 
   dir_choice_t = nil

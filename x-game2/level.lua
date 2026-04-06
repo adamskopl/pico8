@@ -23,53 +23,51 @@ local function map_each(cb)
   end
 end
 
-local CNT = 0
-local TARGET = 25
 --===== walls =====--
-local function wall_update_sprite(m, vec)
-  CNT = CNT + 1
-  -- if CNT == TARGET then add(DBG.WALLS1, vec) end
+local function wall_update_sprite(_, vec)
   if not LVL.is_wall(vec) then return end
-  -- if CNT ~= TARGET then return end
-  printh(CNT .. ' wall-upd' .. ' ' .. VEC.key(vec))
-  local wall_neigh_cnt = 0
-  local wall_neigh = {}
-  for d in all(DIRS_8_ALL) do
+  local neigh_cnt = 0
+  local neigh = {}
+  for d in all(DIRS_8) do
     local v_dir = VEC.add(vec, d)
     if LVL.is_wall(v_dir) then
-      wall_neigh_cnt = wall_neigh_cnt + 1
-      wall_neigh[VEC.key(d)] = true
-      printh('adding ' .. VEC.key(d))
-      -- add(DBG.WALLS2, v_dir)
+      neigh_cnt = neigh_cnt + 1
+      neigh[VEC.key(d)] = true
     end
   end
-  local up = wall_neigh['0_-8']
-  local right = wall_neigh['8_0']
-  local down = wall_neigh['0_8']
-  local left = wall_neigh['-8_0']
+  local up = neigh['0_-8']
+  local right = neigh['8_0']
+  local down = neigh['0_8']
+  local left = neigh['-8_0']
 
-  -- corners
-  if down and left then -- UR
-    LVL.set(vec, 202)
+  if neigh_cnt == 1 then
+    if up then
+      LVL.set(vec, MAP.WALL_UD[1])
+    elseif down then
+      LVL.set(vec, MAP.WALL_LR[1])
+    end
+  elseif neigh_cnt == 2 then
+    -- corners
+    if down and left then      -- UR
+      LVL.set(vec, MAP.WALL_UR[1])
+    elseif up and left then    -- DR
+      LVL.set(vec, MAP.WALL_DR[1])
+    elseif right and up then   -- DL
+      LVL.set(vec, MAP.WALL_DL[1])
+    elseif right and down then -- UL
+      LVL.set(vec, MAP.WALL_UL[1])
+    elseif up and down and not left and not right then
+      LVL.set(vec, MAP.WALL_LR[1]) -- left/right
+    elseif left and right and not up and not down then
+      LVL.set(vec, MAP.WALL_UD[1]) -- up/down
+    end
+  elseif neigh_cnt == 3 then
+    if down then
+      LVL.set(vec, MAP.WALL_LR[1])
+    elseif up then
+      LVL.set(vec, MAP.WALL_UD[1])
+    end
   end
-  if up and left then -- DR
-    LVL.set(vec, 234)
-  end
-  if right and up then -- DL
-    LVL.set(vec, 232)
-  end
-  if right and down then -- UL
-    LVL.set(vec, 200)
-  end
-  -- left/right
-  if up and down and not left and not right then
-    LVL.set(vec, 216)
-  end
-  -- up/down
-  if left and right and not up and not down then
-    LVL.set(vec, 201)
-  end
-  printh('wall-upd END')
 end
 
 local function init_walls()
@@ -105,7 +103,7 @@ end
 function LVL.init()
   -- map positions should include space for outer walls
   local LEVEL_1 = {
-    vec_start = VEC.from(0, 0), vec_end = VEC.from(6, 5)
+    vec_start = VEC.from(0, 0), vec_end = VEC.from(6, 4)
   }
   local LEVEL_2 = {
   }
