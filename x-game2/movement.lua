@@ -15,6 +15,9 @@ function MOV.is_moving(o)
 end
 
 function MOV.start(o)
+  local map_dir = VEC.add(o.vec, VEC.multi(o.dir, 8))
+  if LVL.is_wall(map_dir) then return end
+
   o.mov.on = true
   o.mov.vec_start = VEC.from(o.vec.x, o.vec.y)
   ANIM.start(o)
