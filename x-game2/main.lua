@@ -9,6 +9,7 @@ function _init()
     player = nil
   }
   LVL.init()
+  LOS.init()
 end
 
 function game_keys_update()
@@ -40,6 +41,7 @@ end
 function _update60()
   game_keys_update()
   PLAYER.update()
+  LOS.update()
 end
 
 function _draw()
@@ -50,4 +52,5 @@ function _draw()
   camera(G.player.vec.x - 64, G.player.vec.y - 64)
   LVL.draw()
   PLAYER.draw()
+  LOS.draw()
 end

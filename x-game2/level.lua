@@ -121,7 +121,7 @@ end
 function LVL.init()
   -- map positions should include space for outer walls
   local LEVEL_1 = {
-    vec_start = VEC.from(0, 0), vec_end = VEC.from(6, 5)
+    vec_start = VEC.from(0, 0), vec_end = VEC.from(13, 13)
   }
   local LEVEL_2 = {
   }

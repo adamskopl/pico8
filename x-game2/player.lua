@@ -19,5 +19,5 @@ local function draw_crosshair()
 end
 function PLAYER.draw()
   ANIM.draw(G.player)
-  draw_crosshair()
+  -- draw_crosshair()
 end

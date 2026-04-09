@@ -13,7 +13,6 @@ MAP = {
   WALL_LR = { 18, 20, 22, 26, 28 }, -- left/right
   WALL_UD = { 3, 11 }               -- up/down
 }
-printh(MAP.WALL_UR[0])
 --===== init WALL_ALL =====--
 MAP.WALL_ALL[MAP.WALL_BASE] = true
 set_add_tbl(MAP.WALL_ALL, MAP.WALL_DBG)
