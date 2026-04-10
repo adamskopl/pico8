@@ -136,6 +136,4 @@ local function m_draw(m, vec)
 end
 function LVL.draw()
   map_each(m_draw)
-  DBG.drawWalls1()
-  DBG.drawWalls2()
 end

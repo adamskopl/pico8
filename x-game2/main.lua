@@ -49,8 +49,8 @@ function _draw()
   cls(COLORS.BLACK)
   rect(0, 0, 127, 127, COLORS.RED)
 
-  camera(G.player.vec.x - 64, G.player.vec.y - 64)
+  camera(SCREEN.v_camera())
   LVL.draw()
   PLAYER.draw()
-  LOS.draw()
+  -- LOS.draw()
 end
