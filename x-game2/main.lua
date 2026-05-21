@@ -13,10 +13,8 @@ function _init()
 end
 
 function game_keys_update()
-  local dir_choice = (btn(0) and VEC.from(-1, 0)) or
-      (btn(1) and VEC.from(1, 0)) or
-      (btn(2) and VEC.from(0, -1)) or
-      (btn(3) and VEC.from(0, 1)) or nil
+  local dir_choice = (btn(0) and VEC.from(-1, 0)) or (btn(1) and VEC.from(1, 0)) or (btn(2) and VEC.from(0, -1)) or
+                       (btn(3) and VEC.from(0, 1)) or nil
   if dir_choice and not MOV.is_moving(G.player) then
     if not VEC.eq(dir_choice, G.player.dir) then
       -- dir change, measure press time
@@ -41,7 +39,7 @@ end
 function _update60()
   game_keys_update()
   PLAYER.update()
-  LOS.update()
+  -- LOS.update()
 end
 
 function _draw()
