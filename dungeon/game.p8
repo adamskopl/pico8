@@ -8,7 +8,7 @@ __lua__
 #include mov.lua
 #include hero.lua
 #include lvl.lua
-#include game.lua
+#include main.lua
 
 __gfx__
 000000000000000001dddddddddddddddddddd100000000001dddddd010dd0101ddd1d10000000000011dddddddddddddddd11001dddddd11dddddd101ddddd1
