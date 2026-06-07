@@ -3,7 +3,6 @@ function _init()
 
   dir_choice_t = nil
   dir_choice_delay = 0.1
-  mov_interrupted = true
 
   G = {
     level = nil,
@@ -16,22 +15,22 @@ function game_keys_update()
   local dir_choice = (btn(0) and VEC.new(-1, 0)) or (btn(1) and VEC.new(1, 0)) or (btn(2) and VEC.new(0, -1)) or
                        (btn(3) and VEC.new(0, 1)) or nil
 
-  if not dir_choice or MOV.moving(hero) then
+  if not dir_choice or MOV.moving(G.hero) then
     dir_choice_t = nil
     return
   end
 
   -- dir change
-  if not hero.dir or not VEC.eq(dir_choice, hero.dir) then
-    hero.dir = dir_choice
+  if not G.hero.dir or not VEC.eq(dir_choice, G.hero.dir) then
+    G.hero.dir = dir_choice
     dir_choice_t = time()
     return
   end
 
   -- same dir
   if not dir_choice_t or time() - dir_choice_t >= dir_choice_delay then
-    if not wall_dir(hero) then
-      MOV.start(hero)
+    if not wall_dir(G.hero) then
+      MOV.start(G.hero)
     end
   end
 end

@@ -1,4 +1,8 @@
 # biezac
+ANIMACJA PROBLEM
+
+- zaczyna sie za czesto. ma zrobic raz start i raz end
+
 - dokoncz 
   - kompletna animacja - dopóki nie przestaniemy sie ruszac, animacja trwa
   - najpierw printh wychwytujący

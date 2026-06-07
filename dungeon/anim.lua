@@ -1,8 +1,10 @@
 ANIM = {}
 
 function ANIM.draw(o)
-  local flip = o.dir.x == -1
-  spr(o.anim.frame, o.pos.x, o.pos.y, 1, 1, flip)
+  if o.dir and o.dir.x ~= 0 then
+    o.anim.flip = o.dir.x == -1
+  end
+  spr(o.anim.frame, o.pos.x, o.pos.y, 1, 1, o.anim.flip)
 end
 
 function ANIM.create_loop(o, frame_idle, frame_s, frame_e, speed)
@@ -14,6 +16,7 @@ function ANIM.create_loop(o, frame_idle, frame_s, frame_e, speed)
     frame = frame_idle,
     speed = speed,
     time = time(),
+    flip = false,
     type = "LOOP"
   }
 end
@@ -27,6 +30,7 @@ function ANIM.create_single(o, frame_idle, frame_s, frame_e, speed)
     frame = frame_idle,
     speed = speed,
     time = time(),
+    flip = false,
     type = "SINGLE"
   }
 end
@@ -42,6 +46,7 @@ function ANIM.create_cont_reverse(o, frame_s, frame_e, speed, interval)
     time = time(),
     forward = true, -- false = backward,
     pause = true,
+    flip = false,
     type = "CONT_REVERSE"
   }
 end

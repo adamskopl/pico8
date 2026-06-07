@@ -9,6 +9,6 @@ LVL_2 = {
 }
 
 function lvl_init()
-  level = LVL_1
-  hero = hero_new(VEC.multi(level.hero,8))
+  G.level = LVL_1
+  G.hero = hero_new(VEC.multi(G.level.hero,8))
 end
