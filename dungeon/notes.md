@@ -2,6 +2,7 @@
 - dokoncz 
   - kompletna animacja - dopóki nie przestaniemy sie ruszac, animacja trwa
   - najpierw printh wychwytujący
+  - oddzielnie monitorowac movement interrupt... moze w movement util się da?
 
 
 # versions

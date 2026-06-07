@@ -2,12 +2,12 @@ function hero_new(pos)
   local h = {
     flip = false
   }
-  mov_init(h, VEC.cp(pos))
+  MOV.init(h, VEC.cp(pos))
   return h
 end
 
 function hero_update()
-  mov_update(hero)
+  MOV.update(hero)
 end
 
 function draw_crosshair()

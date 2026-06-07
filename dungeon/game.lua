@@ -2,7 +2,7 @@ function _init()
   printh('--init')
 
   dir_choice_t = nil
-  dir_choice_delay = 0 -- increase in case of restoring dir choice without movement
+  dir_choice_delay = 0.1
   mov_interrupted = true
 
   G = {
@@ -15,26 +15,24 @@ end
 function game_keys_update()
   local dir_choice = (btn(0) and VEC.new(-1, 0)) or (btn(1) and VEC.new(1, 0)) or (btn(2) and VEC.new(0, -1)) or
                        (btn(3) and VEC.new(0, 1)) or nil
-  
 
-
-  if dir_choice and not mov_moving(hero) then
-    if (not hero.dir) or (not VEC.eq(dir_choice, hero.dir)) then
-      -- dir change, measure press time
-      hero.dir = dir_choice
-      dir_choice_t = time()
-    elseif dir_choice_t then
-      -- same dir + measuring press time
-      if time() - dir_choice_t >= dir_choice_delay then
-        dir_choice_t = nil
-      end
-    else
-      if not wall_dir(hero) then
-        mov_start(hero)
-      end
-    end
-  else
+  if not dir_choice or MOV.moving(hero) then
     dir_choice_t = nil
+    return
+  end
+
+  -- dir change
+  if not hero.dir or not VEC.eq(dir_choice, hero.dir) then
+    hero.dir = dir_choice
+    dir_choice_t = time()
+    return
+  end
+
+  -- same dir
+  if not dir_choice_t or time() - dir_choice_t >= dir_choice_delay then
+    if not wall_dir(hero) then
+      MOV.start(hero)
+    end
   end
 end
 

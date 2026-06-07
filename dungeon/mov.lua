@@ -1,4 +1,5 @@
-function mov_init(o, pos)
+MOV = {}
+function MOV.init(o, pos)
   o.pos = pos
   o.dir = nil
   o.speed = 1
@@ -8,16 +9,16 @@ function mov_init(o, pos)
   }
 end
 
-function mov_moving(o)
+function MOV.moving(o)
   return o.mov.on
 end
 
-function mov_start(o)
+function MOV.start(o)
   o.mov.on = true
   o.mov.pos_start = VEC.new(o.pos.x, o.pos.y)
 end
 
-function mov_update(o)
+function MOV.update(o)
   if not o.mov.on then
     return
   end
