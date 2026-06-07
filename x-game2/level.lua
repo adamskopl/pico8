@@ -1,6 +1,6 @@
 LVL = {}
 
---===== get/set =====--
+-- ===== get/set =====--
 function LVL.get(vec)
   return mget(vec.x / 8, vec.y / 8)
 end
@@ -9,12 +9,12 @@ function LVL.set(vec, val)
   return mset(vec.x / 8, vec.y / 8, val)
 end
 
---===== global utils =====--
+-- ===== global utils =====--
 function LVL.is_wall(vec)
   return MAP.WALL_ALL[LVL.get(vec)]
 end
 
---===== local helpers ======--
+-- ===== local helpers ======--
 local function map_each(cb)
   for x = G.level.vec_start.x, G.level.vec_end.x do
     for y = G.level.vec_start.y, G.level.vec_end.y do
@@ -23,9 +23,11 @@ local function map_each(cb)
   end
 end
 
---===== walls =====--
+-- ===== walls =====--
 local function wall_update_sprite(_, vec)
-  if not LVL.is_wall(vec) then return end
+  if not LVL.is_wall(vec) then
+    return
+  end
   local neigh_cnt = 0
   local neigh = {}
   for d in all(DIRS_8) do
@@ -49,11 +51,11 @@ local function wall_update_sprite(_, vec)
     end
   elseif neigh_cnt == 2 then
     -- corners
-    if down and left then      -- UR
+    if down and left then -- UR
       sprites = MAP.WALL_UR
-    elseif up and left then    -- DR
+    elseif up and left then -- DR
       sprites = MAP.WALL_DR
-    elseif right and up then   -- DL
+    elseif right and up then -- DL
       sprites = MAP.WALL_DL
     elseif right and down then -- UL
       sprites = MAP.WALL_UL
@@ -111,26 +113,26 @@ local function init_walls()
   map_each(floor_update_sprite)
 end
 
---===== init =====--
+-- ===== init =====--
 local function m_init(m, vec)
   if m == MAP.HERO then
-    G.player = PLAYER.create(VEC.cp(vec))
+    G.hero = HERO.create(VEC.cp(vec))
     mset(vec.x / 8, vec.y / 8, MAP.FLOOR_BASE)
   end
 end
 function LVL.init()
   -- map positions should include space for outer walls
   local LEVEL_1 = {
-    vec_start = VEC.from(0, 0), vec_end = VEC.from(13, 13)
+    vec_start = VEC.from(0, 0),
+    vec_end = VEC.from(13, 13)
   }
-  local LEVEL_2 = {
-  }
+  local LEVEL_2 = {}
   G.level = LEVEL_1
   map_each(m_init)
   init_walls()
 end
 
---===== draw =====--
+-- ===== draw =====--
 local function m_draw(m, vec)
   spr(m, vec.x, vec.y)
 end

@@ -1,5 +1,4 @@
---===== line of sight =====--
-
+-- ===== line of sight =====--
 LOS = {}
 
 function visible(v_src, v_dst)
@@ -13,7 +12,6 @@ function visible(v_src, v_dst)
 
   local x = v_src.x + 4
   local y = v_src.y + 4
-
 
   local stepx = dx / steps
   local stepy = dy / steps
@@ -43,21 +41,15 @@ function LOS.init()
   printh('init')
   local test_vec = VEC.from(4, 1)
   local test_vec2 = VEC.from(-4, 1)
-  LOS.v_target = VEC.add(
-    G.player.vec,
-    VEC.multi(test_vec, 8)
-  )
-  LOS.v_target2 = VEC.add(
-    G.player.vec,
-    VEC.multi(test_vec2, 8)
-  )
+  LOS.v_target = VEC.add(G.hero.vec, VEC.multi(test_vec, 8))
+  LOS.v_target2 = VEC.add(G.hero.vec, VEC.multi(test_vec2, 8))
 end
 
 function LOS.update()
   LOS.v_steps = {}
   LOS.v_steps_tiles = {}
-  visible(G.player.vec, LOS.v_target)
-  visible(G.player.vec, LOS.v_target2)
+  visible(G.hero.vec, LOS.v_target)
+  visible(G.hero.vec, LOS.v_target2)
 end
 
 function LOS.draw()
