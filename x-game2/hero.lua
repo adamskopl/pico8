@@ -12,12 +12,12 @@ function HERO.update()
   MOV.update(G.hero)
 end
 
-local function draw_crosshair()
+function draw_crosshair()
   local p = G.hero
   local len = 8
   circ(p.vec.x + 4 + p.dir.x * len, p.vec.y + 4 + p.dir.y * len, 1, 8)
 end
 function HERO.draw()
   ANIM.draw(G.hero)
-  -- draw_crosshair()
+  draw_crosshair()
 end
