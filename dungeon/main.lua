@@ -8,7 +8,7 @@ function _init()
     level = nil,
     hero = nil
   }
-  lvl_init()
+  LEVEL.init()
 end
 
 function game_keys_update()
@@ -29,7 +29,7 @@ function game_keys_update()
 
   -- same dir
   if not dir_choice_t or time() - dir_choice_t >= dir_choice_delay then
-    if not wall_dir(G.hero) then
+    if not wall_in_dir(G.hero) then
       MOV.start(G.hero)
     end
   end
@@ -42,12 +42,13 @@ end
 
 function _draw()
   cls(0)
-  map(0, 0, 0, 0, 16, 16)
-
+  camera()
+  map(G.level.pos.x, G.level.pos.y, 0, 0, 16, 16)
   line(0, 0, 127, 0, 13)
   line(0, 0, 0, 127, 13)
   line(0, 127, 127, 127, 13)
   line(127, 0, 127, 127, 13)
 
+  camera(G.level.pos.x * 8, G.level.pos.y * 8)
   hero_draw()
 end

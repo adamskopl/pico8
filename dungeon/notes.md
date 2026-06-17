@@ -1,20 +1,10 @@
 # biezac
-ANIMACJA PROBLEM
-
-- zaczyna sie za czesto. ma zrobic raz start i raz end
-
-- dokoncz 
-  - kompletna animacja - dopóki nie przestaniemy sie ruszac, animacja trwa
-  - najpierw printh wychwytujący
-  - oddzielnie monitorowac movement interrupt... moze w movement util się da?
-
-
 # versions
 ## v1
 - level loading
 - movement. walls collisions
 - movement animation
-- check multiple levels loading
+- **check multiple levels loading**
 
 ## v2
 - coins collecting
