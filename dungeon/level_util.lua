@@ -9,3 +9,20 @@ function m_offscreen(pos_m)
   return (pos_m.x < G.level.pos.x) or (pos_m.x > G.level.pos.x + 15) or
            (pos_m.y < G.level.pos.y) or (pos_m.y > G.level.pos.y + 15)
 end
+
+TILES = {}
+
+function TILES.touch(a, b)
+  return (a.x == b.x and abs(a.y - b.y) == 8) or
+           (a.y == b.y and abs(a.x - b.x) == 8)
+end
+function TILES.collide(a, b)
+  return a.x < b.x + 8 and a.x + 8 > b.x and a.y < b.y + 8 and a.y + 8 > b.y
+end
+function TILES.small_collide(a, b)
+  return a.x < b.x + 4 and a.x + 4 > b.x and a.y < b.y + 4 and a.y + 4 > b.y
+end
+function TILES.vec_in_tile(v, v_tile)
+  return (v.x >= v_tile.x and v.x < v_tile.x + 8) and
+           (v.y >= v_tile.y and v.y < v_tile.y + 8)
+end

@@ -6,14 +6,16 @@ function _init()
 
   G = {
     level = nil,
-    hero = nil
+    hero = nil,
+    coins = nil
   }
   LEVEL.init()
 end
 
 function game_keys_update()
-  local dir_choice = (btn(0) and VEC.new(-1, 0)) or (btn(1) and VEC.new(1, 0)) or (btn(2) and VEC.new(0, -1)) or
-                       (btn(3) and VEC.new(0, 1)) or nil
+  local dir_choice =
+    (btn(0) and VEC.new(-1, 0)) or (btn(1) and VEC.new(1, 0)) or
+      (btn(2) and VEC.new(0, -1)) or (btn(3) and VEC.new(0, 1)) or nil
 
   if not dir_choice or MOV.moving(G.hero) then
     dir_choice_t = nil
@@ -30,6 +32,7 @@ function game_keys_update()
   -- same dir
   if not dir_choice_t or time() - dir_choice_t >= dir_choice_delay then
     if not wall_in_dir(G.hero) then
+      sfx(SFX.WALK)
       MOV.start(G.hero)
     end
   end
@@ -37,7 +40,8 @@ end
 
 function _update60()
   game_keys_update()
-  hero_update()
+  HERO.update()
+  COINS.update()
 end
 
 function _draw()
@@ -50,5 +54,6 @@ function _draw()
   line(127, 0, 127, 127, 13)
 
   camera(G.level.pos.x * 8, G.level.pos.y * 8)
-  hero_draw()
+  COINS.draw()
+  HERO.draw()
 end

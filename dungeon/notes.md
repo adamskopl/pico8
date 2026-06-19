@@ -1,11 +1,12 @@
-# biezac
-# versions
-## v1
-- level loading
-- movement. walls collisions
-- movement animation
-- **check multiple levels loading**
+# coins
+## collecting
+- use smaller collision box?
+- remove coin, play sound
+## finishing level
+- coins collected -> load next level (prepare 3 testing levels)
 
+
+# versions
 ## v2
 - coins collecting
 - coins collected, next level
