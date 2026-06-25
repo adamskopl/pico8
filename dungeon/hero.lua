@@ -14,8 +14,7 @@ function HERO.update()
 
   -- COINS COLLISION
   for i = #G.coins, 1, -1 do
-    printh(VEC.to_str(G.coins[i].pos))
-    if (TILES.small_collide(G.hero.pos, G.coins[i].pos)) then
+    if (TILES.collide(G.hero.pos, G.coins[i].pos)) then
       deli(G.coins, i)
       sfx(SFX.COIN)
     end

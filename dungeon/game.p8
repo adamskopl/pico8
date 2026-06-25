@@ -8,6 +8,7 @@ __lua__
 #include movement.lua
 #include hero.lua
 #include level.lua
+#include state.lua
 #include game.lua
 
 __gfx__

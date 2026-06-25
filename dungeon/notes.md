@@ -1,9 +1,16 @@
 # coins
-## collecting
-- use smaller collision box?
-- remove coin, play sound
 ## finishing level
+
+- game state:
+  - before every load a screen with level number
+  - config how long show screen + if even show (for testing)
+  - after Xs load level
+  - coins collected -> next level (welcome screen + load level)
+
 - coins collected -> load next level (prepare 3 testing levels)
+- game state management. game state, changing state
+- last level - do nothing. just black screen. so that all levels can be tested
+
 
 
 # versions
