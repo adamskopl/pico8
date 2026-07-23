@@ -1,3 +1,14 @@
+# state
+## biezace
+
+- po pierwsze to state ładuje lvl
+
+# TODOS
+
+- level plansza (rowniez przed pierwszym)
+  - press key... (po 2s)
+- zaladuj level, graj
+
 # coins
 ## finishing level
 
