@@ -11,7 +11,7 @@ LEVEL_1 = {
 	title = "Level 1",
 	pos = VEC.new(1, 1),
 	hero = VEC.new(2, 2),
-	coins = { VEC.new(3, 2) },
+	coins = { VEC.new(3, 2), VEC.new(4, 2), VEC.new(5, 2) },
 }
 LEVEL_2 = {
 	title = "Level 2",
