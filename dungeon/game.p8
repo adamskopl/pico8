@@ -3,6 +3,7 @@ version 43
 __lua__
 #include config.lua
 #include utils.lua
+#include debugger.lua
 #include text.lua
 #include level_util.lua
 #include anim.lua

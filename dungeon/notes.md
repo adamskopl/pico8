@@ -1,23 +1,31 @@
-# coins
-## finishing level
+# teleport
 
-- game state:
-  - before every load a screen with level number
-  - config how long show screen + if even show (for testing)
-  - after Xs load level
-  - coins collected -> next level (welcome screen + load level)
+## current
 
-- coins collected -> load next level (prepare 3 testing levels)
-- game state management. game state, changing state
-- last level - do nothing. just black screen. so that all levels can be tested
+- od ktorego tile szukac... dodatkowo rozpatrzyc jednoczesnie case stania pod sciana...
+- moze: jesli juz sie na jakis poruszam, to jest to tile za ktorym zaczynamy szukac.
+- w kazdym razie szukac niezaleznie od kierunku
+
+## moving on a key
+
+- first detect where player will be moved. show where (rectangle)
+
+## generally
+- press key. player is immediately moved to tile in a given direction.
+- can be done even when moving (interrupt moving)
+- hero stops on next obstacle(wall)
+- extra effects
+  - show sparklings in place where he can teleport
+  - dust animation in previous place
+
+## against wall
+- if against wall, we will jump to other side (if able)
+
+## adjustements
+- 
+
 
 # versions
-## v2
-- coins collecting
-- coins collected, next level
-- next level: just "level 2"
-- load next level
-
 ## v3
 - teleport
 - fireball shot
@@ -63,3 +71,6 @@ let's start with that
 ## extras
 when appearing, also poof animation
 (under main animation)
+
+Trzęsienie się kamery przy jakimś wydarzeniu
+jedna pula na strzelanie i teleport ktora powili sie odnawia. potion odnawaia.

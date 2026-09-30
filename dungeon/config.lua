@@ -1,3 +1,6 @@
+CONFIG = {
+	SKIP_INTRO = true,
+}
 FLAGS = {
 	WALL = 0,
 }

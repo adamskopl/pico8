@@ -1,6 +1,12 @@
+--[
+-- DICTIONARY
+-- pos_* -> pixel pos like pixel 16,16
+-- pos_m_* -> map pos like map 2,2
+-- pos_mf_* -> map pos with fraction (ready for rounding)
+--]
+--
 function _init()
 	printh("--init")
-
 	dir_choice_t = nil
 	dir_choice_delay = 0.1
 
@@ -70,5 +76,6 @@ function _draw()
 		camera(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
 		COINS.draw()
 		HERO.draw()
+		DEBUGGER.draw()
 	end
 end

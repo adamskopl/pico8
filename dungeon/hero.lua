@@ -11,6 +11,7 @@ end
 function HERO.update()
 	MOV.update(G.hero)
 	ANIM.update(G.hero)
+	teleport_update()
 
 	-- COINS COLLISION
 	for i = #G.coins, 1, -1 do
@@ -20,7 +21,26 @@ function HERO.update()
 		end
 	end
 end
+function teleport_update()
+	if not G.hero.dir then
+		return
+	end
 
+	DEBUGGER.clear()
+	local h = G.hero
+	local pos_m_now = pos_to_pos_m(h.pos, h.dir)
+	local pos_m_next = VEC.add(pos_m_now, h.dir)
+	-- printh(VEC.to_str(G.hero.pos) .. " " .. VEC.to_str(pos_next))
+	DEBUGGER.add_orange(VEC.multi(pos_m_now, 8))
+	DEBUGGER.add_green(VEC.multi(pos_m_next, 8))
+	printh(wall_in_pos_m(pos_m_next))
+	while not wall_in_pos_m(pos_m_next) do
+		pos_m_next = VEC.add(pos_m_next, h.dir)
+		DEBUGGER.add_green(VEC.multi(pos_m_next, 8))
+	end
+end
+
+-- TODO will be replaced with showing teleport mark
 function draw_crosshair()
 	local len = 8
 	circ(G.hero.pos.x + 4 + G.hero.dir.x * len, G.hero.pos.y + 4 + G.hero.dir.y * len, 1, 8)
