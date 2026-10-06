@@ -1,4 +1,34 @@
 # teleport
+## animation system new notes
+- znowu, zystem tworzac obiekt sam go update itd
+- jedynie potem podajemy ereferencje do usuniecia
+- dodatkowo: mov system tworzy pos itd, tak? wiec moze niech inaczej sie nazywa... entity czy cokolwiek. bo np. sparkles tez potrzebuja pos a nie beda ruszane...
+
+## animation system...
+
+
+CEL
+- dodaję do systemu i działa
+- jedynie potrzebuję referencji, aby usuanac
+
+- uzywajac obecnego - po prostu automatyzowac
+- system wykorzystuje .pos...
+
+## notes...
+Until wyświetlanie animacji w dowolnym miejscu. 
+Tryb ciągły
+Tryb jednorazowy
+
+Miejsce teleport animacja sparkles
+Przeniesienie
+Animacja out smoke
+Animacja in smoke
+Implementacja przejścia przez ścianę
+## current
+- first: debug rectangle where teleport will be
+- second: animation tool for sparkles animation
+  - show them in place of teleport
+  kfldkl
 
 ## current
 

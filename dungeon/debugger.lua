@@ -5,18 +5,18 @@ DEBUGGER = {
 		DEBUGGER.TILES_ORANGE = {}
 		DEBUGGER.TILES_GREEN = {}
 	end,
-	add_orange = function(tile)
-		add(DEBUGGER.TILES_ORANGE, tile)
+	add_orange = function(pos_m)
+		add(DEBUGGER.TILES_ORANGE, pos_m)
 	end,
-	add_green = function(tile)
-		add(DEBUGGER.TILES_GREEN, tile)
+	add_green = function(pos_m)
+		add(DEBUGGER.TILES_GREEN, pos_m)
 	end,
 	draw = function()
-		for tile in all(DEBUGGER.TILES_ORANGE) do
-			rect(tile.x, tile.y, tile.x + 7, tile.y + 7, COLORS.ORANGE)
+		for pos_m in all(DEBUGGER.TILES_ORANGE) do
+			rect(pos_m.x * 8, pos_m.y * 8, pos_m.x * 8 + 7, pos_m.y * 8 + 7, COLORS.ORANGE)
 		end
-		for tile in all(DEBUGGER.TILES_GREEN) do
-			rect(tile.x, tile.y, tile.x + 7, tile.y + 7, COLORS.GREEN)
+		for pos_m in all(DEBUGGER.TILES_GREEN) do
+			rect(pos_m.x * 8, pos_m.y * 8, pos_m.x * 8 + 7, pos_m.y * 8 + 7, COLORS.GREEN)
 		end
 	end,
 }

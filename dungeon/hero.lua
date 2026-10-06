@@ -1,8 +1,6 @@
 HERO = {}
 function HERO.new(pos)
-	local h = {
-		flip = false,
-	}
+	local h = {}
 	MOV.init(h, VEC.cp(pos))
 	ANIM.create_loop(h, 164, 164, 167, 0.04)
 	return h
@@ -30,13 +28,13 @@ function teleport_update()
 	local h = G.hero
 	local pos_m_now = pos_to_pos_m(h.pos, h.dir)
 	local pos_m_next = VEC.add(pos_m_now, h.dir)
-	-- printh(VEC.to_str(G.hero.pos) .. " " .. VEC.to_str(pos_next))
-	DEBUGGER.add_orange(VEC.multi(pos_m_now, 8))
-	DEBUGGER.add_green(VEC.multi(pos_m_next, 8))
-	printh(wall_in_pos_m(pos_m_next))
+	local pos_m_last = pos_m_next
 	while not wall_in_pos_m(pos_m_next) do
+		pos_m_last = pos_m_next
 		pos_m_next = VEC.add(pos_m_next, h.dir)
-		DEBUGGER.add_green(VEC.multi(pos_m_next, 8))
+	end
+	if not VEC.eq(pos_m_last, pos_m_now) then
+		DEBUGGER.add_green(pos_m_last)
 	end
 end
 
