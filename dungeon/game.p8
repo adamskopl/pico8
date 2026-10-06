@@ -6,6 +6,7 @@ __lua__
 #include debugger.lua
 #include text.lua
 #include level_util.lua
+#include entity.lua
 #include anim.lua
 #include movement.lua
 #include hero.lua

@@ -7,7 +7,7 @@ function ANIM.draw(o)
   spr(o.anim.frame, o.pos.x, o.pos.y, 1, 1, o.anim.flip)
 end
 
-function ANIM.create_loop(o, frame_idle, frame_s, frame_e, speed)
+function ANIM.apply_loop(o, frame_idle, frame_s, frame_e, speed)
   o.anim = {
     stop = true,
     frame_idle = frame_idle,
@@ -17,11 +17,11 @@ function ANIM.create_loop(o, frame_idle, frame_s, frame_e, speed)
     speed = speed,
     time = time(),
     flip = false,
-    type = "LOOP"
+    type = "LOOP",
   }
 end
 
-function ANIM.create_single(o, frame_idle, frame_s, frame_e, speed)
+function ANIM.apply_single(o, frame_idle, frame_s, frame_e, speed)
   o.anim = {
     stop = true,
     frame_idle = frame_idle,
@@ -31,12 +31,12 @@ function ANIM.create_single(o, frame_idle, frame_s, frame_e, speed)
     speed = speed,
     time = time(),
     flip = false,
-    type = "SINGLE"
+    type = "SINGLE",
   }
 end
 
 -- continuous, no stopping
-function ANIM.create_cont_reverse(o, frame_s, frame_e, speed, interval)
+function ANIM.apply_cont_reverse(o, frame_s, frame_e, speed, interval)
   o.anim = {
     frame_s = frame_s,
     frame_e = frame_e,
@@ -47,7 +47,7 @@ function ANIM.create_cont_reverse(o, frame_s, frame_e, speed, interval)
     forward = true, -- false = backward,
     pause = true,
     flip = false,
-    type = "CONT_REVERSE"
+    type = "CONT_REVERSE",
   }
 end
 
@@ -75,7 +75,7 @@ function ANIM.update(o)
         ANIM.stop(o)
       end
     end
-  elseif (anim.type == "CONT_REVERSE") then
+  elseif anim.type == "CONT_REVERSE" then
     if anim.pause then
       if (time() - anim.time) >= anim.interval then
         anim.time = time()

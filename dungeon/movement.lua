@@ -1,8 +1,6 @@
 MOV = {}
 
-function MOV.init(o, pos)
-	o.pos = pos
-	o.dir = nil -- maybe should be [0,0] instead
+function MOV.apply(o)
 	o.mov = {
 		on = false,
 		speed = 1,
