@@ -3,6 +3,9 @@ function HERO.new(pos)
   local h = ENTITY.new(pos)
   MOV.apply(h)
   ANIM.apply_loop(h, 164, 164, 167, 0.04)
+  h.teleport_target = ENTITY.new(VEC.new(0, 0))
+  ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
+  ANIM.start(h.teleport_target)
   return h
 end
 
@@ -20,6 +23,8 @@ function HERO.update()
   end
 end
 function teleport_update()
+  ANIM.update(G.hero.teleport_target)
+
   if not G.hero.dir then
     return
   end
@@ -34,7 +39,7 @@ function teleport_update()
     pos_m_next = VEC.add(pos_m_next, h.dir)
   end
   if not VEC.eq(pos_m_last, pos_m_now) then
-    DEBUGGER.add_green(pos_m_last)
+    h.teleport_target.pos = VEC.multi(pos_m_last, 8)
   end
 end
 
@@ -45,9 +50,7 @@ function draw_crosshair()
 end
 function HERO.draw()
   ANIM.draw(G.hero)
-  if G.hero.dir then
-    draw_crosshair()
-  end
+  ANIM.draw(G.hero.teleport_target, true)
 end
 
 COINS = {}
