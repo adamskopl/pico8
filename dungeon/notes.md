@@ -1,16 +1,13 @@
-# fireball
+# MANA LEVEL
 
-- create object. animation.
-- start with that
+- ok, czy po prostu ogólnie, że zużywamy mana levl i tyle?
+- mógłby to być prosty fire pokazywany nad nami. ile jeszcze zostalo.
 
-## destroy
-
-- uderzenie w scianę = fireball destroy (ANIMACJA SINGLE TAK JAK POOF)
 
 # versions
 ## v3
 - [x] teleport
-- [ ] fireball shot
+- [x] fireball shot
 - [ ] mana levels for both
 ### MANA levels
 

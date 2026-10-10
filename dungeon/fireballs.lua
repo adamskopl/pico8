@@ -7,6 +7,7 @@ function FIREBALLS.fire()
   MOV.start(f)
   add(fireballs, f)
   sfx(SFX.FIRE)
+  shake_camera(0.1, 3)
 end
 
 function FIREBALLS.update()

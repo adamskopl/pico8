@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 43
 __lua__
 #include config.lua
+#include camera.lua
 #include utils.lua
 #include debugger.lua
 #include text.lua

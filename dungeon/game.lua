@@ -53,6 +53,7 @@ function game_keys_update()
 end
 
 function _update60()
+  CAMERA.update()
   if STATE.state == STATE.LEVEL_INTRO then
     LEVEL.update()
   elseif STATE.state == STATE.PLAYING then
@@ -75,14 +76,15 @@ function _draw()
     LEVEL.draw_level_intro()
   elseif STATE.state == STATE.PLAYING then
     cls(0)
-    camera()
+    camera(CAMERA.shake_x, CAMERA.shake_y)
     map(LEVEL.level.pos.x, LEVEL.level.pos.y, 0, 0, 16, 16)
+    camera()
     line(0, 0, 127, 0, 13)
     line(0, 0, 0, 127, 13)
     line(0, 127, 127, 127, 13)
     line(127, 0, 127, 127, 13)
 
-    camera(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
+    CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
     COINS.draw()
     FIREBALLS.draw()
     HERO.draw()
