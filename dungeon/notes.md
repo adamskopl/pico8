@@ -1,7 +1,10 @@
 # teleport
+## biezace...
+
+- przeniesienie, na razie button = przeniesienie
+
 ## notes...
 
-Miejsce teleport animacja sparkles
 Przeniesienie
 Animacja out smoke
 Animacja in smoke

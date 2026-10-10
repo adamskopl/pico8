@@ -12,10 +12,8 @@ end
 
 function pos_to_pos_m(pos, dir)
   local pos_mf_x, pos_mf_y = pos.x / 8, pos.y / 8
-  local pos_m = VEC.new(
-    (dir.x == -1 and ceil(pos_mf_x)) or (dir.x == 1 and flr(pos_mf_x)) or pos_mf_x,
-    (dir.y == -1 and ceil(pos_mf_y)) or (dir.y == 1 and flr(pos_mf_y)) or pos_mf_y
-  )
+  local pos_m =
+    VEC.new((dir.x == 1 and ceil(pos_mf_x)) or flr(pos_mf_x), (dir.y == 1 and ceil(pos_mf_y)) or flr(pos_mf_y))
   return pos_m
 end
 
