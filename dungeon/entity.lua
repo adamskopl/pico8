@@ -1,8 +1,8 @@
 ENTITY = {}
 
-function ENTITY.new(pos)
+function ENTITY.new(pos, dir)
   return {
     pos = pos,
-    dir = nil,
+    dir = dir,
   }
 end

@@ -38,7 +38,7 @@ function LEVEL.load_next()
 	end
 
 	LEVEL.level = LEVEL.levels[LEVEL.index]
-	G.hero = HERO.new(VEC.multi(LEVEL.level.hero, 8))
+	hero = HERO.new(VEC.multi(LEVEL.level.hero, 8))
 	COINS.load(LEVEL.level)
 end
 

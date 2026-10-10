@@ -1,39 +1,23 @@
-# teleport
-## biezace...
+# fireball
 
-- single POOF animation...
-- i to NIECH BĘDZIE single, który się wydarzy i już nie muszę się nim martwić
+- create object. animation.
+- start with that
 
-## notes...
+## destroy
 
-Przeniesienie
-Animacja out smoke
-Animacja in smoke
-Implementacja przejścia przez ścianę
-
-## moving on a key
-
-- first detect where player will be moved. show where (rectangle)
-
-## generally
-
-- press key. player is immediately moved to tile in a given direction.
-- can be done even when moving (interrupt moving)
-- hero stops on next obstacle(wall)
-- extra effects
-  - show sparklings in place where he can teleport
-  - dust animation in previous place
-
-## against wall
-- if against wall, we will jump to other side (if able)
-
-
+- uderzenie w scianę = fireball destroy (ANIMACJA SINGLE TAK JAK POOF)
 
 # versions
 ## v3
-- [ ] teleport
+- [x] teleport
 - [ ] fireball shot
 - [ ] mana levels for both
+### MANA levels
+
+- co jesli... jest tylko JEDEN strzał. i trzeba złapać fireball...
+- trochę szalone. ale moznaby przetestowac ten koncept.
+- drugą opcją jest, że złapanie fireball = death
+ALBO jest to tylko opcja... i np jest bonus, jesli 
 
 ## v4
 - first enemy

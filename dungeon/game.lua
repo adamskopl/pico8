@@ -10,10 +10,10 @@ function _init()
   dir_choice_t = nil
   dir_choice_delay = 0.1
 
-  G = {
-    hero = nil,
-    coins = nil,
-  }
+  hero = nil
+  coins = {}
+  fireballs = {}
+
   STATE.change(STATE.LEVEL_INTRO)
 end
 
@@ -31,23 +31,23 @@ function game_keys_update()
     or (btn(3) and VEC.new(0, 1))
     or nil
 
-  if not dir_choice or MOV.moving(G.hero) then
+  if not dir_choice or MOV.moving(hero) then
     dir_choice_t = nil
     return
   end
 
   -- dir change
-  if not G.hero.dir or not VEC.eq(dir_choice, G.hero.dir) then
-    G.hero.dir = dir_choice
+  if not hero.dir or not VEC.eq(dir_choice, hero.dir) then
+    hero.dir = dir_choice
     dir_choice_t = time()
     return
   end
 
   -- same dir
   if not dir_choice_t or time() - dir_choice_t >= dir_choice_delay then
-    if not wall_in_dir(G.hero) then
+    if not wall_in_dir(hero) then
       sfx(SFX.WALK)
-      MOV.start(G.hero)
+      MOV.start(hero)
     end
   end
 end
@@ -59,8 +59,9 @@ function _update60()
     game_keys_update()
     HERO.update()
     COINS.update()
+    FIREBALLS.update()
 
-    if #G.coins == 0 then
+    if #coins == 0 then
       printh("FINISH")
       sfx(SFX.WIN)
       STATE.change(STATE.LEVEL_INTRO)
@@ -83,6 +84,7 @@ function _draw()
 
     camera(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
     COINS.draw()
+    FIREBALLS.draw()
     HERO.draw()
     DEBUGGER.draw()
     ANIM.draw_singles()
