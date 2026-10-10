@@ -1,4 +1,6 @@
-ANIM = {}
+ANIM = {
+  singles = {},
+}
 
 function ANIM.draw(o)
   if o.dir and o.dir.x ~= 0 then
@@ -109,5 +111,29 @@ function ANIM.update(o)
         anim.frame = anim.frame_s
       end
     end
+  end
+end
+
+function ANIM.create_single(pos, frame_s, frame_e, speed)
+  printh(frame_s .. " " .. frame_e .. " " .. speed)
+  local single = ENTITY.new(pos)
+  ANIM.apply_single(single, frame_s, frame_s, frame_e, speed)
+  ANIM.start(single)
+  add(ANIM.singles, single)
+end
+
+function ANIM.update_singles()
+  for i = #ANIM.singles, 1, -1 do -- backward because of removals
+    local single = ANIM.singles[i]
+    ANIM.update(single)
+    if single.anim.stop then
+      deli(ANIM.singles, i)
+    end
+  end
+end
+
+function ANIM.draw_singles()
+  for single in all(ANIM.singles) do
+    ANIM.draw(single)
   end
 end

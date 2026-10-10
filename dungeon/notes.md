@@ -1,7 +1,8 @@
 # teleport
 ## biezace...
 
-- przeniesienie, na razie button = przeniesienie
+- single POOF animation...
+- i to NIECH BĘDZIE single, który się wydarzy i już nie muszę się nim martwić
 
 ## notes...
 
@@ -26,15 +27,13 @@ Implementacja przejścia przez ścianę
 ## against wall
 - if against wall, we will jump to other side (if able)
 
-## adjustements
-- 
 
 
 # versions
 ## v3
-- teleport
-- fireball shot
-- mana levels for bothkkkkkku
+- [ ] teleport
+- [ ] fireball shot
+- [ ] mana levels for both
 
 ## v4
 - first enemy
@@ -58,7 +57,10 @@ a puzzle to solve by actions
 
 if we die - level restart
 
+## mana levels
 
+- jedna pula na strzelanie i teleport ktora powili sie odnawia. potion odnawaia.
+- jeszcze lepiej: nie odnawia się, ale POTION odnowi!
 ## about level
 one screen per level
 monsters are spawning constantly
@@ -78,4 +80,3 @@ when appearing, also poof animation
 (under main animation)
 
 Trzęsienie się kamery przy jakimś wydarzeniu
-jedna pula na strzelanie i teleport ktora powili sie odnawia. potion odnawaia.

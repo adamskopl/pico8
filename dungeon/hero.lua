@@ -54,9 +54,12 @@ end
 
 function HERO.on_O_press()
   if G.hero.teleport_target.active then
+    ANIM.create_single(G.hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.04)
     G.hero.pos = G.hero.teleport_target.pos
+    ANIM.create_single(G.hero.pos, GFX.DUST, GFX.DUST + 7, 0.04)
     G.hero.teleport_target.active = false
     MOV.stop(G.hero)
+    sfx(SFX.TELEPORT)
   end
 end
 

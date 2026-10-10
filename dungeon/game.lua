@@ -65,6 +65,7 @@ function _update60()
       sfx(SFX.WIN)
       STATE.change(STATE.LEVEL_INTRO)
     end
+    ANIM.update_singles()
   end
 end
 
@@ -84,5 +85,6 @@ function _draw()
     COINS.draw()
     HERO.draw()
     DEBUGGER.draw()
+    ANIM.draw_singles()
   end
 end

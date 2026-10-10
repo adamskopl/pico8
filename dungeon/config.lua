@@ -8,12 +8,15 @@ FLAGS = {
 GFX = {
   COIN = 152,
   SPARK = 168,
+  DUST = 136,
+  EXPLOSION = 156,
 }
 
 SFX = {
   WALK = 0,
   COIN = 1,
   WIN = 2,
+  TELEPORT = 3,
 }
 
 COLORS = {
