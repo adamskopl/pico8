@@ -6,12 +6,19 @@ function FIREBALLS.fire()
   ANIM.apply_loop(f, GFX.FIREBALL, GFX.FIREBALL, GFX.FIREBALL + 3, 0.05)
   MOV.start(f)
   add(fireballs, f)
+  sfx(SFX.FIRE)
 end
 
 function FIREBALLS.update()
-  for f in all(fireballs) do
+  for i = #fireballs, 1, -1 do
+    local f = fireballs[i]
     MOV.update(f)
     ANIM.update(f)
+    if wall_in_pos_m(pos_to_pos_m(f.pos, f.dir)) then
+      ANIM.create_single(f.pos, GFX.ENERGY, GFX.ENERGY + 3, 0.06)
+      deli(fireballs, i)
+      sfx(SFX.CRASH)
+    end
   end
 end
 

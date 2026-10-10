@@ -11,6 +11,7 @@ GFX = {
   DUST = 136,
   EXPLOSION = 156,
   FIREBALL = 188,
+  ENERGY = 244,
 }
 
 SFX = {
@@ -18,6 +19,8 @@ SFX = {
   COIN = 1,
   WIN = 2,
   TELEPORT = 3,
+  FIRE = 4,
+  CRASH = 5,
 }
 
 COLORS = {
