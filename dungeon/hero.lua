@@ -5,6 +5,7 @@ function HERO.new(pos)
   ANIM.apply_loop(h, 164, 164, 167, 0.04)
   h.teleport_target = ENTITY.new(VEC.new(0, 0))
   h.teleport_target.active = false
+  h.mana = 5
   ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
   ANIM.start(h.teleport_target)
   return h
@@ -50,6 +51,7 @@ function HERO.draw()
   if hero.teleport_target.active then
     ANIM.draw(hero.teleport_target)
   end
+  -- spr(GFX.POTION, hero.pos.x, hero.pos.y - 8, 1, 1, false)
 end
 
 function HERO.on_O_press()
@@ -57,10 +59,8 @@ function HERO.on_O_press()
   if not h.dir then
     return
   end
-
-  local pos_m_now = pos_to_pos_m(h.pos, h.dir)
-
   FIREBALLS.fire()
+  hero.mana = hero.mana - 1
 end
 
 function HERO.on_X_press()
@@ -71,5 +71,6 @@ function HERO.on_X_press()
     hero.teleport_target.active = false
     MOV.stop(hero)
     sfx(SFX.TELEPORT)
+    hero.mana = hero.mana - 1
   end
 end

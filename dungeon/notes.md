@@ -1,7 +1,44 @@
 # MANA LEVEL
+## poziom
 
+- pokazać ikonę i numerek?
+- hmm.. skoro tylko poziom many będzie jedynym poziomem
+
+OPCJE
+- pasek nad postacią (dowolna ilość many, ale 3 kolory poziomu. zielony, żółty, czerwony)
+- kolor gracza (np pierwsze zużycie zielony -> żółty -> czerwony -> czarny (brak)) = 4 strzały
+  - kolor mógłby mrugać, albo utrzymać się chwilę. jeśli mruganie, to np bardzo częste
+- pokazywanie ilości fiolek na chwilę
+- pokazywanie dużej grafiki many z poziomem (taka bum po oczach)
+
+## poziom życia
+
+- czy będzie poziom zycia?
+- wtedy byłby pokazywany w podobny sposob co mana
+NIE. gra ma za krótkie levele. po prostu trzeba powtórzyć.
+
+## BIEŻĄCE 
+
+- najpeirw arbitralna ilosc. logika ze jak nie ma, to off
+- fire nie działa, teleport nie działa (nie ma sparkles). dźwięk empty
+
+## notatki
 - ok, czy po prostu ogólnie, że zużywamy mana levl i tyle?
 - mógłby to być prosty fire pokazywany nad nami. ile jeszcze zostalo.
+
+- szerokosc sprite to 8... wiec mamy 8 many na kazdy czar
+- strzał/teleport zużywa 1 i to widać na pasku
+
+## wskaźnik..
+
+aby testowac wskazniki, działają one pobierajac tylko poziom many. poradzą sobie same ze wskazaniem
+
+moze jakis bardziej fancy wskaźnik... ale nadal aby było wiadomo, ile zostaje...
+
+PROPOZYCJE
+- RAMKA DOOKOŁA
+- KOŁO ZAMYKAJĄCE SIĘ (co raz mniejsze)
+- KOLOR czarodzieja
 
 
 # versions
@@ -27,10 +64,6 @@ ALBO jest to tylko opcja... i np jest bonus, jesli
 - so action puzzle 
 
 # ideas
-- jumping. moves to the nereast wall. if against wall - jumps to next free tile
-
-
-# notes
 ## rember. simplicty!
 our goal is to finish
 so. one screen. and it will be
@@ -56,8 +89,8 @@ randomly. so we have to collect
 
 let's start with that
 
-## extras
-when appearing, also poof animation
-(under main animation)
-
-Trzęsienie się kamery przy jakimś wydarzeniu
+## killing enemies
+### tough
+- są enemies w których trzeba walnać wiele razy
+- są również niezniszczalni
+- są enemies SUPER TWARDZI w których trzeba walnąć całą serię

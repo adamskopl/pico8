@@ -6,12 +6,13 @@ FLAGS = {
 }
 
 GFX = {
-  COIN = 152,
-  SPARK = 168,
+  COIN = 216,
+  SPARK = 232,
   DUST = 136,
   EXPLOSION = 156,
   FIREBALL = 188,
   ENERGY = 244,
+  POTION = 200,
 }
 
 SFX = {

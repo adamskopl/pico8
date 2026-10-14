@@ -5,8 +5,7 @@ CAMERA = {
   shake_y = 0,
 }
 
--- Call shake_camera(duration_in_seconds, strength_in_pixels) to shake the view.
-function shake_camera(duration, strength)
+function CAMERA.shake(duration, strength)
   CAMERA.shake_time = duration or 0.25
   CAMERA.shake_strength = strength or 2
 end
