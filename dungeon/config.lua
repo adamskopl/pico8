@@ -7,8 +7,7 @@ FLAGS = {
 
 GFX = {
   COIN = 152,
-  COIN2 = 216,
-  SPARK = 232,
+  SPARK = 168,
   DUST = 136,
   EXPLOSION = 156,
   FIREBALL = 188,

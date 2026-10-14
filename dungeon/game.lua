@@ -75,9 +75,10 @@ function _draw()
   if STATE.state == STATE.LEVEL_INTRO then
     LEVEL.draw_level_intro()
   elseif STATE.state == STATE.PLAYING then
-    cls(0)
-    camera(CAMERA.shake_x, CAMERA.shake_y)
+    cls(COLORS.BLACK)
+    CAMERA.apply(0, 0)
     map(LEVEL.level.pos.x, LEVEL.level.pos.y, 0, 0, 16, 16)
+
     camera()
     line(0, 0, 127, 0, 13)
     line(0, 0, 0, 127, 13)

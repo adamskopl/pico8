@@ -51,7 +51,6 @@ function HERO.draw()
   if hero.teleport_target.active then
     ANIM.draw(hero.teleport_target)
   end
-  -- spr(GFX.POTION, hero.pos.x, hero.pos.y - 8, 1, 1, false)
 end
 
 function HERO.on_O_press()

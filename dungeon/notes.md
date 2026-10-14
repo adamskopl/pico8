@@ -1,5 +1,37 @@
+# ZROZUMIEC CAMERA
+
+nie rozumiem
+ZROZUMIEC
+zoptymalizowac
+
+# grafiki
+
+- uprościć grafiki do stylu oryginału (mono colors)
+- usunac stare, zeby nie kusiło
+
+## fireball
+
+## mana...
+
+MOZE PO PROSTU PASEK NAD POSTACIĄ. kazdy piksel = 1 mana point
+
+ALBO ZMIENIC SPOSOB MYSLENIA.. MOZE NIE FIOLKI.. MOZE MONOCOLOR POZIOM JAKIS CIEKAWY
+
+jakis wielki pasek gdzies czy cos..
+SPOJRZ NA GRE. POMYSL CO BY PASOWALO
+
+moze wrocic do konceptow jakiegos geometrycznego pokazywania poziomu
+
 # MANA LEVEL
+
+## BUTELECZKA + NUMER
+
+ale chyba w rogu, a nie nad graczem..
+
+
 ## poziom
+
+- nad postacią buteleczka i numer
 
 - pokazać ikonę i numerek?
 - hmm.. skoro tylko poziom many będzie jedynym poziomem
