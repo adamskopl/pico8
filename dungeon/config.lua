@@ -6,7 +6,8 @@ FLAGS = {
 }
 
 GFX = {
-  COIN = 216,
+  COIN = 152,
+  COIN2 = 216,
   SPARK = 232,
   DUST = 136,
   EXPLOSION = 156,

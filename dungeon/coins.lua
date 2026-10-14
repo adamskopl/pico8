@@ -1,7 +1,8 @@
 COINS = {}
 function COINS.new(pos)
   local c = ENTITY.new(pos)
-  ANIM.apply_loop(c, GFX.COIN, GFX.COIN, GFX.COIN + 3, 0.1)
+  local gfx_coin = flr(rnd(2)) == 0 and GFX.COIN or GFX.COIN2
+  ANIM.apply_loop(c, gfx_coin, gfx_coin, gfx_coin + 3, 0.12)
   ANIM.start(c)
   return c
 end
