@@ -4,6 +4,7 @@ __lua__
 #include config.lua
 #include camera.lua
 #include utils.lua
+#include orbit.lua
 #include debugger.lua
 #include text.lua
 #include level_util.lua

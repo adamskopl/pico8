@@ -6,14 +6,17 @@ function HERO.new(pos)
   h.teleport_target = ENTITY.new(VEC.new(0, 0))
   h.teleport_target.active = false
   h.mana = 5
+  h.mana_orbits = nil -- WILL BE HANDLED BY ORBITS.new_track
   ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
   ANIM.start(h.teleport_target)
+  ORBITS.apply(h, h.mana)
   return h
 end
 
 function HERO.update()
   MOV.update(hero)
   ANIM.update(hero)
+  ORBITS.update(hero)
   teleport_update()
 
   -- COINS COLLISION
@@ -48,6 +51,7 @@ end
 
 function HERO.draw()
   ANIM.draw(hero)
+  ORBITS.draw(hero)
   if hero.teleport_target.active then
     ANIM.draw(hero.teleport_target)
   end
@@ -59,7 +63,7 @@ function HERO.on_O_press()
     return
   end
   FIREBALLS.fire()
-  hero.mana = hero.mana - 1
+  mana_decrease()
 end
 
 function HERO.on_X_press()
@@ -70,6 +74,11 @@ function HERO.on_X_press()
     hero.teleport_target.active = false
     MOV.stop(hero)
     sfx(SFX.TELEPORT)
-    hero.mana = hero.mana - 1
+    mana_decrease()
   end
+end
+
+function mana_decrease()
+  hero.mana = hero.mana - 1
+  ORBITS.apply(hero, hero.mana)
 end

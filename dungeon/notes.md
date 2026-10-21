@@ -1,8 +1,7 @@
-# ZROZUMIEC CAMERA
-
-nie rozumiem
-ZROZUMIEC
-zoptymalizowac
+# MANA NEW CONCEPT
+## orbits
+- potrzebny entity orbit_group
+- bedzie mial wlasna pozycje itd i ogarnial 
 
 # grafiki
 

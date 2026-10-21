@@ -10,7 +10,7 @@ GFX = {
   SPARK = 168,
   DUST = 136,
   EXPLOSION = 156,
-  FIREBALL = 188,
+  FIREBALL = 184,
   ENERGY = 244,
   POTION = 200,
 }

@@ -115,7 +115,6 @@ function ANIM.update(o)
 end
 
 function ANIM.create_single(pos, frame_s, frame_e, speed)
-  printh(frame_s .. " " .. frame_e .. " " .. speed)
   local single = ENTITY.new(pos)
   ANIM.apply_single(single, frame_s, frame_s, frame_e, speed)
   ANIM.start(single)
