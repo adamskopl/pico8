@@ -13,6 +13,7 @@ function _init()
   hero = nil
   coins = {}
   fireballs = {}
+  mana_orbits = {}
 
   STATE.change(STATE.LEVEL_INTRO)
 end

@@ -6,7 +6,6 @@ function HERO.new(pos)
   h.teleport_target = ENTITY.new(VEC.new(0, 0))
   h.teleport_target.active = false
   h.mana = 5
-  h.mana_orbits = nil -- WILL BE HANDLED BY ORBITS.new_track
   ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
   ANIM.start(h.teleport_target)
   ORBITS.apply(h, h.mana)
@@ -57,7 +56,7 @@ function HERO.draw()
   end
 end
 
-function HERO.on_O_press()
+function HERO.on_O_press() -- FIRE
   local h = hero
   if not h.dir then
     return
@@ -66,7 +65,7 @@ function HERO.on_O_press()
   mana_decrease()
 end
 
-function HERO.on_X_press()
+function HERO.on_X_press() -- TELEPORT
   if hero.teleport_target.active then
     ANIM.create_single(hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.05)
     hero.pos = hero.teleport_target.pos

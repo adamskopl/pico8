@@ -1,8 +1,9 @@
 # MANA NEW CONCEPT
 ## orbits
-- potrzebny entity orbit_group
-- bedzie mial wlasna pozycje itd i ogarnial 
 
+- uwzgledniac liczbe many na danej pozycji...
+- wiec trzeba bedzie sprawdzac, czy jest jakas pozycja.
+- chyba uzyc mapy z pozycjami...
 # grafiki
 
 - uprościć grafiki do stylu oryginału (mono colors)
