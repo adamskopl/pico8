@@ -11,7 +11,7 @@ function HERO.new(pos)
   h.mana = 5
   ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
   ANIM.start(h.teleport_target)
-  ORBITS.apply(h, h.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO, true)
+  ORBITS.apply(h, h.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO)
   return h
 end
 
@@ -71,6 +71,7 @@ end
 function HERO.on_X_press() -- TELEPORT
   if hero.teleport_target.active then
     ANIM.create_single(hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.05)
+    MANA.add(hero.pos)
     hero.pos = hero.teleport_target.pos
     ANIM.create_single(hero.pos, GFX.DUST, GFX.DUST + 7, 0.04)
     hero.teleport_target.active = false
@@ -82,5 +83,5 @@ end
 
 function mana_decrease()
   hero.mana = hero.mana - 1
-  ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO, true)
+  ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO)
 end

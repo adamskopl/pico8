@@ -1,6 +1,6 @@
 MANA = {}
-ORBIT_RADIUS_MANA = 2
-ORBIT_SPEED_MANA = 0.03
+ORBIT_RADIUS_MANA = 3
+ORBIT_SPEED_MANA = 0.02
 
 function MANA.add(pos)
   for m in all(mana_orbits) do
@@ -10,7 +10,7 @@ function MANA.add(pos)
   end
 
   local m = ENTITY.new(VEC.cp(pos), nil)
-  ORBITS.apply(m, 1, ORBIT_RADIUS_MANA, ORBIT_SPEED_MANA, true)
+  ORBITS.apply(m, 1, ORBIT_RADIUS_MANA, ORBIT_SPEED_MANA)
   add(mana_orbits, m)
 end
 
