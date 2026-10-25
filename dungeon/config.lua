@@ -22,6 +22,7 @@ SFX = {
   TELEPORT = 3,
   FIRE = 4,
   CRASH = 5,
+  EMPTY = 6,
 }
 
 COLORS = {

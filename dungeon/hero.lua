@@ -61,6 +61,10 @@ end
 
 function HERO.on_O_press() -- FIRE
   local h = hero
+  if h.mana <= 0 then
+    sfx(SFX.EMPTY)
+    return
+  end
   if not h.dir then
     return
   end
@@ -69,6 +73,10 @@ function HERO.on_O_press() -- FIRE
 end
 
 function HERO.on_X_press() -- TELEPORT
+  if hero.mana <= 0 then
+    sfx(SFX.EMPTY)
+    return
+  end
   if hero.teleport_target.active then
     ANIM.create_single(hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.05)
     MANA.add(hero.pos)

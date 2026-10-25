@@ -21,12 +21,6 @@ function orbit_new(angle, radius, speed, color, trail_color)
   }
 end
 
-function ORBITS.new(pos, radius, speed)
-  local o = ENTITY.new(pos)
-  ORBITS.apply(o, 1, radius, speed)
-  add(mana_orbits, o)
-end
-
 function ORBITS.update(o)
   for orbit in all(o.orbits) do
     orbit.angle = (orbit.angle + orbit.speed) % 1
