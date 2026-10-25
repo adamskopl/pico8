@@ -15,7 +15,10 @@ function FIREBALLS.update()
     local f = fireballs[i]
     MOV.update(f)
     ANIM.update(f)
-    if wall_in_pos_m(pos_to_pos_m(f.pos, f.dir)) then
+    local wall_pos_m = pos_to_pos_m(f.pos, f.dir)
+    if wall_in_pos_m(wall_pos_m) then
+      local mana_pos = VEC.new((wall_pos_m.x - f.dir.x) * 8, (wall_pos_m.y - f.dir.y) * 8)
+      MANA.add(mana_pos)
       ANIM.create_single(f.pos, GFX.ENERGY, GFX.ENERGY + 3, 0.06)
       deli(fireballs, i)
       sfx(SFX.CRASH)

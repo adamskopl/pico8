@@ -1,33 +1,36 @@
 ORBITS = {}
 
-function ORBITS.apply(o, num) -- attach to an object
+function ORBITS.apply(o, num, radius, speed, draw_trail) -- attach to an object
   o.orbits = {}
+  radius = radius or 7
+  speed = speed or 0.015
 
   local angle_step = 1 / num
   for i = 0, num - 1 do
-    local orbit = orbit_new(i * angle_step, 7, 0.015, COLORS.BLUE, COLORS.BLUE)
+    local orbit = orbit_new(i * angle_step, radius, speed, COLORS.BLUE, COLORS.BLUE, draw_trail)
     add(o.orbits, orbit)
   end
 end
-function orbit_new(angle, radius, speed, color, trail_color)
+function orbit_new(angle, radius, speed, color, trail_color, draw_trail)
   return {
     angle = angle,
     radius = radius,
     speed = speed,
     color = color,
     trail_color = trail_color,
+    draw_trail = draw_trail,
   }
 end
 
-function ORBITS.new(pos)
+function ORBITS.new(pos, radius, speed, draw_trail)
   local o = ENTITY.new(pos)
-  ORBITS.apply(o, 1)
+  ORBITS.apply(o, 1, radius, speed, draw_trail)
   add(mana_orbits, o)
 end
 
 function ORBITS.update(o)
-  for o in all(o.orbits) do
-    o.angle = (o.angle + o.speed) % 1
+  for orbit in all(o.orbits) do
+    orbit.angle = (orbit.angle + orbit.speed) % 1
   end
 end
 
@@ -37,6 +40,12 @@ function ORBITS.draw(o)
     local a = orbit.angle
     local trail_a = a - 0.03
     pset(center.x + cos(a) * orbit.radius, center.y + sin(a) * orbit.radius, orbit.color)
-    pset(center.x + cos(trail_a) * orbit.radius, center.y + sin(trail_a) * orbit.radius, orbit.trail_color)
+    if orbit.draw_trail then
+      pset(center.x + cos(trail_a) * orbit.radius, center.y + sin(trail_a) * orbit.radius, orbit.trail_color)
+    end
   end
+end
+
+function ORBITS.count(o)
+  return #o.orbits
 end

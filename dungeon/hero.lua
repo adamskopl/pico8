@@ -1,4 +1,7 @@
 HERO = {}
+ORBIT_RADIUS_HERO = 7
+ORBIT_SPEED_HERO = 0.015
+
 function HERO.new(pos)
   local h = ENTITY.new(pos)
   MOV.apply(h, 1, true)
@@ -8,7 +11,7 @@ function HERO.new(pos)
   h.mana = 5
   ANIM.apply_loop(h.teleport_target, GFX.SPARK, GFX.SPARK, GFX.SPARK + 3, 0.1)
   ANIM.start(h.teleport_target)
-  ORBITS.apply(h, h.mana)
+  ORBITS.apply(h, h.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO, true)
   return h
 end
 
@@ -79,5 +82,5 @@ end
 
 function mana_decrease()
   hero.mana = hero.mana - 1
-  ORBITS.apply(hero, hero.mana)
+  ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO, true)
 end

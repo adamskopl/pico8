@@ -62,6 +62,7 @@ function _update60()
     HERO.update()
     COINS.update()
     FIREBALLS.update()
+    MANA.update()
 
     if #coins == 0 then
       printh("FINISH")
@@ -92,5 +93,6 @@ function _draw()
     HERO.draw()
     DEBUGGER.draw()
     ANIM.draw_singles()
+    MANA.draw()
   end
 end
