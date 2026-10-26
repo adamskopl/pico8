@@ -20,6 +20,7 @@ function HERO.update()
   ANIM.update(hero)
   ORBITS.update(hero)
   teleport_update()
+  mana_collect()
 
   -- COINS COLLISION
   for i = #coins, 1, -1 do
@@ -48,6 +49,16 @@ function teleport_update()
     h.teleport_target.active = true
   else
     h.teleport_target.active = false
+  end
+end
+function mana_collect()
+  for key, m in pairs(mana_orbits) do
+    if TILES.collide(hero.pos, m.pos) then
+      hero.mana = hero.mana + ORBITS.count(m)
+      mana_orbits[key] = nil
+      ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO)
+      sfx(SFX.COLLECT)
+    end
   end
 end
 

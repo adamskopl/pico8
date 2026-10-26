@@ -23,6 +23,7 @@ SFX = {
   FIRE = 4,
   CRASH = 5,
   EMPTY = 6,
+  COLLECT = 7,
 }
 
 COLORS = {
