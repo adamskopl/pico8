@@ -1,9 +1,15 @@
 # MANA NEW CONCEPT
 ## orbits
 
-- uwzgledniac liczbe many na danej pozycji...
-- wiec trzeba bedzie sprawdzac, czy jest jakas pozycja.
-- chyba uzyc mapy z pozycjami...
+zostawiac mana na tile z wiekszym obszarem
+tak samo bedzie z potworami
+
+mana orbit ma zostawac w pozycji tile a nie gracza
+rozkninic obecna funkcje do wyliczania tile pos
+NAOISAC OPPOSITE I UZYC DO TELEPORT
+
+KTORY TILE DLA TELEPORT. wydaje mi sie leaving
+
 # grafiki
 
 - uprościć grafiki do stylu oryginału (mono colors)

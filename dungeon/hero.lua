@@ -37,7 +37,7 @@ function teleport_update()
   end
   ANIM.update(h.teleport_target)
 
-  local pos_m_now = pos_to_pos_m(h.pos, h.dir)
+  local pos_m_now = get_pos_m_facing(h)
   local pos_m_next = VEC.add(pos_m_now, h.dir)
   local pos_m_last_open = nil
   while not wall_in_pos_m(pos_m_next) do
@@ -90,7 +90,8 @@ function HERO.on_X_press() -- TELEPORT
   end
   if hero.teleport_target.active then
     ANIM.create_single(hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.05)
-    MANA.add(hero.pos)
+    local mana_pos_m = get_pos_m_mostly_occupied(hero)
+    MANA.add(VEC.multi(mana_pos_m, 8))
     hero.pos = hero.teleport_target.pos
     ANIM.create_single(hero.pos, GFX.DUST, GFX.DUST + 7, 0.04)
     hero.teleport_target.active = false
