@@ -15,7 +15,7 @@ function GAME_OVER.start()
 end
 function GAME_OVER.update()
   if not go_coins_gone then
-    if time() - go_start_time >= 0.5 then
+    if time() - go_start_time >= 1 then
       go_coins_gone = true
       for c in all(coins) do
         EFFECTS.create_disappear(c.pos)
@@ -31,8 +31,7 @@ function GAME_OVER.update()
       go_crying = true
       ANIM.apply_loop(hero, GFX.HERO_CRY, GFX.HERO_CRY, GFX.HERO_CRY + 1, 0.4)
       ANIM.start(hero)
-      printh("ANIM_START")
-      go_cry_time = time()
+      go_cry_time = time() - 0.4
     end
   else
     ANIM.update(hero)
