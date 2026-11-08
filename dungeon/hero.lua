@@ -90,11 +90,11 @@ function HERO.on_X_press() -- TELEPORT
     return
   end
   if hero.teleport_target.active then
-    ANIM.create_single(hero.pos, GFX.EXPLOSION, GFX.EXPLOSION + 3, 0.05)
+    EFFECTS.create_disappear(hero.pos)
     local mana_pos_m = get_pos_m_mostly_occupied(hero)
     MANA.add(pos_m_to_pos(mana_pos_m))
     hero.pos = hero.teleport_target.pos
-    ANIM.create_arrival(hero.pos)
+    EFFECTS.create_arrival(hero.pos)
     hero.teleport_target.active = false
     MOV.stop(hero)
     mana_decrease()

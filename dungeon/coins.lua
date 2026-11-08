@@ -73,6 +73,14 @@ function COINS.get_dead()
   end
   return dead
 end
+function COINS.leave_dead()
+  for i = #coins, 1, -1 do
+    local c = coins[i]
+    if not coin_is_dead(c) then
+      deli(coins, i)
+    end
+  end
+end
 function coin_is_dead(c)
   if not c.arrival_time then
     return
@@ -81,5 +89,3 @@ function coin_is_dead(c)
   return c.coin_state == COINS_STATE.BLINKING_DEATH
     and time_diff >= COINS_TIME.BLINK + COINS_TIME.BLINK_LAST + COINS_TIME.DISAPPEAR
 end
-
-function COINST.remove_dead() end

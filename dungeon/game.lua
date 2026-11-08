@@ -106,13 +106,12 @@ end
 
 function check_win()
   if #coins == 0 then
-    printh("FINISH")
-    -- sfx(SFX.WIN)
     STATE.change(STATE.LEVEL_INTRO)
   end
 end
 function check_game_over()
   if #COINS.get_dead() > 0 then
+    COINS.leave_dead()
     STATE.change(STATE.GAME_OVER)
   end
 end

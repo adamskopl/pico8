@@ -4,7 +4,11 @@ EFFECTS = {
 }
 
 function EFFECTS.create_arrival(pos)
-  ANIM.create_single(pos, GFX.DUST, GFX.DUST + 7, 0.04)
+  ANIM.create_single(pos, GFX.EXPLOSION, GFX.EXPLOSION + 7, 0.04)
+  sfx(SFX.TELEPORT)
+end
+function EFFECTS.create_disappear(pos)
+  ANIM.create_single(pos, GFX.DUST, GFX.DUST + 3, 0.04)
   sfx(SFX.TELEPORT)
 end
 
