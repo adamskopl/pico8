@@ -38,6 +38,7 @@ LEVEL.levels = { LEVEL_1, LEVEL_2, LEVEL_EMPTY }
 
 function LEVEL.load_next()
   printh("load level next")
+  state = STATE.LEVEL_INTRO
   LEVEL.timer_button_start = time()
   LEVEL.let_close_intro = false
   TEXT.reset_blinking()
@@ -54,9 +55,9 @@ function LEVEL.load_next()
 end
 
 function LEVEL.update()
-  if STATE.state == STATE.LEVEL_INTRO then
+  if state == STATE.LEVEL_INTRO then
     if CONFIG.SKIP_INTRO then
-      STATE.change(STATE.PLAYING)
+      state = STATE.PLAYING
     end
     if not LEVEL.let_close_intro and time() - LEVEL.timer_button_start > 2 then
       LEVEL.let_close_intro = true
@@ -65,7 +66,7 @@ function LEVEL.update()
     if LEVEL.let_close_intro then
       TEXT.update_blinking()
       if any_pressed() then
-        STATE.change(STATE.PLAYING)
+        state = STATE.PLAYING
       end
     end
   end

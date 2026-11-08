@@ -18,7 +18,6 @@ __lua__
 #include coins.lua
 #include fireballs.lua
 #include level.lua
-#include state.lua
 #include game.lua
 
 __gfx__

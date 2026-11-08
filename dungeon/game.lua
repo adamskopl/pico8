@@ -5,8 +5,16 @@
 -- pos_mf_* -> map pos with fraction (ready for rounding)
 --]
 --
+STATE = {
+  LEVEL_INTRO = "LEVEL_INTRO",
+  PLAYING = "PLAYING",
+  GAME_OVER = "GAME_OVER",
+}
+
 function _init()
   printh("--init")
+  state = nil
+
   dir_choice_t = nil
   dir_choice_delay = 0.1
 
@@ -16,7 +24,7 @@ function _init()
   mana_orbits = {}
   enemies = {}
 
-  STATE.change(STATE.LEVEL_INTRO)
+  LEVEL.load_next()
 end
 
 function game_keys_update()
@@ -56,9 +64,9 @@ end
 
 function _update60()
   CAMERA.update()
-  if STATE.state == STATE.LEVEL_INTRO then
+  if state == STATE.LEVEL_INTRO then
     LEVEL.update()
-  elseif STATE.state == STATE.PLAYING then
+  elseif state == STATE.PLAYING then
     game_keys_update()
     HERO.update()
     COINS.update()
@@ -68,16 +76,16 @@ function _update60()
     ANIM.update_singles()
     check_win()
     check_game_over()
-  elseif STATE.state == STATE.GAME_OVER then
+  elseif state == STATE.GAME_OVER then
     HERO.update()
     COINS.update()
   end
 end
 
 function _draw()
-  if STATE.state == STATE.LEVEL_INTRO then
+  if state == STATE.LEVEL_INTRO then
     LEVEL.draw_level_intro()
-  elseif STATE.state == STATE.PLAYING then
+  elseif state == STATE.PLAYING then
     cls(COLORS.BLACK)
     CAMERA.apply(0, 0)
     map(LEVEL.level.pos.x, LEVEL.level.pos.y, 0, 0, 16, 16)
@@ -96,7 +104,7 @@ function _draw()
     DEBUGGER.draw()
     ANIM.draw_singles()
     MANA.draw()
-  elseif STATE.state == STATE.GAME_OVER then
+  elseif state == STATE.GAME_OVER then
     cls(COLORS.DARK_BLUE)
     CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
     HERO.draw()
@@ -106,12 +114,12 @@ end
 
 function check_win()
   if #coins == 0 then
-    STATE.change(STATE.LEVEL_INTRO)
+    LEVEL.load_next()
   end
 end
 function check_game_over()
   if #COINS.get_dead() > 0 then
     COINS.leave_dead()
-    STATE.change(STATE.GAME_OVER)
+    state = STATE.GAME_OVER
   end
 end
