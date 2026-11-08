@@ -5,9 +5,9 @@ COINS = {
   },
 }
 COINS_TIME = {
-  BLINK = 1,
-  BLINK_LAST = 1,
-  DISAPPEAR = 1,
+  BLINK = 0.5,
+  BLINK_LAST = 0.5,
+  DISAPPEAR = 0.5,
 }
 COINS_STATE = {
   NORMAL = "NORMAL",
@@ -52,28 +52,23 @@ function COINS.update()
       c.arrival_time = now
       EFFECTS.create_arrival(c.pos)
     end
-    coins_update_blinking(c, now)
+
+    if c.arrival_time then
+      coin_update_blinking(c)
+    end
+
     ANIM.update(c)
     EFFECTS.update(c)
   end
 end
-function coins_update_blinking(c, now)
-  if not c.arrival_time then
-    return
-  end
-
-  local time_diff = now - c.arrival_time
+function coin_update_blinking(c)
+  local time_diff = time() - c.arrival_time
   if c.coin_state == COINS_STATE.NORMAL and time_diff >= COINS_TIME.BLINK then
     EFFECTS.apply_blinking(c, EFFECTS.BLINK_FREQ_LOW)
     c.coin_state = COINS_STATE.BLINKING
   elseif c.coin_state == COINS_STATE.BLINKING and time_diff >= COINS_TIME.BLINK + COINS_TIME.BLINK_LAST then
     EFFECTS.apply_blinking(c, EFFECTS.BLINK_FREQ_HIGH)
     c.coin_state = COINS_STATE.BLINKING_DEATH
-  elseif
-    c.coin_state == COINS_STATE.BLINKING_DEATH
-    and time_diff >= COINS_TIME.BLINK + COINS_TIME.BLINK_LAST + COINS_TIME.DISAPPEAR
-  then
-    STATE.change(STATE.GAME_OVER)
   end
 end
 
@@ -81,4 +76,22 @@ function COINS.draw()
   for c in all(coins) do
     ANIM.draw(c)
   end
+end
+
+function COINS.get_dead()
+  dead = {}
+  for c in all(coins) do
+    if coin_is_dead(c) then
+      add(dead, c)
+    end
+  end
+  return dead
+end
+function coin_is_dead(c)
+  if not c.arrival_time then
+    return
+  end
+  local time_diff = time() - c.arrival_time
+  return c.coin_state == COINS_STATE.BLINKING_DEATH
+    and time_diff >= COINS_TIME.BLINK + COINS_TIME.BLINK_LAST + COINS_TIME.DISAPPEAR
 end

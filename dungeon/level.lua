@@ -13,6 +13,7 @@ LEVEL_1 = {
   hero = VEC.new(4, 8),
   coins = {
     { coin_type = COINS.TYPES.TILE_TRIGGERED, pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(12, 8) },
+    { coin_type = COINS.TYPES.TILE_TRIGGERED, pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(13, 8) },
   },
   -- coins = {
   --   { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(3, 2) },

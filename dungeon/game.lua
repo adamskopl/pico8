@@ -65,13 +65,10 @@ function _update60()
     ENEMIES.update()
     FIREBALLS.update()
     MANA.update()
-
-    if #coins == 0 then
-      printh("FINISH")
-      -- sfx(SFX.WIN)
-      STATE.change(STATE.LEVEL_INTRO)
-    end
     ANIM.update_singles()
+    check_win()
+    check_game_over()
+  elseif STATE.state == STATE.GAME_OVER then
   end
 end
 
@@ -97,5 +94,22 @@ function _draw()
     DEBUGGER.draw()
     ANIM.draw_singles()
     MANA.draw()
+  elseif STATE.state == STATE.GAME_OVER then
+    cls(COLORS.DARK_BLUE)
+    CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
+    HERO.draw()
+  end
+end
+
+function check_win()
+  if #coins == 0 then
+    printh("FINISH")
+    -- sfx(SFX.WIN)
+    STATE.change(STATE.LEVEL_INTRO)
+  end
+end
+function check_game_over()
+  if #COINS.get_dead() > 0 then
+    STATE.change(STATE.GAME_OVER)
   end
 end
