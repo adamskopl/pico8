@@ -43,7 +43,7 @@ Wizard znika
 - na start level wizard pojawia sie jak moneta. wiec poof
 ### LOOSE
 
-- animacja cry...
+- kurde, cos z tymi priv vars zmienic... ciezko.
 ### DUZA ZMIANA O MONETY
 
 
