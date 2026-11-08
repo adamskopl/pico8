@@ -69,6 +69,8 @@ function _update60()
     check_win()
     check_game_over()
   elseif STATE.state == STATE.GAME_OVER then
+    HERO.update()
+    COINS.update()
   end
 end
 
@@ -98,6 +100,7 @@ function _draw()
     cls(COLORS.DARK_BLUE)
     CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
     HERO.draw()
+    COINS.draw()
   end
 end
 

@@ -39,15 +39,13 @@ Do skrzyni wpada tyle monet ile zebraliśmy (pop in, wpada, dźwięk collect, po
 Skrzynia znika
 Wizard znika
 
+### wizard appear
+- na start level wizard pojawia sie jak moneta. wiec poof
 ### LOOSE
 
-#### BIEZACE
-- potrzebny jakis level unload... no bo. co zostaje? zostaje TYLKO TO co powoduje loose. wiec czarodziej i moneta
-- czarodziej tam gdzie jest zostaje
+- tylko ttrigger type... trigger to pole gracza jesli instant
 
-#### plan
-  - czemu nie... wszystko się zatrzymuje a moze i nawet znika... zostaje tylko czarodziej, moneta ktora robi poof. czarodziej szlocha, pojawia się press any key
-
+- niech monety tez sie pojawia, ale tylko ktore zniknely
 ### DUZA ZMIANA O MONETY
 
 

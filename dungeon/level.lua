@@ -12,14 +12,10 @@ LEVEL_1 = {
   pos = VEC.new(1, 1),
   hero = VEC.new(4, 8),
   coins = {
-    { coin_type = COINS.TYPES.TILE_TRIGGERED, pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(12, 8) },
-    { coin_type = COINS.TYPES.TILE_TRIGGERED, pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(13, 8) },
+    { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(12, 8) },
+    { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(13, 8) },
+    { pos_m_trigger_tile = VEC.new(5, 8), pos_m = VEC.new(14, 8) },
   },
-  -- coins = {
-  --   { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(3, 2) },
-  --   { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(4, 2) },
-  --   { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(5, 2) },
-  -- },
   enemies = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 5), to_m = VEC.new(11, 5) } },
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 8), to_m = VEC.new(10, 8) } },
@@ -30,13 +26,13 @@ LEVEL_2 = {
   title = "Level 2",
   pos = VEC.new(18, 1),
   hero = VEC.new(19, 2),
-  coins = { { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(20, 3) } },
+  coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
 }
 LEVEL_EMPTY = {
   title = "EMPTY",
   pos = VEC.new(1, 1),
   hero = VEC.new(19, 2),
-  coins = { { coin_type = COINS.TYPES.INSTANT, pos_m = VEC.new(20, 3) } },
+  coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
 }
 LEVEL.levels = { LEVEL_1, LEVEL_2, LEVEL_EMPTY }
 
