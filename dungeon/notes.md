@@ -43,9 +43,7 @@ Wizard znika
 - na start level wizard pojawia sie jak moneta. wiec poof
 ### LOOSE
 
-- tylko ttrigger type... trigger to pole gracza jesli instant
-
-- niech monety tez sie pojawia, ale tylko ktore zniknely
+- animacja cry...
 ### DUZA ZMIANA O MONETY
 
 

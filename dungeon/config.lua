@@ -6,6 +6,8 @@ FLAGS = {
 }
 
 GFX = {
+  HERO = 164,
+  HERO_CRY = 200,
   COIN = 152,
   SPARK = 168,
   DUST = 156,
@@ -25,6 +27,7 @@ SFX = {
   CRASH = 5,
   EMPTY = 6,
   COLLECT = 7,
+  CRY = 8,
 }
 
 COLORS = {

@@ -5,7 +5,7 @@ ORBIT_SPEED_HERO = 0.015
 function HERO.new(pos)
   local h = ENTITY.new(pos)
   MOV.apply(h, 1, true)
-  ANIM.apply_loop(h, 164, 164, 167, 0.04)
+  ANIM.apply_loop(h, GFX.HERO, GFX.HERO, GFX.HERO + 3, 0.04)
   h.teleport_target = ENTITY.new(VEC.new(0, 0))
   h.teleport_target.active = false
   h.mana = 0

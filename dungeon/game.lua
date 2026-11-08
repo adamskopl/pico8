@@ -73,13 +73,12 @@ function _update60()
     ENEMIES.update()
     FIREBALLS.update()
     MANA.update()
-    ANIM.update_singles()
     check_win()
     check_game_over()
   elseif state == STATE.GAME_OVER then
-    HERO.update()
-    COINS.update()
+    GAME_OVER.update()
   end
+  ANIM.update_singles()
 end
 
 function _draw()
@@ -109,6 +108,7 @@ function _draw()
     CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
     HERO.draw()
     COINS.draw()
+    ANIM.draw_singles()
   end
 end
 
@@ -119,7 +119,6 @@ function check_win()
 end
 function check_game_over()
   if #COINS.get_dead() > 0 then
-    COINS.leave_dead()
-    state = STATE.GAME_OVER
+    GAME_OVER.start()
   end
 end
