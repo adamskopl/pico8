@@ -111,6 +111,7 @@ function _draw()
     HERO.draw()
     COINS.draw()
     ANIM.draw_singles()
+    TEXT.draw_press_any()
   end
 end
 

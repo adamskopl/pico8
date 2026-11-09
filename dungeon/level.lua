@@ -8,7 +8,6 @@ LEVEL = {
 }
 
 LEVEL_1 = {
-  title = "poziom 1. witaj",
   pos = VEC.new(1, 1),
   hero = VEC.new(4, 8),
   coins = {
@@ -23,7 +22,6 @@ LEVEL_1 = {
   },
 }
 LEVEL_2 = {
-  title = "Level 2",
   pos = VEC.new(18, 1),
   hero = VEC.new(19, 2),
   coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
@@ -70,11 +68,9 @@ function LEVEL.update()
 end
 
 function LEVEL.draw_level_intro()
-  camera()
   cls(COLORS.DARK_BLUE)
   TEXT.print_center(TEXT.get("LEVEL") .. " " .. LEVEL.index, COLORS.YELLOW)
   if LEVEL.let_close_intro then
-    local press_any = TEXT.get("PRESS_ANY")
-    TEXT.draw_blinking(press_any, 128 - #press_any * 4 - 4, 128 - 10, COLORS.YELLOW)
+    TEXT.draw_press_any()
   end
 end

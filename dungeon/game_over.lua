@@ -1,6 +1,7 @@
 GAME_OVER = {}
 GO_TIMES = {
-  KEEP_COINS = 2,
+  KEEP_COINS = 1,
+  START_CRYING = 2,
 }
 go_start_time = nil
 go_coins_gone = false
@@ -31,10 +32,11 @@ function GAME_OVER.update()
   end
 
   if not go_crying then
-    if time() - go_start_time >= 3 then
+    if time() - go_start_time >= GO_TIMES.START_CRYING then
       go_crying = true
       ANIM.start(hero)
       go_cry_time = time() - 0.4
+      TEXT.start_blinking()
     end
   else
     ANIM.update(hero)
