@@ -43,7 +43,19 @@ Wizard znika
 - na start level wizard pojawia sie jak moneta. wiec poof
 ### LOOSE
 
+- text blinking udpate i draw globalnie. po prostu albo się narysuje albo nie
+- text ma metode na pokazanie tego tekstu i kiedy ma przestac
+
+- nie podoba mi sie level.update... nie ma sensu. 
+  - takze review update level itd... bo wszystko dzieje w game, a level jakby nie
+- dodatkowo trzeba jakos z press any key zrobic util
+  - w danym momencie sie odpala (z zewnatrz)
+  - i ma callback ze wcisnieto
+
+
 - kurde, cos z tymi priv vars zmienic... ciezko.
+- jaki flow??? czy rzeczywiscie plansza level... czy ona jest w ogóle potrzebna. level bedzie sie konczyl - bedzie nastepny i tyle
+- flow zostaje - jak bedzie game win, pojawi się nowa plansza bez press key
 ### DUZA ZMIANA O MONETY
 
 

@@ -78,7 +78,9 @@ function _update60()
   elseif state == STATE.GAME_OVER then
     GAME_OVER.update()
   end
+  -- always update:
   ANIM.update_singles()
+  TEXT.update_blinking()
 end
 
 function _draw()

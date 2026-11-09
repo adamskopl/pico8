@@ -8,7 +8,7 @@ LEVEL = {
 }
 
 LEVEL_1 = {
-  title = "Level 1",
+  title = "poziom 1. witaj",
   pos = VEC.new(1, 1),
   hero = VEC.new(4, 8),
   coins = {
@@ -41,7 +41,6 @@ function LEVEL.load_next()
   state = STATE.LEVEL_INTRO
   LEVEL.timer_button_start = time()
   LEVEL.let_close_intro = false
-  TEXT.reset_blinking()
   if LEVEL.index == nil then
     LEVEL.index = 1
   else
@@ -55,19 +54,17 @@ function LEVEL.load_next()
 end
 
 function LEVEL.update()
-  if state == STATE.LEVEL_INTRO then
-    if CONFIG.SKIP_INTRO then
+  if CONFIG.SKIP_INTRO then
+    state = STATE.PLAYING
+  end
+  if not LEVEL.let_close_intro and time() - LEVEL.timer_button_start > 2 then
+    LEVEL.let_close_intro = true
+    TEXT.start_blinking()
+  end
+  if LEVEL.let_close_intro then
+    if any_pressed() then
+      TEXT.stop_blinking()
       state = STATE.PLAYING
-    end
-    if not LEVEL.let_close_intro and time() - LEVEL.timer_button_start > 2 then
-      LEVEL.let_close_intro = true
-      TEXT.start_blinking()
-    end
-    if LEVEL.let_close_intro then
-      TEXT.update_blinking()
-      if any_pressed() then
-        state = STATE.PLAYING
-      end
     end
   end
 end
@@ -75,8 +72,9 @@ end
 function LEVEL.draw_level_intro()
   camera()
   cls(COLORS.DARK_BLUE)
-  TEXT.print_center("level " .. LEVEL.index, COLORS.YELLOW)
+  TEXT.print_center(TEXT.get("LEVEL") .. " " .. LEVEL.index, COLORS.YELLOW)
   if LEVEL.let_close_intro then
-    TEXT.draw_blinking("press a key...", 128 - 60, 128 - 10, COLORS.YELLOW)
+    local press_any = TEXT.get("PRESS_ANY")
+    TEXT.draw_blinking(press_any, 128 - #press_any * 4 - 4, 128 - 10, COLORS.YELLOW)
   end
 end
