@@ -48,9 +48,6 @@ function LEVEL.load_next()
 end
 
 function LEVEL.update_intro()
-  if CONFIG.SKIP_INTRO then
-    state = STATE.PLAYING
-  end
   if not level_let_close_intro and time() - level_timer_button_start > 2 then
     level_let_close_intro = true
     TEXT.start_blinking()
@@ -58,9 +55,11 @@ function LEVEL.update_intro()
   if level_let_close_intro then
     if any_pressed() then
       TEXT.stop_blinking()
-      state = STATE.PLAYING
+      return true
     end
   end
+
+  return false
 end
 
 function LEVEL.draw_level_intro()

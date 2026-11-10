@@ -65,7 +65,12 @@ end
 function _update60()
   CAMERA.update()
   if state == STATE.LEVEL_INTRO then
-    LEVEL.update_intro()
+    if CONFIG.SKIP_INTRO then
+      state = STATE.PLAYING
+    end
+    if LEVEL.update_intro() then
+      state = STATE.PLAYING
+    end
   elseif state == STATE.PLAYING then
     game_keys_update()
     HERO.update()
