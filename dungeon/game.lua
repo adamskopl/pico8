@@ -13,7 +13,6 @@ STATE = {
 
 function _init()
   printh("--init")
-  state = nil
 
   dir_choice_t = nil
   dir_choice_delay = 0.1
@@ -24,6 +23,7 @@ function _init()
   mana_orbits = {}
   enemies = {}
 
+  state = STATE.LEVEL_INTRO
   LEVEL.load_next()
 end
 
@@ -65,7 +65,7 @@ end
 function _update60()
   CAMERA.update()
   if state == STATE.LEVEL_INTRO then
-    LEVEL.update()
+    LEVEL.update_intro()
   elseif state == STATE.PLAYING then
     game_keys_update()
     HERO.update()
@@ -117,11 +117,12 @@ end
 
 function check_win()
   if #coins == 0 then
-    LEVEL.load_next()
+    -- LEVEL.load_next()
   end
 end
 function check_game_over()
   if #COINS.get_dead() > 0 then
+    state = STATE.GAME_OVER
     GAME_OVER.start()
   end
 end

@@ -9,7 +9,6 @@ go_cry_time = nil
 go_crying = false
 
 function GAME_OVER.start()
-  state = STATE.GAME_OVER
   go_start_time = time()
   go_coins_gone = false
   go_cry_time = nil
