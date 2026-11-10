@@ -1,5 +1,5 @@
 EFFECTS = {
-  BLINK_FREQ_LOW = 0.2,
+  BLINK_FREQ_LOW = 0.15,
   BLINK_FREQ_HIGH = 0.05,
 }
 

@@ -9,6 +9,7 @@ STATE = {
   LEVEL_INTRO = "LEVEL_INTRO",
   PLAYING = "PLAYING",
   GAME_OVER = "GAME_OVER",
+  GAME_WIN = "GAME_WIN",
 }
 
 function _init()
@@ -82,8 +83,13 @@ function _update60()
     check_game_over()
   elseif state == STATE.GAME_OVER then
     if GAME_OVER.update() then
-      LEVEL.load_current()
       state = STATE.PLAYING
+      LEVEL.load_current()
+    end
+  elseif state == STATE.GAME_WIN then
+    if GAME_WIN.update() then
+      state = STATE.LEVEL_INTRO
+      LEVEL.load_next()
     end
   end
   -- always update:
@@ -114,18 +120,16 @@ function _draw()
     ANIM.draw_singles()
     MANA.draw()
   elseif state == STATE.GAME_OVER then
-    cls(COLORS.DARK_BLUE)
-    CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
-    HERO.draw()
-    COINS.draw()
-    ANIM.draw_singles()
-    TEXT.draw_press_any()
+    GAME_OVER.draw()
+  elseif state == STATE.GAME_WIN then
+    GAME_WIN.draw()
   end
 end
 
 function check_win()
   if #coins == 0 then
-    -- LEVEL.load_next()
+    state = STATE.GAME_WIN
+    GAME_WIN.start()
   end
 end
 function check_game_over()

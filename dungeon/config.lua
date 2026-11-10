@@ -1,5 +1,5 @@
 CONFIG = {
-  SKIP_INTRO = false,
+  SKIP_INTRO = true,
   LANG = "PL",
   -- LANG = "EN",
 }
@@ -18,6 +18,7 @@ GFX = {
   ENERGY = 244,
   POTION = 200,
   ENEMY_GRUNT = 148,
+  CHEST = 99,
 }
 
 SFX = {

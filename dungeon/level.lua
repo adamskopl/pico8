@@ -9,9 +9,9 @@ LEVEL_1 = {
   pos = VEC.new(1, 1),
   hero = VEC.new(4, 8),
   coins = {
-    { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(12, 8) },
-    { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(13, 8) },
-    { pos_m_trigger_tile = VEC.new(5, 8), pos_m = VEC.new(14, 8) },
+    -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(12, 8) },
+    -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(13, 8) },
+    { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(5, 8) },
   },
   enemies = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 5), to_m = VEC.new(11, 5) } },

@@ -1,8 +1,8 @@
 COINS = {}
 COINS_TIME = {
-  BLINK = 0.1,
-  BLINK_LAST = 0.1,
-  DISAPPEAR = 0.1,
+  BLINK = 10,
+  BLINK_LAST = 5,
+  DISAPPEAR = 3,
 }
 COINS_STATE = {
   NORMAL = "NORMAL",

@@ -19,6 +19,7 @@ __lua__
 #include fireballs.lua
 #include level.lua
 #include game_over.lua
+#include game_win.lua
 #include game.lua
 
 __gfx__

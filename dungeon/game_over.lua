@@ -51,3 +51,12 @@ function GAME_OVER.update()
 
   return false
 end
+
+function GAME_OVER.draw()
+  cls(COLORS.DARK_BLUE)
+  CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
+  HERO.draw()
+  COINS.draw()
+  ANIM.draw_singles()
+  TEXT.draw_press_any()
+end

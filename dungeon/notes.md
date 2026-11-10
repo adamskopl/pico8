@@ -25,27 +25,21 @@ Po wizard pojawia się pop in. Aby zgrywało się z przejściami level
 ### WIN
 
 - eee... pojawia się skrzynia do ktorej wpadają monety? ekran moglby wygasnac (znika level, zostaje tylko tlo) tak jak w przypadku przegranej
+
 #### aniamcja win
+
 Tam gdzie jest wizard - obok pojawia się skrzynia 
+- moze tam skad przyszedl dla pewnosci...
 Pop standardową animacja
 
 Do skrzyni wpada tyle monet ile zebraliśmy (pop in, wpada, dźwięk collect, pop in, wpada.. szybko wszystkie). Skrzynia podskakuje dostając monety.
 Skrzynia znika
 Wizard znika
+Level next sie od razu ładuje (intro)
 
 ### wizard appear
 - na start level wizard pojawia sie jak moneta. wiec poof
 ### LOOSE
-
-- text blinking udpate i draw globalnie. po prostu albo się narysuje albo nie
-- text ma metode na pokazanie tego tekstu i kiedy ma przestac
-
-- nie podoba mi sie level.update... nie ma sensu. 
-  - takze review update level itd... bo wszystko dzieje w game, a level jakby nie
-- dodatkowo trzeba jakos z press any key zrobic util
-  - w danym momencie sie odpala (z zewnatrz)
-  - i ma callback ze wcisnieto
-
 
 - kurde, cos z tymi priv vars zmienic... ciezko.
 - jaki flow??? czy rzeczywiscie plansza level... czy ona jest w ogóle potrzebna. level bedzie sie konczyl - bedzie nastepny i tyle
