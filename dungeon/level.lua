@@ -29,8 +29,19 @@ LEVEL_EMPTY = {
   pos = VEC.new(1, 1),
   hero = VEC.new(19, 2),
   coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
+  {},
 }
 LEVELS = { LEVEL_1, LEVEL_2, LEVEL_EMPTY }
+
+function LEVEL.load_current()
+  LEVEL.level = LEVELS[level_index]
+
+  hero = HERO.new(pos_m_to_pos(LEVEL.level.hero))
+  COINS.load(LEVEL.level)
+  fireballs = {}
+  mana_orbits = {}
+  ENEMIES.load(LEVEL.level)
+end
 
 function LEVEL.load_next()
   level_timer_button_start = time()
@@ -40,11 +51,7 @@ function LEVEL.load_next()
   else
     level_index = level_index + 1
   end
-
-  LEVEL.level = LEVELS[level_index]
-  hero = HERO.new(pos_m_to_pos(LEVEL.level.hero))
-  COINS.load(LEVEL.level)
-  ENEMIES.load(LEVEL.level)
+  LEVEL.load_current()
 end
 
 function LEVEL.update_intro()

@@ -1,9 +1,3 @@
-# GITHUB PRIVATE
-
-- no, commitujemy podczas pracy...
-- schowac jak najszybciej. kod opublikuje się jako jeden commit potem
-ALBO LEPIEJ - nie robic historii zmian. po prostu jeden commit caly czas update i push
-
 ---
 # fireball wizard death
 # Death: zostaje sam kapelusz 

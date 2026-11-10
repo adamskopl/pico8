@@ -18,10 +18,10 @@ function _init()
   dir_choice_delay = 0.1
 
   hero = nil
-  coins = {}
-  fireballs = {}
-  mana_orbits = {}
-  enemies = {}
+  coins = nil
+  fireballs = nil
+  mana_orbits = nil
+  enemies = nil
 
   state = STATE.LEVEL_INTRO
   LEVEL.load_next()
@@ -81,7 +81,10 @@ function _update60()
     check_win()
     check_game_over()
   elseif state == STATE.GAME_OVER then
-    GAME_OVER.update()
+    if GAME_OVER.update() then
+      LEVEL.load_current()
+      state = STATE.PLAYING
+    end
   end
   -- always update:
   ANIM.update_singles()

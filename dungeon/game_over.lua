@@ -1,7 +1,7 @@
 GAME_OVER = {}
 GO_TIMES = {
-  KEEP_COINS = 1,
-  START_CRYING = 2,
+  KEEP_COINS = 0.5,
+  START_CRYING = 1,
 }
 go_start_time = nil
 go_coins_gone = false
@@ -43,5 +43,11 @@ function GAME_OVER.update()
       go_cry_time = time()
       sfx(SFX.CRY)
     end
+    if any_pressed() then
+      TEXT.stop_blinking()
+      return true
+    end
   end
+
+  return false
 end
