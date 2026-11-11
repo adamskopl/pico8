@@ -1,8 +1,8 @@
 COINS = {}
 COINS_TIME = {
-  BLINK = 10,
-  BLINK_LAST = 5,
-  DISAPPEAR = 3,
+  BLINK = 2,
+  BLINK_LAST = 2,
+  DISAPPEAR = 1,
 }
 COINS_STATE = {
   NORMAL = "NORMAL",
@@ -15,7 +15,7 @@ function COINS.new(config)
   c.coin_state = COINS_STATE.NORMAL
   c.arrival_time = nil
   c.visible = false
-  c.pos_m_trigger_tile = config.pos_m_trigger_tile
+  c.pos_m_trigger_tiles = config.pos_m_trigger_tiles
 
   ANIM.apply_loop(c, GFX.COIN, GFX.COIN, GFX.COIN + 3, 0.12)
   ANIM.start(c)
@@ -33,7 +33,7 @@ end
 function COINS.update()
   local now = time()
   for c in all(coins) do
-    if not c.visible and TILES.collide(hero.pos, pos_m_to_pos(c.pos_m_trigger_tile)) then
+    if not c.visible and coin_is_on_trigger_tile(c) then
       c.visible = true
       c.arrival_time = now
       EFFECTS.create_arrival(c.pos)
@@ -46,6 +46,14 @@ function COINS.update()
     ANIM.update(c)
     EFFECTS.update(c)
   end
+end
+function coin_is_on_trigger_tile(c)
+  for pos_m in all(c.pos_m_trigger_tiles) do
+    if TILES.collide(hero.pos, pos_m_to_pos(pos_m)) then
+      return true
+    end
+  end
+  return false
 end
 function coin_update_blinking(c)
   local time_diff = time() - c.arrival_time

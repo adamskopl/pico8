@@ -8,56 +8,26 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 
 
 # FIRST LEVELS
-## do implementacji...
-
-- przegrana - dopadł nas przeciwnik (jak giniemy? jak wygląda restart level)
-  - zaczyna mrygac press any to try again
-- zebranie finalowego powoduje poof jak teleport (wizard teleportuje sie poza level)
-
-## pierwsze levele mają uczyć
+## LEVEL 1
+- trigger wiele tiles
+## CONCEPT
 
 - każdy level uczy czegoś innego. najlepiej, aby uczył 1 rzeczy. i tą rzecz TRZEBA wykonać
 
-## first level...
-
-### level start
-Po wizard pojawia się pop in. Aby zgrywało się z przejściami level 
-### WIN
-
-- eee... pojawia się skrzynia do ktorej wpadają monety? ekran moglby wygasnac (znika level, zostaje tylko tlo) tak jak w przypadku przegranej
-
-#### aniamcja win
-
-Tam gdzie jest wizard - obok pojawia się skrzynia 
-- moze tam skad przyszedl dla pewnosci...
-Pop standardową animacja
-
-Do skrzyni wpada tyle monet ile zebraliśmy (pop in, wpada, dźwięk collect, pop in, wpada.. szybko wszystkie). Skrzynia podskakuje dostając monety.
-Skrzynia znika
-Wizard znika
-Level next sie od razu ładuje (intro)
-
-### wizard appear
-- na start level wizard pojawia sie jak moneta. wiec poof
-### LOOSE
-
-- kurde, cos z tymi priv vars zmienic... ciezko.
-- jaki flow??? czy rzeczywiscie plansza level... czy ona jest w ogóle potrzebna. level bedzie sie konczyl - bedzie nastepny i tyle
-- flow zostaje - jak bedzie game win, pojawi się nowa plansza bez press key
-### DUZA ZMIANA O MONETY
-
-
-### ...
-
-- zebrac tylko monety
-- pusty level, monety rozrzucone. brak many na start!
-- zbierzemy - poof. wizard jak teleport i znika. 2s i pojawia sie next level
+- ok, nie ma co przesadzać z nauką... 3 levels np u juz mamy full wszystko
+- pomysly
+  - 1: juz teraz zebrac wszystkie monety w odpowiedniej kolejnosci. uczy nawigacji, tego ze trzeba zebrac monety
+    - urozmaićmy. czyli np chodząc pojawiają się nowe monety
+    - musi byc odpowiednia kolejnosc...
+  - 2: to teleport focus. zbieramy fiolkę, i żeby ukonczyc, trzeba poskakac. mozna urozmaicić.
+    - dodatkowo trzeba zebrac pozostawioną manę, inaczej nie zdążymy
 
 ## second level 0.1
 - pokazanie ze nie zebranie coin powoduje przegraną. jest level z odnogami, tam są monety.
 - jesli gracz sie nie obija, to zbiera wszystko z palcem w nosie
 - ale wystarczy ze tylko troche sie spozni - game over
 - wiec to ma nauczyc ruszac sie i zbierac monety i pokazac konsekwencję
+
 ## second level
 
 - grunt. mozna przeskoczyc albo rozwalic (mamy 1 manę)

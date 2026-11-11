@@ -10,11 +10,15 @@ LEVEL_1 = {
   pos = VEC.new(1, 1),
   hero = VEC.new(6, 8),
   coins = {
-    -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(12, 8) },
-    -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(13, 8) },
-    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(7, 8) },
-    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(8, 8) },
-    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(9, 8) },
+    { pos_m_trigger_tiles = { VEC.new(6, 8) }, pos_m = VEC.new(9, 8) },
+    { pos_m_trigger_tiles = { VEC.new(4, 4), VEC.new(13, 13) }, pos_m = VEC.new(8, 9) },
+
+    { pos_m_trigger_tiles = { VEC.new(9, 8) }, pos_m = VEC.new(11, 11) },
+    -- corner coins
+    { pos_m_trigger_tiles = { VEC.new(11, 11) }, pos_m = VEC.new(4, 4) },
+    { pos_m_trigger_tiles = { VEC.new(11, 11) }, pos_m = VEC.new(13, 4) },
+    { pos_m_trigger_tiles = { VEC.new(11, 11) }, pos_m = VEC.new(4, 13) },
+    { pos_m_trigger_tiles = { VEC.new(11, 11) }, pos_m = VEC.new(13, 13) },
   },
   enemies = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 5), to_m = VEC.new(11, 5) } },
@@ -25,13 +29,13 @@ LEVEL_1 = {
 LEVEL_2 = {
   pos = VEC.new(18, 1),
   hero = VEC.new(19, 2),
-  coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
+  coins = { { pos_m_trigger_tiles = { VEC.new(19, 2) }, pos_m = VEC.new(20, 3) } },
 }
 LEVEL_EMPTY = {
   title = "EMPTY",
   pos = VEC.new(1, 1),
   hero = VEC.new(19, 2),
-  coins = { { pos_m_trigger_tile = VEC.new(19, 2), pos_m = VEC.new(20, 3) } },
+  coins = { { pos_m_trigger_tiles = { VEC.new(19, 2) }, pos_m = VEC.new(20, 3) } },
   {},
 }
 LEVELS = { LEVEL_1, LEVEL_2, LEVEL_EMPTY }

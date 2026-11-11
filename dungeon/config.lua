@@ -1,5 +1,5 @@
 CONFIG = {
-  SKIP_INTRO = false,
+  SKIP_INTRO = true,
   LANG = "PL",
   -- LANG = "EN",
 }
