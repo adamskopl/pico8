@@ -1,8 +1,6 @@
 GAME_OVER = {}
-GO_TIMES = {
-  KEEP_COINS = 0.5,
-  START_CRYING = 1,
-}
+GO_KEEP_COINS = 0.5
+GO_START_CRYING = 1
 go_start_time = nil
 go_coins_gone = false
 go_cry_time = nil
@@ -19,36 +17,36 @@ function GAME_OVER.start()
 end
 function GAME_OVER.update()
   if not go_coins_gone then
-    if time() - go_start_time >= GO_TIMES.KEEP_COINS then
+    if time() - go_start_time < GO_KEEP_COINS then
+      COINS.update()
+    else
       go_coins_gone = true
       for c in all(coins) do
         EFFECTS.create_disappear(c.pos)
       end
       coins = {}
-    else
-      COINS.update()
     end
   end
 
   if not go_crying then
-    if time() - go_start_time >= GO_TIMES.START_CRYING then
-      go_crying = true
-      ANIM.start(hero)
-      go_cry_time = time() - 0.4
-      TEXT.start_blinking()
+    if time() - go_start_time < GO_START_CRYING then
+      return false
     end
-  else
-    ANIM.update(hero)
-    if time() - go_cry_time >= 0.8 then
-      go_cry_time = time()
-      sfx(SFX.CRY)
-    end
-    if any_pressed() then
-      TEXT.stop_blinking()
-      return true
-    end
+    go_crying = true
+    ANIM.start(hero)
+    go_cry_time = time() - 0.4
+    TEXT.start_blinking()
   end
 
+  ANIM.update(hero)
+  if time() - go_cry_time >= 0.8 then
+    go_cry_time = time()
+    sfx(SFX.CRY)
+  end
+  if any_pressed() then
+    TEXT.stop_blinking()
+    return true
+  end
   return false
 end
 

@@ -3,6 +3,7 @@
 -- pos_* -> pixel pos like pixel 16,16
 -- pos_m_* -> map pos like map 2,2
 -- pos_mf_* -> map pos with fraction (ready for rounding)
+-- *_t -> time() type
 --]
 --
 STATE = {

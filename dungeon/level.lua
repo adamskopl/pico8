@@ -1,6 +1,7 @@
 LEVEL = {
   level = nil,
 }
+LEVEL_INTRO_DELAY = 0.5
 level_index = nil
 level_timer_button_start = nil
 level_let_close_intro = false
@@ -11,7 +12,9 @@ LEVEL_1 = {
   coins = {
     -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(12, 8) },
     -- { pos_m_trigger_tile = VEC.new(4, 8), pos_m = VEC.new(13, 8) },
-    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(6, 7) },
+    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(7, 8) },
+    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(8, 8) },
+    { pos_m_trigger_tile = VEC.new(6, 8), pos_m = VEC.new(9, 8) },
   },
   enemies = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 5), to_m = VEC.new(11, 5) } },
@@ -55,7 +58,7 @@ function LEVEL.load_next()
 end
 
 function LEVEL.update_intro()
-  if not level_let_close_intro and time() - level_timer_button_start > 2 then
+  if not level_let_close_intro and time() - level_timer_button_start > LEVEL_INTRO_DELAY then
     level_let_close_intro = true
     TEXT.start_blinking()
   end
