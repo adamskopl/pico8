@@ -67,7 +67,7 @@ end
 function _update60()
   CAMERA.update()
   if state == STATE.LEVEL_INTRO then
-    if CONFIG.SKIP_INTRO then
+    if LEVEL.level and CONFIG.SKIP_INTRO then
       state = STATE.PLAYING
     end
     if LEVEL.update_intro() then

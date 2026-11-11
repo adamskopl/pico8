@@ -26,16 +26,13 @@ LEVEL_1 = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 10), to_m = VEC.new(11, 10) } },
   },
 }
-LEVEL_EMPTY = {
-  pos = VEC.new(1, 1),
-  hero = VEC.new(19, 2),
-  coins = { { pos_m_trigger_tiles = { VEC.new(19, 2) }, pos_m = VEC.new(20, 3) } },
-  {},
-}
-LEVELS = { LEVEL_1, LEVEL_EMPTY }
+LEVELS = { LEVEL_1 }
 
 function LEVEL.load_current()
   LEVEL.level = LEVELS[level_index]
+  if not LEVEL.level then
+    return
+  end
 
   hero = HERO.new(pos_m_to_pos(LEVEL.level.hero))
   COINS.load(LEVEL.level)
@@ -56,6 +53,10 @@ function LEVEL.load_next()
 end
 
 function LEVEL.update_intro()
+  if not LEVEL.level then
+    return false
+  end
+
   if not level_let_close_intro and time() - level_timer_button_start > LEVEL_INTRO_DELAY then
     level_let_close_intro = true
     TEXT.start_blinking()
@@ -72,6 +73,11 @@ end
 
 function LEVEL.draw_level_intro()
   cls(COLORS.DARK_BLUE)
+  if not LEVEL.level then
+    TEXT.print_center("WORK IN PROGRESS", COLORS.YELLOW)
+    return
+  end
+
   TEXT.print_center(TEXT.get("LEVEL") .. " " .. level_index, COLORS.YELLOW)
   if level_let_close_intro then
     TEXT.draw_press_any()
