@@ -26,19 +26,13 @@ LEVEL_1 = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 10), to_m = VEC.new(11, 10) } },
   },
 }
-LEVEL_2 = {
-  pos = VEC.new(18, 1),
-  hero = VEC.new(19, 2),
-  coins = { { pos_m_trigger_tiles = { VEC.new(19, 2) }, pos_m = VEC.new(20, 3) } },
-}
 LEVEL_EMPTY = {
-  title = "EMPTY",
   pos = VEC.new(1, 1),
   hero = VEC.new(19, 2),
   coins = { { pos_m_trigger_tiles = { VEC.new(19, 2) }, pos_m = VEC.new(20, 3) } },
   {},
 }
-LEVELS = { LEVEL_1, LEVEL_2, LEVEL_EMPTY }
+LEVELS = { LEVEL_1, LEVEL_EMPTY }
 
 function LEVEL.load_current()
   LEVEL.level = LEVELS[level_index]
