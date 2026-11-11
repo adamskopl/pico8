@@ -10,18 +10,16 @@ GW_COIN_SPEED = 1.5
 function GAME_WIN.start()
   gw_started_t = time()
   gw_chest_pos = nil
-  gw_chest_appear_t = nil
   gw_last_coin_collect_t = nil
-  gw_objects_disappear_t = nil
   gw_coins_remaining = #LEVEL.level.coins
-  gw_coin = nil
+  gw_coin_pos = nil
 end
 
 function GAME_WIN.update()
   MOV.update(hero)
   ANIM.update(hero)
 
-  if not gw_chest_pos and time() - gw_started_t >= GW_TIMES.CHEST_DELAY then
+  if not gw_chest_pos and time() - gw_started_t >= GW_TIMES.CHEST_DELAY and not gw_last_coin_collect_t then
     gw_chest_pos = VEC.sub(hero.pos, VEC.multi(hero.dir, 9))
     hero.dir = VEC.multi(hero.dir, -1)
     EFFECTS.create_arrival(VEC.cp(gw_chest_pos))
@@ -35,15 +33,15 @@ function GAME_WIN.update()
     gw_update_coin()
   end
 
-  -- new
   if gw_last_coin_collect_t then
-    delta_t = time() - gw_last_coin_collect_t
-    if chest_pos and delta_t >= GW_TIMES.OBJECTS_DISAPPEAR then
-      EFFECTS.create_disappear(VEC.cp(chest_pos))
+    local delta_t = time() - gw_last_coin_collect_t
+    if gw_chest_pos and delta_t >= GW_TIMES.OBJECTS_DISAPPEAR then
+      EFFECTS.create_disappear(VEC.cp(gw_chest_pos))
       EFFECTS.create_disappear(VEC.cp(hero.pos))
-      chest_pos = nil
+      hero.visible = false
+      gw_chest_pos = nil
     end
-    if not chest_pos and delta_t >= GW_TIMES.OBJECTS_DISAPPEAR + GW_TIMES.WIN_END_DELAY then
+    if delta_t >= GW_TIMES.OBJECTS_DISAPPEAR + GW_TIMES.WIN_END_DELAY then
       return true
     end
   end
@@ -67,14 +65,12 @@ end
 function GAME_WIN.draw()
   cls(COLORS.DARK_BLUE)
   CAMERA.apply(LEVEL.level.pos.x * 8, LEVEL.level.pos.y * 8)
-  if not gw_objects_disappear_t then
-    HERO.draw()
-  end
   if gw_chest_pos then
     spr(GFX.CHEST, gw_chest_pos.x, gw_chest_pos.y)
   end
-  if gw_coin then
+  if gw_coin_pos then
     spr(GFX.COIN, gw_coin_pos.x, gw_coin_pos.y)
   end
+  HERO.draw()
   ANIM.draw_singles()
 end

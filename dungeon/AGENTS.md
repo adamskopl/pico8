@@ -10,3 +10,4 @@
 8. Place a private helper immediately above the module function that uses it, without a blank line when they form one unit. If several module functions use it, place it near the group they support, usually before the first consumer. Avoid a separate helpers section unless it improves navigation.
 9. Lua files are concatenated into one chunk, so file-level `local` declarations do not provide per-file module scope. Keep private module values as globals with a consistent module-specific prefix, following the simulated module pattern above.
 10. Give variables holding a value from `time()` the `_t` postfix.
+11. If a request is ambiguous or does not provide enough detail, stop and ask for clarification. Do not make assumptions about unexplained details.
