@@ -39,6 +39,7 @@ function LEVEL.load_current()
   fireballs = {}
   mana_orbits = {}
   ENEMIES.load(LEVEL.level)
+  TEXT.start_animated("BLAAA")
 end
 
 function LEVEL.load_next()

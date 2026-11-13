@@ -7,7 +7,7 @@
 5. After any code change, summarize the code changes clearly in a point-by-point list.
 6. Live entity collections are an exception: keep them as globally accessible plural names (for example, `coins` or `enemies`) because multiple systems may need to access them. Keep entity behavior and definitions on their module object.
 7. Functions used only within a module are private. Define them outside the module object and prefix their names with the module name in lowercase (for example, `coins_update_blinking`).
-8. Place a private helper immediately above the module function that uses it, without a blank line when they form one unit. If several module functions use it, place it near the group they support, usually before the first consumer. Avoid a separate helpers section unless it improves navigation.
+8. Place a private helper immediately below the module function that uses it, without a blank line when they form one unit. If several module functions use it, place it below the last consumer. Avoid a separate helpers section unless it improves navigation.
 9. Lua files are concatenated into one chunk, so file-level `local` declarations do not provide per-file module scope. Keep private module values as globals with a consistent module-specific prefix, following the simulated module pattern above.
 10. Give variables holding a value from `time()` the `_t` postfix.
 11. If a request is ambiguous or does not provide enough detail, stop and ask for clarification. Do not make assumptions about unexplained details.

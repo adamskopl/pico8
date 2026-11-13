@@ -9,7 +9,10 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 
 # FIRST LEVELS
 ## LEVEL 1
-- trigger wiele tiles
+
+- licznik monet...
+- ale tez tutorial text
+
 ## CONCEPT
 
 - każdy level uczy czegoś innego. najlepiej, aby uczył 1 rzeczy. i tą rzecz TRZEBA wykonać

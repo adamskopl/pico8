@@ -96,6 +96,7 @@ function _update60()
   -- always update:
   ANIM.update_singles()
   TEXT.update_blinking()
+  TEXT.update_animated()
 end
 
 function _draw()
@@ -125,6 +126,8 @@ function _draw()
   elseif state == STATE.GAME_WIN then
     GAME_WIN.draw()
   end
+  -- always draw
+  TEXT.draw_animated()
 end
 
 function check_win()
