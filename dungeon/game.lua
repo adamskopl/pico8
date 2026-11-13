@@ -69,9 +69,11 @@ function _update60()
   if state == STATE.LEVEL_INTRO then
     if LEVEL.level and CONFIG.SKIP_INTRO then
       state = STATE.PLAYING
+      LEVEL.on_level_start()
     end
     if LEVEL.update_intro() then
       state = STATE.PLAYING
+      LEVEL.on_level_start()
     end
   elseif state == STATE.PLAYING then
     game_keys_update()

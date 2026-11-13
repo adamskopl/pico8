@@ -13,6 +13,9 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 - licznik monet...
 - ale tez tutorial text
 
+level 1 - wyswietlenie tekstu 'zbierz zanim zniknie...'
+'i wszystkie pozostale!'
+
 ## CONCEPT
 
 - każdy level uczy czegoś innego. najlepiej, aby uczył 1 rzeczy. i tą rzecz TRZEBA wykonać

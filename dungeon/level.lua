@@ -9,6 +9,7 @@ level_let_close_intro = false
 LEVEL_1 = {
   pos = VEC.new(1, 1),
   hero = VEC.new(6, 8),
+  text_intro = TEXT.get("LEVEL1_INTRO"),
   coins = {
     { pos_m_trigger_tiles = { VEC.new(6, 8) }, pos_m = VEC.new(9, 8) },
     { pos_m_trigger_tiles = { VEC.new(4, 4), VEC.new(13, 13) }, pos_m = VEC.new(8, 9) },
@@ -39,7 +40,6 @@ function LEVEL.load_current()
   fireballs = {}
   mana_orbits = {}
   ENEMIES.load(LEVEL.level)
-  TEXT.start_animated("BLAAA")
 end
 
 function LEVEL.load_next()
@@ -82,5 +82,11 @@ function LEVEL.draw_level_intro()
   TEXT.print_center(TEXT.get("LEVEL") .. " " .. level_index, COLORS.YELLOW)
   if level_let_close_intro then
     TEXT.draw_press_any()
+  end
+end
+
+function LEVEL.on_level_start()
+  if LEVEL.level.text_intro then
+    TEXT.start_animated(LEVEL.level.text_intro)
   end
 end

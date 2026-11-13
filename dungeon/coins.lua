@@ -69,6 +69,16 @@ end
 function COINS.draw()
   for c in all(coins) do
     ANIM.draw(c)
+    if level_index == 1 and c.visible and c.arrival_time then
+      local now_t = time()
+      local time_left =
+        max(0, COINS_TIME.BLINK + COINS_TIME.BLINK_LAST + COINS_TIME.DISAPPEAR - (now_t - c.arrival_time))
+      local color = COLORS.YELLOW
+      if c.blinking and c.blinking.apply_red then
+        color = COLORS.RED
+      end
+      print(ceil(time_left), c.pos.x + 2, c.pos.y - 5, color)
+    end
   end
 end
 

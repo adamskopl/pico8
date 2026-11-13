@@ -1,20 +1,27 @@
+--[
+--🅾️❎
+--]
+
 TEXT = {}
 TEXT_LANGUAGES = {
   PL = {
     LEVEL = "poziom",
     PRESS_ANY = "naciskaj guzika...",
+    LEVEL1_INTRO = "zbierz nim znikna!",
   },
   EN = {
     LEVEL = "level",
     PRESS_ANY = "press any...",
+    LEVEL1_INTRO = "collect before they vanish!",
   },
 }
 text_timer_t = nil
 text_blink_draw = false
 text_animated = nil
 text_animated_t = nil
-text_animated_duration = 2
+text_animated_duration = 5
 text_animated_x = 0
+TEXT_ANIMATED_COLORS = { COLORS.BLUE, COLORS.WHITE, COLORS.YELLOW }
 
 function TEXT.get(key)
   return TEXT_LANGUAGES[CONFIG.LANG][key]
@@ -59,8 +66,8 @@ end
 function TEXT.start_animated(text_to_start, x, duration)
   text_animated = text_to_start
   text_animated_t = time()
-  text_animated_x = x or 0
-  text_animated_duration = duration or 2
+  text_animated_x = x or 128 / 2 - #text_to_start * 2
+  text_animated_duration = duration or text_animated_duration
 end
 
 function TEXT.update_animated()
@@ -73,11 +80,11 @@ function TEXT.draw_animated()
   if not text_animated then
     return
   end
-  text_draw_animated_string(text_animated, text_animated_x, 2)
+  text_draw_animated_string(text_animated, text_animated_x, 5)
 end
 function text_draw_animated_string(text, x0, y0)
   camera()
-  rectfill(0, 0, 127, 7, COLORS.BLACK)
+  rectfill(1, 1, 126, 6, COLORS.BLACK)
   local amplitude = 1
   x0 = x0 or 0
   y0 = y0 or 0
@@ -86,7 +93,8 @@ function text_draw_animated_string(text, x0, y0)
     local x = x0 + i * 4
     local y = y0 + sin(t1_t / 30) * amplitude
     local ch = sub(text, i, i)
-    local col = 8 + flr((sin(t1_t / 20) + 1) * 3)
+    local color_index = 1 + flr((sin(t1_t / 20) + 1) * 1.499)
+    local col = TEXT_ANIMATED_COLORS[color_index]
     print(ch, x, y, col)
   end
 end

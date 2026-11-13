@@ -1,7 +1,7 @@
 CONFIG = {
-  SKIP_INTRO = false,
-  LANG = "PL",
-  -- LANG = "EN",
+  SKIP_INTRO = true,
+  -- LANG = "PL",
+  LANG = "EN",
 }
 FLAGS = {
   WALL = 0,
