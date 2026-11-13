@@ -27,7 +27,19 @@ LEVEL_1 = {
     -- { type = ENEMY_GRUNT, patrol = { from_m = VEC.new(8, 10), to_m = VEC.new(11, 10) } },
   },
 }
-LEVELS = { LEVEL_1 }
+LEVEL_2 = {
+  pos = VEC.new(18, 1),
+  hero = VEC.new(18, 16),
+  -- text_intro = TEXT.get("LEVEL1_INTRO"),
+  coins = {
+    { pos_m_trigger_tiles = { VEC.new(18, 16) }, pos_m = VEC.new(20, 13) },
+  },
+  mana = {
+    { pos_m = VEC.new(21, 16) },
+  },
+  enemies = {},
+}
+LEVELS = { LEVEL_2, LEVEL_1, LEVEL_2 }
 
 function LEVEL.load_current()
   LEVEL.level = LEVELS[level_index]
@@ -40,6 +52,16 @@ function LEVEL.load_current()
   fireballs = {}
   mana_orbits = {}
   ENEMIES.load(LEVEL.level)
+  level_load_mana()
+end
+function level_load_mana()
+  if not LEVEL.level.mana then
+    return
+  end
+  for m in all(LEVEL.level.mana) do
+    printh("ad")
+    MANA.add(pos_m_to_pos(m.pos_m), MANA_TYPE.COLLECT)
+  end
 end
 
 function LEVEL.load_next()

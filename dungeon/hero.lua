@@ -92,7 +92,7 @@ function HERO.on_X_press() -- TELEPORT
   if hero.teleport_target.active then
     EFFECTS.create_disappear(hero.pos)
     local mana_pos_m = get_pos_m_mostly_occupied(hero)
-    MANA.add(pos_m_to_pos(mana_pos_m))
+    MANA.add(pos_m_to_pos(mana_pos_m), MANA_TYPE.LEFT)
     hero.pos = hero.teleport_target.pos
     EFFECTS.create_arrival(hero.pos)
     hero.teleport_target.active = false

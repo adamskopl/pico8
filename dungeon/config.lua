@@ -1,5 +1,6 @@
 CONFIG = {
   SKIP_INTRO = true,
+  CRY_SOUND = false, -- because it's soooo annoying
   -- LANG = "PL",
   LANG = "EN",
 }
@@ -19,6 +20,9 @@ GFX = {
   POTION = 200,
   ENEMY_GRUNT = 148,
   CHEST = 99,
+  HAT = 122,
+  WAND = 105,
+  WAND_BIG = 121,
 }
 
 SFX = {

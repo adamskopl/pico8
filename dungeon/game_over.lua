@@ -41,7 +41,9 @@ function GAME_OVER.update()
   ANIM.update(hero)
   if time() - go_cry_time >= 0.8 then
     go_cry_time = time()
-    sfx(SFX.CRY)
+    if CONFIG.CRY_SOUND then
+      sfx(SFX.CRY)
+    end
   end
   if any_pressed() then
     TEXT.stop_blinking()

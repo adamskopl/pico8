@@ -18,7 +18,7 @@ function FIREBALLS.update()
     local wall_pos_m = get_pos_m_facing(f)
     if wall_in_pos_m(wall_pos_m) then
       local mana_pos_m = get_pos_m_mostly_occupied(f)
-      MANA.add(pos_m_to_pos(mana_pos_m))
+      MANA.add(pos_m_to_pos(mana_pos_m), MANA_TYPE.LEFT)
       ANIM.create_single(f.pos, GFX.ENERGY, GFX.ENERGY + 3, 0.06)
       deli(fireballs, i)
       sfx(SFX.CRASH)

@@ -8,13 +8,27 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 
 
 # FIRST LEVELS
-## LEVEL 1
+## LEVEL 2
 
-- licznik monet...
-- ale tez tutorial text
+### elixir
 
-level 1 - wyswietlenie tekstu 'zbierz zanim zniknie...'
-'i wszystkie pozostale!'
+ok, kapelusze
+dodac nowe entity
+to jest wlasciwie mana orbit... tylko inneg typu
+### design
+
+deisgn level... dobrze byloby uniknac po prostu spirali dlugich korytarzy
+moze zaczac sie niewinnie
+ALE. pojawi sie fiolka. fiolka daje 1 punkt mocy
+moze bedzie wiecej
+w kazdym razie musi byc niezbedne przemieszczac sie, aby zdazyc:wq
+
+
+
+- teleport
+- bez niego nie da sie skonczyc
+- zbierac pozostawione rowniez...
+
 
 ## CONCEPT
 
