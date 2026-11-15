@@ -39,7 +39,7 @@ LEVEL_2 = {
   },
   enemies = {},
 }
-LEVELS = { LEVEL_2, LEVEL_1, LEVEL_2 }
+LEVELS = { LEVEL_1, LEVEL_1, LEVEL_2 }
 
 function LEVEL.load_current()
   LEVEL.level = LEVELS[level_index]

@@ -1,6 +1,6 @@
 COINS = {}
 COINS_TIME = {
-  BLINK = 30,
+  BLINK = 3,
   BLINK_LAST = 2,
   DISAPPEAR = 2,
 }

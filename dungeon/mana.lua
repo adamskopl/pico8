@@ -10,6 +10,9 @@ function MANA.add(pos, type)
   local key = VEC.to_str(pos)
   local mana = ENTITY.new(VEC.cp(pos), nil)
   mana.type = type
+  if type == MANA_TYPE.COLLECT then
+    FLOATING.apply(mana, 1)
+  end
   local existing_mana = mana_orbits[key] and #mana_orbits[key].orbits or 0
   ORBITS.apply(mana, 1 + existing_mana, ORBIT_RADIUS_MANA, ORBIT_SPEED_MANA)
   mana_orbits[key] = mana
@@ -18,6 +21,7 @@ end
 function MANA.update()
   for _, m in pairs(mana_orbits) do
     ORBITS.update(m)
+    FLOATING.update(m)
   end
 end
 
@@ -26,7 +30,7 @@ function MANA.draw()
     if m.type == MANA_TYPE.LEFT then
       circ(m.pos.x + 4, m.pos.y + 4, ORBIT_RADIUS_MANA + 1, COLORS.INDIGO)
     elseif m.type == MANA_TYPE.COLLECT then
-      spr(GFX.HAT, m.pos.x, m.pos.y)
+      spr(GFX.HAT, m.pos.x, m.pos.y + (m.floating and m.floating.offset or 0))
     end
     ORBITS.draw(m)
   end
