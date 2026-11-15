@@ -57,7 +57,7 @@ function coin_is_on_trigger_tile(c)
 end
 function coin_update_blinking(c)
   local time_diff = time() - c.arrival_time
-  if c.coin_state == COINS_STATE.NORMAL and time_diff >= COINS_TIME.BLINK then
+  if c.coin_state == COINS_STATE.NORMAL and time_diff >= COINS_TIME.BLINK and not CONFIG.COINS_FOREVER then
     EFFECTS.apply_blinking(c, EFFECTS.BLINK_FREQ_LOW)
     c.coin_state = COINS_STATE.BLINKING
   elseif c.coin_state == COINS_STATE.BLINKING and time_diff >= COINS_TIME.BLINK + COINS_TIME.BLINK_LAST then
@@ -69,7 +69,7 @@ end
 function COINS.draw()
   for c in all(coins) do
     ANIM.draw(c)
-    if level_index == 1 and c.visible and c.arrival_time then
+    if LEVEL.level.flags.coins_counter and c.visible and c.arrival_time then
       local now_t = time()
       local time_left =
         max(0, COINS_TIME.BLINK + COINS_TIME.BLINK_LAST + COINS_TIME.DISAPPEAR - (now_t - c.arrival_time))

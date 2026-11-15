@@ -3,6 +3,7 @@ CONFIG = {
   CRY_SOUND = false, -- because it's soooo annoying
   -- LANG = "PL",
   LANG = "EN",
+  COINS_FOREVER = true,
 }
 FLAGS = {
   WALL = 0,
@@ -17,12 +18,10 @@ GFX = {
   EXPLOSION = 136,
   FIREBALL = 184,
   ENERGY = 244,
-  POTION = 200,
+  POTION = 218,
   ENEMY_GRUNT = 148,
   CHEST = 99,
   HAT = 122,
-  WAND = 105,
-  WAND_BIG = 121,
 }
 
 SFX = {
@@ -35,6 +34,7 @@ SFX = {
   EMPTY = 6,
   COLLECT = 7,
   CRY = 8,
+  DRINK = 9,
 }
 
 COLORS = {

@@ -7,6 +7,9 @@ level_timer_button_start = nil
 level_let_close_intro = false
 
 LEVEL_1 = {
+  flags = {
+    coins_counter = true,
+  },
   pos = VEC.new(1, 1),
   hero = VEC.new(6, 8),
   text_intro = TEXT.get("LEVEL1_INTRO"),
@@ -28,18 +31,20 @@ LEVEL_1 = {
   },
 }
 LEVEL_2 = {
+  flags = {},
   pos = VEC.new(18, 1),
-  hero = VEC.new(18, 16),
+  hero = VEC.new(21, 15),
   -- text_intro = TEXT.get("LEVEL1_INTRO"),
   coins = {
     { pos_m_trigger_tiles = { VEC.new(18, 16) }, pos_m = VEC.new(20, 13) },
   },
   mana = {
-    { pos_m = VEC.new(21, 16) },
+    { pos_m = VEC.new(22, 15) },
+    { pos_m = VEC.new(25, 12) },
   },
   enemies = {},
 }
-LEVELS = { LEVEL_1, LEVEL_1, LEVEL_2 }
+LEVELS = { LEVEL_2, LEVEL_1, LEVEL_2 }
 
 function LEVEL.load_current()
   LEVEL.level = LEVELS[level_index]
