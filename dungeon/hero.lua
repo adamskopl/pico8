@@ -59,7 +59,7 @@ function mana_collect()
       mana_orbits[key] = nil
       ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO)
       if m.type == MANA_TYPE.LEFT then
-        sfx(SFX.COLLECT)
+        sfx(SFX.DRINK)
       elseif m.type == MANA_TYPE.COLLECT then
         sfx(SFX.DRINK)
       end

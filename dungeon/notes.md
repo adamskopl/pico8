@@ -12,6 +12,16 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 
 ### elixir
 
+
+rozpatrzyc 2 opcje i wybrac jedna, nie kombinowac dalej
+#### elixir + pozostawiona moc (niebieska moneta wygląda super, wiec moze jakas kula...)
+- 
+#### moneta z orbitą. zarówno zbieranie jak i zostawianie
+- rowniez dzwiek zbierania dostosowac...
+
+ROZPATRZYC TYLKO MONETY. ZBIERAMY MONETY - ZOSTAWIAMY MONETY
+NIEBIESKIEE
+
 ok, kapelusze
 dodac nowe entity
 to jest wlasciwie mana orbit... tylko inneg typu
