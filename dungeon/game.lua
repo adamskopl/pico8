@@ -121,8 +121,8 @@ function _draw()
     FIREBALLS.draw()
     HERO.draw()
     DEBUGGER.draw()
-    ANIM.draw_singles()
     MANA.draw()
+    ANIM.draw_singles()
   elseif state == STATE.GAME_OVER then
     GAME_OVER.draw()
   elseif state == STATE.GAME_WIN then

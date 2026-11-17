@@ -17,7 +17,7 @@ GFX = {
   DUST = 156,
   EXPLOSION = 136,
   FIREBALL = 184,
-  ENERGY = 244,
+  ENERGY = 228,
   POTION = 217,
   ENEMY_GRUNT = 148,
   CHEST = 99,
@@ -32,9 +32,8 @@ SFX = {
   FIRE = 4,
   CRASH = 5,
   EMPTY = 6,
-  COLLECT = 7,
   CRY = 8,
-  DRINK = 9,
+  COLLECT = 9,
 }
 
 COLORS = {

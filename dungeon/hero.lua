@@ -58,11 +58,7 @@ function mana_collect()
       hero.mana = hero.mana + ORBITS.count(m)
       mana_orbits[key] = nil
       ORBITS.apply(hero, hero.mana, ORBIT_RADIUS_HERO, ORBIT_SPEED_HERO)
-      if m.type == MANA_TYPE.LEFT then
-        sfx(SFX.DRINK)
-      elseif m.type == MANA_TYPE.COLLECT then
-        sfx(SFX.DRINK)
-      end
+      sfx(SFX.COLLECT)
     end
   end
 end
@@ -96,7 +92,7 @@ function HERO.on_X_press() -- TELEPORT
   if hero.teleport_target.active then
     EFFECTS.create_disappear(hero.pos)
     local mana_pos_m = get_pos_m_mostly_occupied(hero)
-    MANA.add(pos_m_to_pos(mana_pos_m), MANA_TYPE.LEFT)
+    MANA.add(pos_m_to_pos(mana_pos_m))
     hero.pos = hero.teleport_target.pos
     EFFECTS.create_arrival(hero.pos)
     hero.teleport_target.active = false

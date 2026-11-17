@@ -65,7 +65,7 @@ function level_load_mana()
   end
   for m in all(LEVEL.level.mana) do
     printh("ad")
-    MANA.add(pos_m_to_pos(m.pos_m), MANA_TYPE.COLLECT)
+    MANA.add(pos_m_to_pos(m.pos_m))
   end
 end
 
