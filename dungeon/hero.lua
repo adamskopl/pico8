@@ -27,6 +27,9 @@ function HERO.update()
     if coins[i].visible and TILES.collide(hero.pos, coins[i].pos) then
       deli(coins, i)
       sfx(SFX.COIN)
+      local total_coins = #LEVEL.level.coins
+      local collected_coins = total_coins - #coins
+      TEXT.start_animated(tostr(collected_coins) .. "/" .. tostr(total_coins), GFX.COIN)
     end
   end
 end

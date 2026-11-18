@@ -34,12 +34,13 @@ LEVEL_2 = {
   flags = {},
   pos = VEC.new(18, 1),
   hero = VEC.new(21, 15),
-  -- text_intro = TEXT.get("LEVEL1_INTRO"),
+  text_intro = TEXT.get("LEVEL2_INTRO"),
   coins = {
     { pos_m_trigger_tiles = { VEC.new(18, 16) }, pos_m = VEC.new(20, 13) },
+    { pos_m_trigger_tiles = { VEC.new(21, 15) }, pos_m = VEC.new(22, 15) },
   },
   mana = {
-    { pos_m = VEC.new(22, 15) },
+    { pos_m = VEC.new(23, 15) },
     { pos_m = VEC.new(25, 12) },
   },
   enemies = {},

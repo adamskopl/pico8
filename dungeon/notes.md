@@ -9,17 +9,15 @@ moze niech rozsypują się w kierunku siły. ale - jest to rozsypanie jakby po p
 
 # FIRST LEVELS
 ## LEVEL 2
-
-### elixir
-
+### licznik zebranych monet
 
 
-ROZPATRZYC TYLKO MONETY. ZBIERAMY MONETY - ZOSTAWIAMY MONETY
-NIEBIESKIEE
+POTRZEBNE POPRAWKI
+niech uzywac utils do animacji a nie tego dziwnego
+w text animated draw
 
-ok, kapelusze
-dodac nowe entity
-to jest wlasciwie mana orbit... tylko inneg typu
+- zerbana moneta: symbol falujący i licznik ile na ile
+
 ### design
 
 deisgn level... dobrze byloby uniknac po prostu spirali dlugich korytarzy
